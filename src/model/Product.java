@@ -1,3 +1,5 @@
+package model;
+
 import java.util.Date;
 
 /**
@@ -6,9 +8,12 @@ import java.util.Date;
 public class Product {
     private String title;
     private String description;
+    private String productID;
     private String imageID;
     private String sellerID;
     private Date date;
     private boolean isSold;
+
+    public void sellProduct(){ }
 
 }
