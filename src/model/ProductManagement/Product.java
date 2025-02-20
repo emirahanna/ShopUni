@@ -1,4 +1,4 @@
-package model;
+package model.ProductManagement;
 
 import java.util.Date;
 

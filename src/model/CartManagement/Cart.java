@@ -1,6 +1,7 @@
-package model;
+package model.CartManagement;
 
 import java.util.ArrayList;
+import model.ProductManagement.Product;
 
 public class Cart {
     private ArrayList<Product> cartContent;
