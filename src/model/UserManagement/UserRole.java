@@ -1,4 +1,3 @@
 package model.UserManagement;
 
-public class UserRole {
-}
+public enum UserRole { BUYER, SELLER, ADMIN, ADVERTISERS}
