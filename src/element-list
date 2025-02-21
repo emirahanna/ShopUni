@@ -1,0 +1,12 @@
+unnamed package
+CartManagement.controller
+CartManagement.model
+CartManagement.view
+OrderManagement.model
+OrderManagement.view
+PaymentManagement.model
+ProductManagement.model
+ProductManagement.view
+UserManagement.controller
+UserManagement.model
+UserManagement.view
