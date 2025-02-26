@@ -1,8 +1,7 @@
 package controller;
 
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import model.ProductDetailManagement.ProductDetails;
+import ProductDetailManagement.ProductDetails;
 import view.ProductDetailsView;
 
 /**
