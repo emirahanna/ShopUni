@@ -1,8 +1,8 @@
-package controller;
+package UserManagement.controller;
 
 import java.util.ArrayList;
 import ProductDetailManagement.ProductDetails;
-import view.ProductDetailsView;
+import UserManagement.view.ProductDetailsView;
 
 /**
  * This class stores the model and the view
