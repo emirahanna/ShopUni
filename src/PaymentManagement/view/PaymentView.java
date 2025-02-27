@@ -1,4 +1,9 @@
 package PaymentManagement.view;
 
-public class PaymentView {
+import javax.swing.*;
+import java.awt.*;
+
+public class PaymentView  extends JFrame {
+    public PaymentView() throws HeadlessException {
+    }
 }

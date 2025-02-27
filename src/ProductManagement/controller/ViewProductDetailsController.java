@@ -1,8 +1,9 @@
 package ProductManagement.controller;
 
-import java.util.ArrayList;
 import ProductManagement.model.Product;
 import ProductManagement.view.ProductPageView;
+
+import java.util.ArrayList;
 
 /**
  * This class stores the model and the view

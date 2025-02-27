@@ -1,4 +1,9 @@
 package UserManagement.view;
 
-public class AccessDeniedView {
+import javax.swing.*;
+import java.awt.*;
+
+public class AccessDeniedView  extends JFrame {
+    public AccessDeniedView() throws HeadlessException {
+    }
 }

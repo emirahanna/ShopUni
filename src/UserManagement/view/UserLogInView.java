@@ -1,4 +1,9 @@
 package UserManagement.view;
 
-public class UserLogInView {
+import javax.swing.*;
+import java.awt.*;
+
+public class UserLogInView extends JFrame {
+    public UserLogInView() throws HeadlessException {
+    }
 }

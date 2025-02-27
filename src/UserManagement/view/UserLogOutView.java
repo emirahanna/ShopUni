@@ -1,4 +1,9 @@
 package UserManagement.view;
 
-public class UserLogOutView {
+import javax.swing.*;
+import java.awt.*;
+
+public class UserLogOutView  extends JFrame {
+    public UserLogOutView() throws HeadlessException {
+    }
 }

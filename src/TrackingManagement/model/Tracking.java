@@ -1,18 +1,34 @@
 package TrackingManagement.model;
 
 public class Tracking {
-    private String paymentID;
-    private String trackingID;
+    private String orderID;
     private String arrivalDate;
     private String location;
 
 
-    public Tracking(String paymentID, String trackingID, String arrivalDate, String location) {
-        this.paymentID = paymentID;
-        this.trackingID = trackingID;
+    public Tracking(String orderID, String arrivalDate, String location) {
+        this.orderID = orderID;
         this.arrivalDate = arrivalDate;
         this.location = location;
     }
+
+    /**
+     * Estimates the remaining time for delivery based on the arrival date.
+     */
+    public String estimateDeliveryTime() {
+        if (arrivalDate == null || arrivalDate.isEmpty()) {
+            return "Arrival date not available.";
+        }
+        return "Estimated delivery in X days (based on " + arrivalDate + ")";
+    }
+
+    /**
+     * Validates if the tracking information is correctly formatted.
+     */
+    public boolean validateTracking() {
+        return orderID != null && location != null && !location.isEmpty();
+    }
+
 
     /**
      * Updates the location of the product as its status changes

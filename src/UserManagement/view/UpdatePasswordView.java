@@ -1,4 +1,9 @@
 package UserManagement.view;
 
-public class UpdatePasswordView {
+import javax.swing.*;
+import java.awt.*;
+
+public class UpdatePasswordView  extends JFrame {
+    public UpdatePasswordView() throws HeadlessException {
+    }
 }

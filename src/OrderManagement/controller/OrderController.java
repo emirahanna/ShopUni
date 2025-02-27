@@ -1,7 +1,6 @@
 package OrderManagement.controller;
 
 import OrderManagement.model.Order;
-import OrderManagement.model.Shipping;
 import OrderManagement.view.OrderConfirmedView;
 import OrderManagement.view.OrderDetailView;
 

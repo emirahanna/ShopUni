@@ -33,6 +33,7 @@ public class Inventory {
     }
 
     public String stockStatus() {
+        //ternary operator for easy 1-line readability
         return inStock ? "Available (" + quantity + " left)" : "Out of Stock";
     }
 }

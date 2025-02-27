@@ -1,4 +1,9 @@
 package UserManagement.view;
 
-public class UserRegisterView {
+import javax.swing.*;
+import java.awt.*;
+
+public class UserRegisterView extends JFrame {
+    public UserRegisterView() throws HeadlessException {
+    }
 }
