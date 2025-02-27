@@ -1,6 +1,6 @@
 package TrackingManagement.model;
 
-public class Track {
+public class Tracking {
     private String paymentID;
     private String trackingID;
     private String productID;

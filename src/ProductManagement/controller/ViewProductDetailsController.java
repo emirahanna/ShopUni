@@ -1,8 +1,8 @@
-package controller;
+package ProductManagement.controller;
 
 import java.util.ArrayList;
-import ProductDetailManagement.ProductDetails;
-import view.ProductDetailsView;
+import ProductManagement.model.Product;
+import ProductManagement.view.ProductPageView;
 
 /**
  * This class stores the model and the view
@@ -11,11 +11,11 @@ import view.ProductDetailsView;
 
 public class ViewProductDetailsController {
 
-    private ProductDetails productDetails;
-    private ProductDetailsView productDetailsView;
+    private Product productDetails;
+    private ProductPageView productDetailsView;
 
     //constructor stores model and view
-    public ViewProductDetailsController (ProductDetails productDetails, ProductDetailsView productDetailsView){
+    public ViewProductDetailsController (Product productDetails, ProductPageView productDetailsView){
         this.productDetails = productDetails;
         this.productDetailsView = productDetailsView;
     }

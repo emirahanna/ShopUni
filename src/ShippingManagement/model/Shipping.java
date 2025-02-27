@@ -1,11 +1,13 @@
 package ShippingManagement.model;
 
+import OrderManagement.model.Order;
+
 public class Shipping {
     private String companyID;
     private String trackingID;
     private String productID;
     private String location;
-    private String status;
+    private Order.OrderStatus status;
 
     /**
      * Connects the company ID to the tracking ID for customer reference
@@ -25,7 +27,7 @@ public class Shipping {
     /** 
      * Updates the status of the product as it moves through the shipping process
      */
-    public void updateStatus(String status) {
+    public void updateStatus(Order.OrderStatus status) {
         this.status = status;
     }
 }
