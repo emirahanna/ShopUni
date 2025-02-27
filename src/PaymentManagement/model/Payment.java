@@ -10,19 +10,27 @@ public class Payment {
     record GiftCard(int giftCardCode) implements PaymentOption {}
     record Cash(String currency) implements PaymentOption {}
 
-    private String paymentID;
-    private PaymentOption paymentOption;
-    private double amountPaid;
-    private Date transactionDate;
+    public String paymentID;
+    public PaymentOption paymentOption;
+    public double amountPaid;
+    public Date transactionDate;
 
     public void refundPayment() {
+        if (isRefundable()) {
+            System.out.println("Refunding " + amountPaid + " to " + paymentOption);
+        } else {
+            System.out.println("Payment is not refundable.");
+        }
     }
 
     public boolean isRefundable() {
-        return false;
+        return transactionDate.after(new Date(System.currentTimeMillis() - 7L * 24 * 60 * 60 * 1000)); // Refundable within 7 days
     }
 
     public String generatesReceipt() {
-        return "";
+        return "Receipt:\nPayment ID: " + paymentID +
+                "\nAmount Paid: $" + amountPaid +
+                "\nDate: " + transactionDate +
+                "\nPayment Method: " + paymentOption;
     }
 }
