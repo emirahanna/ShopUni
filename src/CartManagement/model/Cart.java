@@ -5,6 +5,9 @@ import java.util.Map;
 
 import ProductManagement.model.Product;
 
+/**
+ *  Class that emulates the behavior of an actual cart
+ */
 public class Cart {
     private String userID;
     private double totalPrice;
@@ -24,9 +27,6 @@ public class Cart {
     }
     private void calculateTotalPrice(double price){
         totalPrice+=price;
-    }
-    public double displayTotalPrice(){
-        return totalPrice;
     }
 
 }

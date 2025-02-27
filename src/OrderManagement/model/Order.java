@@ -1,51 +1,63 @@
 package OrderManagement.model;
+
 import CartManagement.model.Cart;
 import PaymentManagement.model.Payment;
 
 import java.util.Date;
 
 public class Order {
-
     private String customerID;
     private String orderID;
     private Payment payment;
     private double orderTotal;
     private Date orderDate;
-    private String address;
-    private DeliveryOption deliveryOption;
-    private OrderStatus orderStatus;
     private Cart cartContents;
+    private OrderStatusManager orderStatusManager;
+    private Shipping shippingDetails;
 
-    enum DeliveryOption{PICKUP, DELIVERY}
-    public enum OrderStatus{PENDING, SHIPPED, DELIVERED, CANCELED}
-
-    public boolean cancelOrder() {
-        if (orderStatus.equals(OrderStatus.PENDING)){
-            return true;
-        }
-        return false; // Can't cancel if already shipped or delivered
+    public Order(String customerID, String orderID, Payment payment, double orderTotal, Date orderDate,
+                 Cart cartContents, String address, Shipping.DeliveryOption deliveryOption) {
+        this.customerID = customerID;
+        this.orderID = orderID;
+        this.payment = payment;
+        this.orderTotal = orderTotal;
+        this.orderDate = orderDate;
+        this.cartContents = cartContents;
+        this.orderStatusManager = new OrderStatusManager();
+        this.shippingDetails = new Shipping(address, deliveryOption, orderDate);
     }
-
-    public void markAsShipped() {
-        if (orderStatus.equals(OrderStatus.PENDING)) {
-            orderStatus = OrderStatus.SHIPPED;
-        }
-    }
-
-    public void markAsDelivered() {
-        if (orderStatus.equals(OrderStatus.SHIPPED)) {
-            orderStatus = OrderStatus.DELIVERED;
-        }
-    }
-
-    public Date estimateDeliveryDate() {
-        return new Date(orderDate.getTime() + 99999999); //random number as placeholder
-    }
-
 
     public String generateOrderSummary() {
-        return "";
+        return "Order ID: " + orderID + "\n" +
+                "Customer ID: " + customerID + "\n" +
+                "Order Total: $" + orderTotal + "\n" +
+                "Status: " + orderStatusManager.getOrderStatus() + "\n" +
+                "Delivery: " + shippingDetails.getDeliveryOption() + " to " + shippingDetails.getAddress() + "\n" +
+                "Estimated Delivery: " + shippingDetails.estimateDeliveryDate();
     }
 
+    public String getCustomerID() {
+        return customerID;
+    }
 
+    public String getOrderID() {
+        return orderID;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public double getOrderTotal() {
+        return orderTotal;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public Cart getCartContents() {
+        return cartContents;
+    }
 }
+
