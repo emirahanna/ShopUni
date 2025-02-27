@@ -11,7 +11,7 @@ import ProductManagement.model.Product;
 public class Cart {
     private String userID;
     private double totalPrice;
-    private Map<Product, Integer> cartContent;
+    private Map<Product, Integer> cartContents;
 
     public void addProduct(Product p){
         //accesses the product's price and increments it to totalPrice
