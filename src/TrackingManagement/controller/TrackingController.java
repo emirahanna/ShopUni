@@ -11,4 +11,14 @@ public class TrackingController {
         this.model = model;
         this.view = view;
     }
+    public void ShowTracking() {
+        String trackingNumber = view.ShowTracking();
+        String status = model.getStatus(trackingNumber);
+        if (status != null) {
+            view.ShowTrackingStatus(status);
+        } 
+        else {
+            view.ShowTrackingError();
+        }
+    }
 }
