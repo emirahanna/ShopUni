@@ -1,8 +1,9 @@
 package CartManagement.model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
+import OrderManagement.controller.OrderController;
 import ProductManagement.model.Product;
 
 /**
@@ -13,20 +14,59 @@ public class Cart {
     private double totalPrice;
     private Map<Product, Integer> cartContents;
 
+    public Cart(String userID) {
+        this.userID = userID;
+        cartContents = new HashMap<Product, Integer>();
+        totalPrice = 0;
+    }
+
+    /**
+     *     accesses the product's price and increments it to totalPrice
+     */
+
     public void addProduct(Product p){
-        //accesses the product's price and increments it to totalPrice
+        cartContents.put(p, cartContents.getOrDefault(p, 0) + 1);
+        calculateTotalPrice(p.getPrice());
+
     }
+
+    /**
+     *    accesses the product's price and decrements it from totalPrice
+     */
     public void removeProduct(Product p){
-        //accesses the product's price and decrements it from totalPrice
+        if (cartContents.containsKey(p) && cartContents.get(p) > 0) {
+            cartContents.put(p, cartContents.get(p) - 1);
+            calculateTotalPrice(-p.getPrice());
+            if (cartContents.get(p) == 0) {
+                cartContents.remove(p);
+            }
+        }
+
     }
+
+    /**
+     * purges the map, and total price
+     */
     public void emptyCart(){
-        //purges the map, and total price
+        cartContents.clear();
+        totalPrice = 0;
     }
+
+    /**
+     * creates an order using the cartContent
+     */
     public void buyCart(){
-        //creates an order using the cartContent
+       //new OrderController(new);
     }
     private void calculateTotalPrice(double price){
         totalPrice+=price;
     }
 
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public Map<Product, Integer> getCartContents() {
+        return cartContents;
+    }
 }

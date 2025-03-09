@@ -13,9 +13,10 @@ public class Product {
     private String sellerID;
     private Date dateListed;
     private String productCategory;
+    private Pricing price;
 
 
-    public Product(String title, String description, String productID, String imageID, String sellerID, Date dateListed, String productCategory) {
+    public Product(String title, String description, String productID, String imageID, String sellerID, Date dateListed, String productCategory, Pricing price) {
         this.title = title;
         this.description = description;
         this.productID = productID;
@@ -23,6 +24,7 @@ public class Product {
         this.sellerID = sellerID;
         this.dateListed = dateListed;
         this.productCategory = productCategory;
+        this.price = price;
     }
 
     public String displayProductDetails() {
@@ -55,5 +57,9 @@ public class Product {
 
     public String getProductCategory() {
         return productCategory;
+    }
+
+    public double getPrice() {
+        return price.getPrice();
     }
 }

@@ -38,9 +38,9 @@ public class PaymentController {
     public void refundPayment() {
         if (paymentModel.isRefundable()) {
             paymentModel.refundPayment();
-            System.out.println("Refund processed.");
+            paymentView.refundProcessed();
         } else {
-            System.out.println("Payment is not refundable.");
+            paymentView.denyRefund();
         }
     }
 
@@ -48,7 +48,7 @@ public class PaymentController {
      *
      */
     public void showPaymentDetails() {
-        paymentView.displayPaymentDetails(paymentModel);
+        paymentView.displayPaymentDetails();
     }
 }
 

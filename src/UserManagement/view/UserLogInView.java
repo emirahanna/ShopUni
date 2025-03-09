@@ -1,17 +1,12 @@
 package UserManagement.view;
 
-import javax.swing.*;
-import java.awt.*;
+import java.util.Scanner;
 
-public class UserLogInView extends JFrame {
-    public UserLogInView() throws HeadlessException {
-    }
-    public void ShowLogIn() {
-        Scanner scnr = new Scanner(System.in);
-        System.out.println("Enter your username");
-        String username = scnr.nextLine();
-        System.out.println("Enter your password");
-        String password = scnr.nextLine();
+public class UserLogInView {
+    Scanner scnr;
+
+    public UserLogInView() {
+        scnr = new Scanner(System.in);
     }
 
     public void ShowLogInError() {
@@ -23,5 +18,23 @@ public class UserLogInView extends JFrame {
         UpdatePasswordView updatePasswordView = new UpdatePasswordView();
         updatePasswordView.ShowUpdatePassword();
     }
-    
+
+    public String getUsernameInput() {
+        System.out.print("Enter Login: ");
+        return scnr.next();
+    }
+
+    public String getPasswordInput() {
+        System.out.print("Enter Password: ");
+        return scnr.next();
+    }
+
+    public void displayLoginSuccess() {
+        System.out.println("Login successful!");
+    }
+
+    public void displayLoginFailure() {
+        System.out.println("Login failed. Incorrect username or password.");
+    }
+
 }

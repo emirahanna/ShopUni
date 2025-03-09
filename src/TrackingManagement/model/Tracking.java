@@ -4,12 +4,14 @@ public class Tracking {
     private String orderID;
     private String arrivalDate;
     private String location;
+    private String status;
 
 
-    public Tracking(String orderID, String arrivalDate, String location) {
+    public Tracking(String orderID, String arrivalDate, String location, String status) {
         this.orderID = orderID;
         this.arrivalDate = arrivalDate;
         this.location = location;
+        this.status = status;
     }
 
     /**
@@ -42,5 +44,21 @@ public class Tracking {
      */
     public void updateDate(String arrivalDate) {
         this.arrivalDate = arrivalDate;
+    }
+
+    public String getOrderID() {
+        return orderID;
+    }
+
+    public String getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getStatus(String orderID) {
+        return status;
     }
 }

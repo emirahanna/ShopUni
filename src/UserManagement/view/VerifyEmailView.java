@@ -2,9 +2,10 @@ package UserManagement.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Scanner;
 
-public class VerifyEmailView  extends JFrame {
-    public VerifyEmailView() throws HeadlessException {
+public class VerifyEmailView  {
+    public VerifyEmailView() {
     }
     public void ShowVerifyEmail() {
         Scanner scnr = new Scanner(System.in);

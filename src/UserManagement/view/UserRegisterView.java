@@ -2,6 +2,7 @@ package UserManagement.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Scanner;
 
 public class UserRegisterView extends JFrame {
     public UserRegisterView() throws HeadlessException {

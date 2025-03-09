@@ -4,4 +4,13 @@ We are four Penn State students who intend to create a comprehensive storefront 
 
 
 Team Member ID + Name	Contribution in The Particular Assignment
+
 nvl5303 - Nicole Leon   Implemented TrackingManagement & UserManagement MVCs with method stubs
+
+
+USE CASES
+1. View Product Details
+2. Add Product to Cart
+3. Track Order
+4. Purchase Order
+5. Authenticate Account

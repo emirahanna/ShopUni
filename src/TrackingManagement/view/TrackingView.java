@@ -2,6 +2,7 @@ package TrackingManagement.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Scanner;
 
 public class TrackingView extends JFrame {
     public TrackingView() throws HeadlessException {

@@ -1,9 +1,19 @@
 package PaymentManagement.view;
 
-import javax.swing.*;
-import java.awt.*;
+public class PaymentView {
+    public PaymentView() {
+    }
 
-public class PaymentView  extends JFrame {
-    public PaymentView() throws HeadlessException {
+    public void displayPaymentDetails() {
+
+    }
+
+    public void refundProcessed() {
+        System.out.println("Refund processed.");
+
+    }
+
+    public void denyRefund() {
+        System.out.println("Payment is not refundable.");
     }
 }
