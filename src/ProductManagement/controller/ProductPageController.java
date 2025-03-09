@@ -30,6 +30,7 @@ public class ProductPageController {
 
         switch (choice) {
             case "A" -> {
+                view.succAddToCart();
                 new CartController(productDetails);
             }
             case "X" -> {

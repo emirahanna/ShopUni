@@ -26,10 +26,10 @@ public class ProductPageView{
     }
 
     public void succAddToCart(){
-        System.out.println("Successfully added to cart!");
+        System.out.println("Successfully added to cart!\n");
     }
     public void invalidInput(){
-        System.out.println("Invalid input. Please try again.");
+        System.out.println("Invalid input. Please try again.\n");
     }
 
 }
