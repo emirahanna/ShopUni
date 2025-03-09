@@ -10,14 +10,20 @@ import ProductManagement.model.Product;
  *  Class that emulates the behavior of an actual cart
  */
 public class Cart {
-    private String userID;
     private double totalPrice;
     private Map<Product, Integer> cartContents;
 
-    public Cart(String userID) {
-        this.userID = userID;
+    private static Cart instance;  // Singleton instance
+
+    private Cart() {
         cartContents = new HashMap<Product, Integer>();
         totalPrice = 0;
+    }
+    public static Cart getInstance() {
+        if (instance == null) {
+            instance = new Cart();
+        }
+        return instance;
     }
 
     /**

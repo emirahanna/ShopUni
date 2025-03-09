@@ -3,19 +3,22 @@ package CartManagement.controller;
 import CartManagement.model.Cart;
 import CartManagement.view.CartContentsView;
 
+import ProductManagement.controller.ProductListingController;
 import ProductManagement.model.Product;
 
 import java.util.Scanner;
 
 public class CartController {
-    private final Cart cart;
-    private final CartContentsView view;
-    private final Scanner scanner;
+    private Cart cart;
+    private CartContentsView view;
+    private Scanner scanner;
 
-    public CartController(Cart cart, CartContentsView view) {
-        this.cart = cart;
-        this.view = view;
+    public CartController(Product p) {
+        this.cart = Cart.getInstance();
+        this.cart.addProduct(p);
+        this.view = new CartContentsView(cart.getCartContents(), cart.getTotalPrice());
         this.scanner = new Scanner(System.in);
+        manageCart();
     }
 
     public void manageCart() {
@@ -28,40 +31,45 @@ public class CartController {
                 case 1 -> removeProduct();
                 case 2 -> {
                     cart.emptyCart();
-                    System.out.println("Cart emptied.");
+                    view.cartEmptied();
                 }
-                case 3 -> buyCart();
-                case 4 -> System.out.println("Exiting cart...");
-                default -> System.out.println("Invalid choice. Please try again.");
+                case 3 -> {
+                    buyCart();
+                    choice = 4;
+                }
+                case 4 -> {
+                    view.exitingCart();
+                    new ProductListingController();
+                }
+                default -> view.invalidChoice();
             }
         } while (choice != 4);
     }
 
     private void addProduct(Product p) {
         cart.addProduct(p);
-        System.out.println(p.getTitle() + " added to cart.");
     }
 
     private void removeProduct() {
-        System.out.print("Enter product name to remove: ");
+        view.removeProductPrompt();
         String productName = scanner.next();
 
         for (Product p : cart.getCartContents().keySet()) {
             if (p.getTitle().equalsIgnoreCase(productName)) {
                 cart.removeProduct(p);
-                System.out.println(productName + " removed from cart.");
+                view.productWasRemoved(p.getTitle());
+                manageCart();
                 return;
             }
         }
-        System.out.println("Product not found in cart.");
+        view.productNotFound();
     }
 
     private void buyCart() {
         if (cart.getCartContents().isEmpty()) {
-            System.out.println("Cart is empty! Add products before purchasing.");
+            view.cartEmptyReminder();
             return;
         }
-        System.out.println("Proceeding to checkout... ");
         cart.emptyCart();  // Simulate purchase
     }
 }

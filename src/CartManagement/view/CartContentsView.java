@@ -14,17 +14,17 @@ public class CartContentsView {
 
 
     public CartContentsView(Map<Product, Integer> cart, double totalPrice) {
-        displayCart(cart, totalPrice);
-        displayOptions();
         this.scnr = new Scanner(System.in);
     }
 
     public void displayCart(Map<Product, Integer> cart, double totalPrice) {
-        System.out.printf("%-15s %5s %5s", "Item", "QTY", "AMT");
+        System.out.printf("%-30s %5s %5s\n", "Item", "QTY", "AMT");
         for (Product p : cart.keySet()) {
-            System.out.printf("%-15s %5d %5f", p, cart.get(p), p.getPrice());
+            System.out.printf("%-30s %5d %5.2f\n", p.getTitle(), cart.get(p), p.getPrice());
         }
-        System.out.printf("%25f", totalPrice);
+        System.out.printf("%42.2f\n", totalPrice);
+        System.out.println();
+        System.out.println();
     }
 
     public int displayOptions() {
@@ -43,5 +43,35 @@ public class CartContentsView {
             readNum = scnr.nextInt();
         }
         return readNum;
+    }
+
+    public void cartEmptied(){
+        System.out.println("Cart emptied.");
+    }
+
+    public void exitingCart(){
+        System.out.println("Exiting cart...");
+    }
+    public void invalidChoice(){
+        System.out.println("Invalid choice. Please try again.");
+    }
+    public void removeProductPrompt(){
+        System.out.print("Enter product name to remove: ");
+
+    }
+    public void productNotFound(){
+        System.out.println("Product not found in cart.");
+    }
+
+    public void productWasRemoved(String s){
+        System.out.println(s + " removed from cart.");
+    }
+
+    public void proceedingToCheckout(){
+        System.out.println("Proceeding to checkout... ");
+    }
+
+    public void cartEmptyReminder(){
+        System.out.println("Cart is empty! Add products before purchasing.");
     }
 }

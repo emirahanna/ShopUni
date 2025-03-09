@@ -3,13 +3,11 @@ package UserManagement.model;
 public class UserAccount {
     private String username;
     private String password;
-    private String email;
     private boolean hasSavedPayment;
 
     public UserAccount(String username, String password) {
         this.username = username;
         this.password = password;
-        this.email = email;
         this.hasSavedPayment = false;
     }
 
@@ -32,6 +30,10 @@ public class UserAccount {
             return UserRole.ADMIN;
         }
         throw new IllegalArgumentException("Not a valid user");
+    }
+
+    public String getUsername() {
+        return username;
     }
 
 }

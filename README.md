@@ -14,3 +14,7 @@ USE CASES
 3. Track Order
 4. Purchase Order
 5. Authenticate Account
+
+Log In Credentials
+username: buyer
+password: pwd
