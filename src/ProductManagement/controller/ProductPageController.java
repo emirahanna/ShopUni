@@ -16,11 +16,12 @@ public class ProductPageController {
     private Product productDetails;
     private ProductPageView view;
 
+
     //constructor stores model and view
     public ProductPageController(Product product) {
         this.productDetails = product;
         this.view = new ProductPageView();
-        view.displayOptions();
+        view.displayOptions(this);
         handleLogic();
     }
 
@@ -39,13 +40,13 @@ public class ProductPageController {
     }
 
     //retrieves information about product requested
-    public ArrayList<String> retrieveProduct() {
-        return null;
+    public String retrieveProduct() {
+        return ("Product Details: \n \n" + productDetails.displayProductDetails());
     }
 
     //changes image and goes through image carousel for product on click if there's multiple images for a listing
     public String changeImg() {
-        return null;
+        return productDetails.getImageID() ;
     }
 }
 

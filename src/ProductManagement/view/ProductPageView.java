@@ -1,5 +1,7 @@
 package ProductManagement.view;
 
+import ProductManagement.controller.ProductPageController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
@@ -11,8 +13,8 @@ public class ProductPageView{
         this.scnr = new Scanner(System.in);
     }
 
-    public void displayOptions(){
-        System.out.println("PRINTED PRODUCT INFO");
+    public void displayOptions(ProductPageController controller){
+        System.out.println(controller.retrieveProduct());
         System.out.println("\nOptions:");
         System.out.println("A - Add To Cart");
         System.out.println("X - Back To Catalog");

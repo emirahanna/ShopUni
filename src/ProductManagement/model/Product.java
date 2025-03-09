@@ -28,7 +28,7 @@ public class Product {
     }
 
     public String displayProductDetails() {
-        return "Product: " + title + "\n" + "Description: " + description + "\n" + "Category: " + productCategory + "\n" + "Listed on: " + dateListed;
+        return "Product: " + title + "\n" + "Description: " + description + "\n" + "Category: " + productCategory + "\n" + "Price: "+ price.getPrice() + "\n" + "Listed on: " + dateListed;
     }
 
     public String getTitle() {
@@ -61,5 +61,10 @@ public class Product {
 
     public double getPrice() {
         return price.getPrice();
+    }
+
+    @Override
+    public String toString(){
+        return String.format("$%.2f", price);
     }
 }
