@@ -1,6 +1,7 @@
 package PaymentManagement.controller;
 
 import PaymentManagement.model.Payment;
+
 import PaymentManagement.view.PaymentView;
 
 import java.util.Date;
@@ -11,27 +12,42 @@ public class PaymentController {
 
     /**Constructor to initialize with an existing Payment model
      */
-    public PaymentController(Payment paymentModel, PaymentView paymentView) {
-        this.paymentModel = paymentModel;
-        this.paymentView = paymentView;
+    public PaymentController() {
+        this.paymentView = new PaymentView();
+        processPayment();
     }
 
-    /** Method to process a payment
-     *
-     * @param paymentID
-     * @param paymentOption
-     * @param amountPaid
-     */
-    public void processPayment(String paymentID, Payment.PaymentOption paymentOption, double amountPaid) {
-        paymentModel = new Payment();
-        // Set attributes
-        paymentModel.paymentID = paymentID;
-        paymentModel.paymentOption = paymentOption;
-        paymentModel.amountPaid = amountPaid;
-        paymentModel.transactionDate = new Date();
+    public void processPayment() {
+        int choice = paymentView.promptPaymentOption();
+        Payment.PaymentOption paymentOption;
 
-        System.out.println("Payment processed [stub].");
+        switch (choice) {
+            case 1 -> { // Cash Payment
+                String currency = paymentView.promptCurrency();
+                paymentOption = new Payment.Cash(currency);
+            }
+            case 2 -> { // Card Payment
+                int cardNumber = paymentView.promptCardNumber();
+                int CVV = paymentView.promptCVV();
+                int expirationDate = paymentView.promptExpirationDate();
+                String name = paymentView.promptCardHolderName();
+                paymentOption = new Payment.Card(cardNumber, CVV, expirationDate, name);
+            }
+            case 3 -> { // Gift Card Payment
+                int giftCardCode = paymentView.promptGiftCardCode();
+                paymentOption = new Payment.GiftCard(giftCardCode);
+            }
+            default -> {
+                paymentView.invalidInput();
+                return;
+            }
+        }
+        paymentModel = new Payment("RANDOM ID", paymentOption, paymentView.promptAmount(), new Date());
+
+
+        paymentView.paymentSuccessful();
     }
+
 
     /**
      * Method to refund a payment
@@ -57,10 +73,14 @@ public class PaymentController {
         System.out.println("showPaymentDetails called.");
 
         if (paymentView != null) {
-            paymentView.displayPaymentDetails();
+            paymentView.printReceipt(paymentModel.generatesReceipt());
         } else {
             System.out.println("Payment view not available.");
         }
+    }
+
+    public Payment getPaymentModel() {
+        return paymentModel;
     }
 }
 

@@ -9,8 +9,8 @@ import java.util.Scanner;
  *  view individual product listings
  */
 
-public class ProductDetailsView extends JFrame {
-    public ProductDetailsView() throws HeadlessException {
+public class ProductDetailsView {
+    public ProductDetailsView() {
     }
     public void ShowProductDetails() {
         Scanner scnr = new Scanner(System.in);
