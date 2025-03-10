@@ -3,7 +3,6 @@ package PaymentManagement.controller;
 import PaymentManagement.model.Payment;
 import PaymentManagement.view.PaymentView;
 
-import java.lang.reflect.Constructor;
 import java.util.Date;
 
 public class PaymentController {
@@ -30,17 +29,24 @@ public class PaymentController {
         paymentModel.paymentOption = paymentOption;
         paymentModel.amountPaid = amountPaid;
         paymentModel.transactionDate = new Date();
+
+        System.out.println("Payment processed [stub].");
     }
 
-    /** Method to refund a payment
+    /**
+     * Method to refund a payment
      *
+     * @return
      */
-    public void refundPayment() {
-        if (paymentModel.isRefundable()) {
-            paymentModel.refundPayment();
-            paymentView.refundProcessed();
+    public boolean refundPayment() {
+        System.out.println("refundPayment called.");
+
+        if (paymentModel != null && paymentModel.isRefundable()) {
+            System.out.println("Refund processed.");
+            return true;
         } else {
-            paymentView.denyRefund();
+            System.out.println("Refund denied.");
+            return false;
         }
     }
 
@@ -48,7 +54,13 @@ public class PaymentController {
      *
      */
     public void showPaymentDetails() {
-        paymentView.displayPaymentDetails();
+        System.out.println("showPaymentDetails called.");
+
+        if (paymentView != null) {
+            paymentView.displayPaymentDetails();
+        } else {
+            System.out.println("Payment view not available.");
+        }
     }
 }
 
