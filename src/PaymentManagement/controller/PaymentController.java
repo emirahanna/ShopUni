@@ -1,60 +1,53 @@
 package PaymentManagement.controller;
 
 import PaymentManagement.model.Payment;
+
 import PaymentManagement.view.PaymentView;
-import ProductManagement.model.Inventory;
 
 import java.util.Date;
 
 public class PaymentController {
     private Payment paymentModel;
     private PaymentView paymentView;
-    private Inventory inventory;
 
     /**Constructor to initialize with an existing Payment model
      */
-    public PaymentController(Payment paymentModel, PaymentView paymentView, Inventory inventory) {
-        this.paymentModel = paymentModel;
-        this.paymentView = paymentView;
-        this.inventory = inventory;
+    public PaymentController() {
+        this.paymentView = new PaymentView();
+        processPayment();
     }
 
-    /**
-     * Method to process a payment
-     *
-     * @param paymentID
-     * @param paymentOption
-     * @param amountPaid
-     * @return
-     */
-    public boolean processPayment(String paymentID, Payment.PaymentOption paymentOption, double amountPaid) {
-        if (inventory == null || !inventory.isAvailable()) {
-            System.out.println("Payment failed: Product out of stock.");
-            return false; // Block purchase if no stock
+    public void processPayment() {
+        int choice = paymentView.promptPaymentOption();
+        Payment.PaymentOption paymentOption;
+
+        switch (choice) {
+            case 1 -> { // Cash Payment
+                String currency = paymentView.promptCurrency();
+                paymentOption = new Payment.Cash(currency);
+            }
+            case 2 -> { // Card Payment
+                int cardNumber = paymentView.promptCardNumber();
+                int CVV = paymentView.promptCVV();
+                int expirationDate = paymentView.promptExpirationDate();
+                String name = paymentView.promptCardHolderName();
+                paymentOption = new Payment.Card(cardNumber, CVV, expirationDate, name);
+            }
+            case 3 -> { // Gift Card Payment
+                int giftCardCode = paymentView.promptGiftCardCode();
+                paymentOption = new Payment.GiftCard(giftCardCode);
+            }
+            default -> {
+                paymentView.invalidInput();
+                return;
+            }
         }
+        paymentModel = new Payment("RANDOM ID", paymentOption, paymentView.promptAmount(), new Date());
 
-        paymentModel = new Payment();
-        // Set attributes
-        paymentModel.paymentID = paymentID;
-        paymentModel.paymentOption = paymentOption;
-        paymentModel.amountPaid = amountPaid;
-        paymentModel.transactionDate = new Date();
 
-        boolean paymentSuccess = sendToPaymentProcessor(amountPaid);
-
-        if (paymentSuccess) {
-            inventory.reduceStock();  // Reduce stock since payment was successful
-            System.out.println("Payment successful. Order confirmed.");
-            return true;
-        } else {
-            System.out.println("Payment failed. Please try again.");
-            return false;
-        }
+        paymentView.paymentSuccessful();
     }
 
-    private boolean sendToPaymentProcessor(double amountPaid) {
-        return amountPaid > 0; // this is to simulate a real payment
-    }
 
     /**
      * Method to refund a payment
@@ -62,11 +55,10 @@ public class PaymentController {
      * @return
      */
     public boolean refundPayment() {
-        System.out.println("refund process initiated.");
+        System.out.println("refundPayment called.");
 
         if (paymentModel != null && paymentModel.isRefundable()) {
             System.out.println("Refund processed.");
-            inventory.addStock(); // Restock item on refund
             return true;
         } else {
             System.out.println("Refund denied.");
@@ -81,10 +73,14 @@ public class PaymentController {
         System.out.println("showPaymentDetails called.");
 
         if (paymentView != null) {
-            paymentView.displayPaymentDetails();
+            paymentView.printReceipt(paymentModel.generatesReceipt());
         } else {
             System.out.println("Payment view not available.");
         }
+    }
+
+    public Payment getPaymentModel() {
+        return paymentModel;
     }
 }
 

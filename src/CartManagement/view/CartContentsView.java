@@ -34,7 +34,7 @@ public class CartContentsView {
                 1. Remove Product
                 2. Empty Cart
                 3. Buy Cart
-                4. Exit Cart
+                4. Exit Cart (Back to Catalog)
                 """);
         System.out.print("Enter your choice: ");
         int readNum = scnr.nextInt();

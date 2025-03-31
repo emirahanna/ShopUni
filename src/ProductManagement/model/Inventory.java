@@ -36,4 +36,12 @@ public class Inventory {
         //ternary operator for easy 1-line readability
         return inStock ? "Available (" + quantity + " left)" : "Out of Stock";
     }
+
+    public void addStock() {
+        inStock = true; // this is here to mark product as available
+    }
+
+    public void reduceStock() {
+        inStock = false; // Mark product as unavailable after purchase
+    }
 }

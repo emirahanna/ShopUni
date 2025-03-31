@@ -1,22 +1,20 @@
 package TrackingManagement.view;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.Scanner;
 
-public class TrackingView extends JFrame {
-    public TrackingView() throws HeadlessException {
+public class TrackingView  {
+    public TrackingView() {
     }
-    public String ShowTracking() {
+    public String showTracking() {
         Scanner scnr = new Scanner(System.in);
         System.out.println("Enter your tracking number");
         String trackingNumber = scnr.nextLine();
         return trackingNumber;
     }
-    public void ShowTrackingStatus(String status) {
+    public void showTrackingStatus(String status) {
         System.out.println("Your tracking status is: " + status);
     }
-    public void ShowTrackingError() {
+    public void showTrackingError() {
         System.out.println("Invalid tracking number");
     }
 }

@@ -26,11 +26,11 @@ public class LogInController {
             UserRole role = user.verifyUser();
             if (role == UserRole.BUYER) {
                 logInView.displayLoginSuccess();
-                new ProductListingController();
                 authenticatedUser = user;
+                new ProductListingController();
             }
 
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             logInView.displayLoginFailure();
             login();
         }

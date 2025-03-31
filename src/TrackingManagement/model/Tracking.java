@@ -1,13 +1,15 @@
 package TrackingManagement.model;
 
+import java.util.Date;
+
 public class Tracking {
     private String orderID;
-    private String arrivalDate;
+    private Date arrivalDate;
     private String location;
     private String status;
 
 
-    public Tracking(String orderID, String arrivalDate, String location, String status) {
+    public Tracking(String orderID, Date arrivalDate, String location, String status) {
         this.orderID = orderID;
         this.arrivalDate = arrivalDate;
         this.location = location;
@@ -18,7 +20,7 @@ public class Tracking {
      * Estimates the remaining time for delivery based on the arrival date.
      */
     public String estimateDeliveryTime() {
-        if (arrivalDate == null || arrivalDate.isEmpty()) {
+        if (arrivalDate == null || arrivalDate == null) {
             return "Arrival date not available.";
         }
         return "Estimated delivery in X days (based on " + arrivalDate + ")";
@@ -42,7 +44,7 @@ public class Tracking {
     /**
      * Updates the arrival date of the product as it reaches the customer
      */
-    public void updateDate(String arrivalDate) {
+    public void updateDate(Date arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 
@@ -50,7 +52,7 @@ public class Tracking {
         return orderID;
     }
 
-    public String getArrivalDate() {
+    public Date getArrivalDate() {
         return arrivalDate;
     }
 

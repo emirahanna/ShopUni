@@ -6,14 +6,21 @@ public class Payment {
     //don't mind this, I am testing out using sealed interfaces and records
     public sealed interface PaymentOption {
     }
-    record Card(int cardNumber, int CVV, int expirationDate, String name) implements PaymentOption {}
-    record GiftCard(int giftCardCode) implements PaymentOption {}
-    record Cash(String currency) implements PaymentOption {}
+    public record Card(int cardNumber, int CVV, int expirationDate, String name) implements PaymentOption {}
+    public record GiftCard(int giftCardCode) implements PaymentOption {}
+    public record Cash(String currency) implements PaymentOption {}
 
-    public static String paymentID;
-    public static PaymentOption paymentOption;
-    public static double amountPaid;
-    public static Date transactionDate;
+    public  String paymentID;
+    public  PaymentOption paymentOption;
+    public  double amountPaid;
+    public  Date transactionDate;
+
+    public Payment(String paymentID, PaymentOption paymentOption, double amountPaid, Date transactionDate) {
+        this.paymentID = paymentID;
+        this.paymentOption = paymentOption;
+        this.amountPaid = amountPaid;
+        this.transactionDate = transactionDate;
+    }
 
     public void refundPayment() {
         System.out.println("refundPayment method called.");
@@ -27,7 +34,6 @@ public class Payment {
     public boolean isRefundable() {
         System.out.println("isRefundable method called.");
         return true; // stub for testing
-        // return transactionDate.after(new Date(System.currentTimeMillis() - 7L * 24 * 60 * 60 * 1000)); // Refundable within 7 days
     }
 
     public String generatesReceipt() {

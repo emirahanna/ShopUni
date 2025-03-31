@@ -3,6 +3,7 @@ package CartManagement.controller;
 import CartManagement.model.Cart;
 import CartManagement.view.CartContentsView;
 
+import OrderManagement.controller.OrderController;
 import ProductManagement.controller.ProductListingController;
 import ProductManagement.model.Product;
 
@@ -14,7 +15,7 @@ public class CartController {
     private Scanner scanner;
 
     public CartController(Product p) {
-        this.cart = Cart.getInstance();
+        this.cart = Cart.getInstance(); //singleton model since there should only be one cart per session per user
         this.cart.addProduct(p);
         this.view = new CartContentsView(cart.getCartContents(), cart.getTotalPrice());
         this.scanner = new Scanner(System.in);
@@ -28,7 +29,9 @@ public class CartController {
             choice = view.displayOptions();
 
             switch (choice) {
-                case 1 -> removeProduct();
+                case 1 -> {
+                    removeProduct();
+                }
                 case 2 -> {
                     cart.emptyCart();
                     view.cartEmptied();
@@ -36,6 +39,7 @@ public class CartController {
                 case 3 -> {
                     buyCart();
                     choice = 4;
+                    new OrderController(cart);
                 }
                 case 4 -> {
                     view.exitingCart();
