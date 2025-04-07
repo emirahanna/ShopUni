@@ -12,13 +12,11 @@ import java.util.Scanner;
 public class CartController {
     private Cart cart;
     private CartContentsView view;
-    private Scanner scanner;
 
     public CartController(Product p) {
         this.cart = Cart.getInstance(); //singleton model since there should only be one cart per session per user
         this.cart.addProduct(p);
-        this.view = new CartContentsView(cart.getCartContents(), cart.getTotalPrice());
-        this.scanner = new Scanner(System.in);
+        view = new CartContentsView();
         manageCart();
     }
 
@@ -56,7 +54,7 @@ public class CartController {
 
     private void removeProduct() {
         view.removeProductPrompt();
-        String productName = scanner.next();
+        String productName = view.getProductName();
 
         for (Product p : cart.getCartContents().keySet()) {
             if (p.getTitle().equalsIgnoreCase(productName)) {

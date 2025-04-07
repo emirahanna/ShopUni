@@ -13,7 +13,7 @@ public class CartContentsView {
     private Scanner scnr;
 
 
-    public CartContentsView(Map<Product, Integer> cart, double totalPrice) {
+    public CartContentsView() {
         this.scnr = new Scanner(System.in);
     }
 
@@ -25,6 +25,10 @@ public class CartContentsView {
         System.out.printf("%42.2f\n", totalPrice);
         System.out.println();
         System.out.println();
+    }
+
+    public String getProductName(){
+        return scnr.next();
     }
 
     public int displayOptions() {
