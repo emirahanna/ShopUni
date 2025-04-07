@@ -8,7 +8,7 @@ import java.util.Date;
 public class Product {
     private String title;
     private String description;
-    private String productID;
+    private String ID;
     private String imageID;
     private String sellerID;
     private Date dateListed;
@@ -19,7 +19,7 @@ public class Product {
     public Product(String title, String description, String productID, String imageID, String sellerID, Date dateListed, String productCategory, Pricing price) {
         this.title = title;
         this.description = description;
-        this.productID = productID;
+        this.ID = productID;
         this.imageID = imageID;
         this.sellerID = sellerID;
         this.dateListed = dateListed;
@@ -39,8 +39,8 @@ public class Product {
         return description;
     }
 
-    public String getProductID() {
-        return productID;
+    public String getID() {
+        return ID;
     }
 
     public String getImageID() {
