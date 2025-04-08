@@ -1,4 +1,4 @@
-import usermanagement.controller.LogInController;
+import edu.psu.ist.usermanagement.controller.LogInController;
 
 public class TestHarness {
     public static void main(String[] args) {
