@@ -1,5 +1,6 @@
 package edu.psu.ist.productmanagement.model;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,7 +10,37 @@ public class ProductCatalog {
 
     public ProductCatalog() {
         this.products = new ArrayList<>();
-        loadSampleProducts(); // sample data, actual shop should be reading from a database
+        loadProducts();
+        //loadSampleProducts(); // sample data, actual shop should be reading from a database
+    }
+
+    private void loadProducts(){ //this is terrible if we scale since we're loading everything at once. for now, it's fine to load the first 50
+        String databaseURL = "jdbc:ucanaccess://C:\\Users\\Hanna\\OneDrive\\Documents\\PSU\\IST412\\ShopUni\\src\\ProductList.accdb";
+
+        try (Connection connection = DriverManager.getConnection(databaseURL)) {
+
+
+            String sql = "SELECT * FROM sample_products";
+
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next()) {
+                String title = result.getString("title");
+                String description = result.getString("description");
+                String id = result.getString("ID");
+                String imageID = result.getString("imageID");
+                String sellerID = result.getString("sellerID");
+                String productCategory = result.getString("productCategory");
+                Date date = result.getDate("dateListed");
+                Pricing price = new Pricing(result.findColumn("price"));
+
+                products.add(new Product(title, description, id, imageID, sellerID, date, productCategory, price));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void loadSampleProducts() {

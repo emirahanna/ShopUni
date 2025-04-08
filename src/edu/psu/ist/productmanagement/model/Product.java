@@ -1,7 +1,6 @@
 package edu.psu.ist.productmanagement.model;
 
 import java.util.Date;
-import edu.psu.ist.productmanagement.model.Pricing;
 
 /**
  * Encapsulates the features of a product, which can be created and sold
