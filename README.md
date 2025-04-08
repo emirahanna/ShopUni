@@ -7,10 +7,10 @@ Team Member ID + Name	Contribution in The Particular Assignment
 
 | User ID | Name              | Contributions                                                                                                                          |
 |---------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| nvl5303 | Nicole Leon       | Implemented TrackingManagement & UserManagement MVCs with method stubs                                                                 |
+| nvl5303 | Nicole Leon       | Implemented trackingmanagement & usermanagement MVCs with method stubs                                                                 |
 | ezy5092 | Emira Hanna Yahya | Implemented Log In Authentication Flow and Add to Cart flow. Connected Order Flow, Payment Flow and the Track Order Flow to each other |
 | hmf5339 | Haley Fitzgerald  | Implemented View Product Details Flow                                                                                                  |
-| hlt5125 | Heaven Thomas     | Implemented PaymentManagement MVC with method stubs and flow            |
+| hlt5125 | Heaven Thomas     | Implemented paymentmanagement MVC with method stubs and flow            |
 
 
 USE CASES
