@@ -15,7 +15,7 @@ public class ProductCatalog {
     }
 
     private void loadProducts(){ //this is terrible if we scale since we're loading everything at once. for now, it's fine to load the first 50
-        String databaseURL = "jdbc:ucanaccess://C:\\Users\\Hanna\\OneDrive\\Documents\\PSU\\IST412\\ShopUni\\src\\ProductList.accdb";
+        String databaseURL = "jdbc:ucanaccess://src/ProductList.accdb";
 
         try (Connection connection = DriverManager.getConnection(databaseURL)) {
 

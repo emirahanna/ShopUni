@@ -10,7 +10,7 @@ public class Playground {
 
     public static void main(String[] args) {
 
-        String databaseURL = "jdbc:ucanaccess://C:\\Users\\Hanna\\OneDrive\\Documents\\PSU\\IST412\\ShopUni\\src\\ProductList.accdb";
+        String databaseURL = "jdbc:ucanaccess://src/ProductList.accdb";
 
         try (Connection connection = DriverManager.getConnection(databaseURL)) {
 
