@@ -1,15 +1,43 @@
 package edu.psu.ist.productmanagement.view;
 
-/**
- * The view of the product when in the catalog (listing form)
- */
-
 import edu.psu.ist.productmanagement.model.Product;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ProductListingView {
+    private JPanel basePanel;
+    private JPanel appLogo;
+    private JLabel appName;
+    private JButton p1AddToCartButton;
+    private JLabel p1ProductImage;
+    private JLabel p1ProductTitle;
+    private JLabel p1ProductDescription;
+    private JButton nextButton;
+    private JButton previousButton;
+    private JButton p2AddToCartButton;
+    private JButton p3AddToCartButton;
+    private JButton p4AddToCartButton;
+    private JButton p5AddToCartButton;
+    private JLabel p2ProductImage;
+    private JLabel p3ProductImage;
+    private JLabel p4ProductImage;
+    private JLabel p5ProductImage;
+    private JLabel p2ProductTitle;
+    private JLabel p3ProductTitle;
+    private JLabel p4ProductTitle;
+    private JLabel p5ProductTitle;
+    private JLabel p2ProductDescription;
+    private JLabel p3ProductDescription;
+    private JLabel p4ProductDescription;
+    private JLabel p5ProductDescription;
+    private JPanel p1Card;
+    private JPanel p4Card;
+    private JPanel p2Card;
+    private JPanel p3Card;
+    private JPanel p5Card;
+
     private Scanner scnr;
 
     public ProductListingView() {
@@ -73,5 +101,4 @@ public class ProductListingView {
     public void firstPageWarning(){
         System.out.println("You are already on the first page.");
     }
-}
-
+    }

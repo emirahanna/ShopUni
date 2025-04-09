@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ProductListingController {
     private ProductCatalog catalog;
-    private  ProductListingView view;
+    private ProductListingView view;
     private int currentPage;
     private boolean isCatalogOpen;
 

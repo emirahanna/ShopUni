@@ -2,9 +2,18 @@ package edu.psu.ist.productmanagement.view;
 
 import edu.psu.ist.productmanagement.controller.ProductPageController;
 
+import javax.swing.*;
 import java.util.Scanner;
 
-public class ProductPageView{
+public class ProductPageView {
+    private JPanel basePanel;
+    private JButton backButton;
+    private JPanel productImage;
+    private JLabel productTitle;
+    private JLabel productDescription;
+    private JLabel productPrice;
+    private JButton addToCartButton;
+    private JLabel breadCrumbs;
 
     private Scanner scnr;
     public ProductPageView()  {
@@ -29,5 +38,6 @@ public class ProductPageView{
     public void invalidInput(){
         System.out.println("Invalid input. Please try again.\n");
     }
+
 
 }
