@@ -1,5 +1,6 @@
 package edu.psu.ist.cartmanagement.model;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,16 +13,14 @@ public class Cart {
     private double totalPrice;
     private Map<Product, Integer> cartContents;
 
-    private static Cart instance;  // Singleton instance
+    private static Cart instance = new Cart();  // Singleton instance, eager loaded for thread safety
 
     private Cart() {
         cartContents = new HashMap<Product, Integer>();
         totalPrice = 0;
     }
+
     public static Cart getInstance() {
-        if (instance == null) {
-            instance = new Cart();
-        }
         return instance;
     }
 
@@ -57,12 +56,6 @@ public class Cart {
         totalPrice = 0;
     }
 
-    /**
-     * creates an order using the cartContent
-     */
-    public void buyCart(){
-       //new OrderController(new);
-    }
     private void calculateTotalPrice(double price){
         totalPrice+=price;
     }
@@ -71,7 +64,9 @@ public class Cart {
         return totalPrice;
     }
 
+
     public Map<Product, Integer> getCartContents() {
-        return cartContents;
+        return Collections.unmodifiableMap(cartContents); //added security, ensures map isn't exposed to modification
     }
+
 }

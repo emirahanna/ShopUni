@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ProductListingView {
+public class ProductListingView extends JFrame{
     private JPanel basePanel;
     private JPanel appLogo;
     private JLabel appName;
@@ -42,6 +42,7 @@ public class ProductListingView {
 
     public ProductListingView() {
         this.scnr = new Scanner(System.in);
+        setView();
 
     }
 
@@ -101,4 +102,14 @@ public class ProductListingView {
     public void firstPageWarning(){
         System.out.println("You are already on the first page.");
     }
+    private void setView() {
+        //names the text at the top of the window
+        this.setTitle("ShopUni");
+        this.setContentPane(basePanel);
+        //sets the window to open with this resolution
+        this.setSize(500, 700);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
+
+}

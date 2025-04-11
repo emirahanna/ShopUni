@@ -15,4 +15,11 @@ public class Pricing {
     public double getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return "Pricing{" +
+                "price=" + price +
+                '}';
+    }
 }
