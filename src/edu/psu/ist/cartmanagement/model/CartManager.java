@@ -9,18 +9,18 @@ import edu.psu.ist.productmanagement.model.Product;
 /**
  *  Class that emulates the behavior of an actual cart
  */
-public class Cart {
+public class CartManager  {
     private double totalPrice;
     private Map<Product, Integer> cartContents;
 
-    private static Cart instance = new Cart();  // Singleton instance, eager loaded for thread safety
+    private static CartManager instance = new CartManager();  // Singleton instance, eager loaded for thread safety
 
-    private Cart() {
+    private CartManager() {
         cartContents = new HashMap<Product, Integer>();
         totalPrice = 0;
     }
 
-    public static Cart getInstance() {
+    public static CartManager getInstance() {
         return instance;
     }
 

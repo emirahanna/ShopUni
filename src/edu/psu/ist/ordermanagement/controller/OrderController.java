@@ -1,6 +1,6 @@
 package edu.psu.ist.ordermanagement.controller;
 
-import edu.psu.ist.cartmanagement.model.Cart;
+import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.ordermanagement.model.Order;
 import edu.psu.ist.ordermanagement.model.Shipping;
 import edu.psu.ist.ordermanagement.view.OrderConfirmedView;
@@ -16,7 +16,7 @@ public class OrderController {
     OrderConfirmedView orderConfirmedView;
     PaymentController paymentController;
 
-    public OrderController(Cart cart) {
+    public OrderController(CartManager cart) {
         paymentController = new PaymentController();
         this.orderDetailView = new OrderDetailView();
         this.orderConfirmedView = new OrderConfirmedView();
@@ -25,7 +25,7 @@ public class OrderController {
 
     }
 
-    public void createOrder(Cart cart){
+    public void createOrder(CartManager cart){
         orderDetailView.promptFillInOrder();
         String address = orderDetailView.promptAddress();
         Shipping.DeliveryOption deliveryOption = switch (orderDetailView.promptDelivery()){

@@ -1,6 +1,6 @@
 package edu.psu.ist.cartmanagement.controller;
 
-import edu.psu.ist.cartmanagement.model.Cart;
+import edu.psu.ist.cartmanagement.model.CartManager;
 
 import edu.psu.ist.cartmanagement.view.CartContentsView;
 import edu.psu.ist.productmanagement.model.Pricing;
@@ -10,11 +10,11 @@ import java.util.Date;
 import java.util.Map;
 
 public class CartController {
-    private Cart cart;
+    private CartManager cart;
     private CartContentsView view;
 
     public CartController(Product p) {
-        this.cart = Cart.getInstance(); //singleton model since there should only be one cart per session per user
+        this.cart = CartManager.getInstance(); //singleton model since there should only be one cart per session per user
         this.cart.addProduct(p);
         view = new CartContentsView();
         refreshCartDisplay();
