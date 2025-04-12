@@ -4,11 +4,13 @@ public class UserAccount {
     private String username;
     private String password;
     private boolean hasSavedPayment;
+    private boolean hasCartItems;
 
     public UserAccount(String username, String password) {
         this.username = username;
         this.password = password;
         this.hasSavedPayment = false;
+        this.hasCartItems = false;
     }
 
     public void toggleHasSavedPayment() {
@@ -18,6 +20,8 @@ public class UserAccount {
     public boolean isHasSavedPayment() {
         return hasSavedPayment;
     }
+
+    public boolean isHasCartItems() { return hasCartItems; }
 
     public UserRole verifyUser(){
         if (username.equals("buyer") && password.equals("pwd")) {
@@ -34,6 +38,10 @@ public class UserAccount {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setHasCartItems(boolean hasCartItems) {
+        this.hasCartItems = hasCartItems;
     }
 
 }
