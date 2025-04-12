@@ -17,35 +17,15 @@ public class ProductListingController {
         this.view = new ProductListingView();
         this.currentPage = 1;
         isCatalogOpen = true;
+
+        setupListeners();
         showCatalog();
     }
-
     public void showCatalog() {
+        ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
         int totalPages = catalog.getTotalPages();
-        while (isCatalogOpen) {
-            ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
-            view.displayProducts(products, currentPage, totalPages);
-
-            String choice = view.getUserChoice().toUpperCase();
-
-            switch (choice) {
-                case "N" -> nextPage(totalPages);
-                case "P" -> prevPage();
-                case "S" -> {
-                    Product selectedProduct = selectProduct(products);
-                    if (selectedProduct != null){
-                        new ProductPageController(selectedProduct);
-                    }
-                    isCatalogOpen = false;
-                }
-                case "X" -> {
-                    view.exitCatalog();
-                    isCatalogOpen = false;
-                }
-                default -> view.invalidInput();
-            }
+        view.initializeProducts(products, currentPage, totalPages);
         }
-    }
 
     private void nextPage(int totalPages) {
         if (currentPage < totalPages) {
@@ -77,5 +57,52 @@ public class ProductListingController {
         }
         return null;
     }
+
+    private void setupListeners() {
+        view.getNextButton().addActionListener(e -> nextPage(catalog.getTotalPages()));
+        view.getPreviousButton().addActionListener(e -> prevPage());
+
+        view.getP1AddToCartButton().addActionListener(e -> openProductPage(0));
+        view.getP2AddToCartButton().addActionListener(e -> openProductPage(1));
+        view.getP3AddToCartButton().addActionListener(e -> openProductPage(2));
+        view.getP4AddToCartButton().addActionListener(e -> openProductPage(3));
+        view.getP5AddToCartButton().addActionListener(e -> openProductPage(4));
+    }
+
+    private void openProductPage(int index) {
+        ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
+        if (index < products.size()) {
+            Product selectedProduct = products.get(index);
+            new ProductPageController(selectedProduct);
+        }
+    }
+
+    //this show catalog was mostly for the scanner, i changed the method for the gui - saving it just in case we need it for later
+//    public void showCatalog() {
+//        int totalPages = catalog.getTotalPages();
+//        while (isCatalogOpen) {
+//            ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
+//            view.displayProducts(products, currentPage, totalPages);
+//
+//            String choice = view.getUserChoice().toUpperCase();
+//
+//            switch (choice) {
+//                case "N" -> nextPage(totalPages);
+//                case "P" -> prevPage();
+//                case "S" -> {
+//                    Product selectedProduct = selectProduct(products);
+//                    if (selectedProduct != null){
+//                        new ProductPageController(selectedProduct);
+//                    }
+//                    isCatalogOpen = false;
+//                }
+//                case "X" -> {
+//                    view.exitCatalog();
+//                    isCatalogOpen = false;
+//                }
+//                default -> view.invalidInput();
+//            }
+//        }
+//    }
 }
 
