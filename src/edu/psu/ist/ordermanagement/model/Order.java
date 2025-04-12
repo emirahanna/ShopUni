@@ -54,5 +54,9 @@ public class Order {
     public Map<Product, Integer>  getCartContents() {
         return cartContents;
     }
+
+    public OrderStatusManager getOrderStatusManager() { return orderStatusManager;}
+
+    public Shipping getShippingDetails() { return shippingDetails; }
 }
 
