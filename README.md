@@ -5,12 +5,12 @@ We are four Penn State students who intend to create a comprehensive storefront 
 
 M03-A05 One Implemented Use Case: 
 
-| User ID | Name              | % Efforts in Assignment | Brief of Efforts in the Task Contribution                                                                                                                                                                                |
-|---------|-------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| nvl5303 | Nicole Leon       | %                       | Design Pattern for Individual Assignment was individual product pages                                                                                                                                                    |
-| ezy5092 | Emira Hanna Yahya | %                       | Implemented ProductList database, connected product page to data base, established project structure using Maven, added Swing forms, implemented cart GUI, started dynamic cart, and added users and cart item databases |
-| hmf5339 | Haley Fitzgerald  | %                       | Started connecting database to product page GUI, initial add to cart button/view product details button functionality, fixed some UI challenges initially in the product listing form                                    |
-| hlt5125 | Heaven Thomas     | %                       | filler text                                                                                                                                                                                                              |
+| User ID | Name              | % Efforts in Assignment | Brief of Efforts in the Task Contribution                                                                                                                                                                                                                               |
+|---------|-------------------|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| nvl5303 | Nicole Leon       | %                       | Design Pattern for Individual Assignment was individual product pages, and helped create Login GUI                                                                                                                                                                      |
+| ezy5092 | Emira Hanna Yahya | %                       | Implemented ProductList database, connected product page to data base, established project structure using Maven, added Swing forms, implemented cart GUI, started dynamic cart, and added users and cart item databases                                                |
+| hmf5339 | Haley Fitzgerald  | %                       | Started connecting database to product page GUI, initial add to cart button/view product details button functionality, fixed some UI challenges initially in the product listing form, helped create Login GUI, connected login gui to functionality for authentication |
+| hlt5125 | Heaven Thomas     | %                       | filler text                                                                                                                                                                                                                                                             |
 
 M03-A04 Implemented Design Patterns:
 
