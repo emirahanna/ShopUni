@@ -1,14 +1,16 @@
 package edu.psu.ist.cartmanagement.view;
 
+import edu.psu.ist.cartmanagement.util.CartObserver;
 import edu.psu.ist.productmanagement.model.Product;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Map;
+import java.util.Observer;
 import java.util.Scanner;
 
-public class CartContentsView extends JFrame{
+public class CartContentsView extends JFrame {
     private JPanel basePanel;
     private JPanel cartContentsPanel;
     private JScrollPane cartContentsScrollPane;
@@ -27,6 +29,8 @@ public class CartContentsView extends JFrame{
         setUpComponents();
         setView();
     }
+
+
 
     /*
     notes:
@@ -144,6 +148,11 @@ public class CartContentsView extends JFrame{
     }
 
 
+
+    public String getProductName(){
+        return scnr.next();
+    }
+
     public void displayCart(Map<Product, Integer> cart, double totalPrice) {
         System.out.printf("%-30s %5s %5s\n", "Item", "QTY", "AMT");
         for (Product p : cart.keySet()) {
@@ -152,10 +161,6 @@ public class CartContentsView extends JFrame{
         System.out.printf("%42.2f\n", totalPrice);
         System.out.println();
         System.out.println();
-    }
-
-    public String getProductName(){
-        return scnr.next();
     }
 
     public int displayOptions() {

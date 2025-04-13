@@ -11,6 +11,8 @@ public class ProductCatalog {
     public ProductCatalog() {
         this.products = new ArrayList<>();
         loadProducts();
+        //loadSampleProducts();
+
     }
 
     private void loadProducts(){ //this is terrible if we scale since we're loading everything at once. for now, it's fine to load the first 50
@@ -32,7 +34,7 @@ public class ProductCatalog {
                 String sellerID = result.getString("sellerID");
                 String productCategory = result.getString("productCategory");
                 Date date = result.getDate("dateListed");
-                Pricing price = new Pricing(result.findColumn("price"));
+                Pricing price = new Pricing(result.getDouble("price"));
 
                 products.add(new Product(title, description, id, imageID, sellerID, date, productCategory, price));
             }

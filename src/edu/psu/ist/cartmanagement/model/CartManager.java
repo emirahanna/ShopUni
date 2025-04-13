@@ -1,23 +1,45 @@
 package edu.psu.ist.cartmanagement.model;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+import edu.psu.ist.cartmanagement.util.CartObserver;
+import edu.psu.ist.cartmanagement.util.CartSubject;
 import edu.psu.ist.productmanagement.model.Product;
 
+import javax.security.auth.Subject;
+
 /**
- *  Class that emulates the behavior of an actual cart
+ * Class that emulates the behavior of an actual cart
  */
-public class CartManager  {
+public class CartManager implements CartSubject {
     private double totalPrice;
     private Map<Product, Integer> cartContents;
+    private List<CartObserver> observers = new ArrayList<>();
+    private List<String> items = new ArrayList<>();
 
     private static CartManager instance = new CartManager();  // Singleton instance, eager loaded for thread safety
+
 
     private CartManager() {
         cartContents = new HashMap<Product, Integer>();
         totalPrice = 0;
+    }
+
+    @Override
+    public void addObserver(CartObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(CartObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (CartObserver observer : observers) {
+            observer.update();
+        }
     }
 
     public static CartManager getInstance() {
@@ -25,19 +47,20 @@ public class CartManager  {
     }
 
     /**
-     *     accesses the product's price and increments it to totalPrice
+     * accesses the product's price and increments it to totalPrice
      */
 
-    public void addProduct(Product p){
+    public void addProduct(Product p) {
         cartContents.put(p, cartContents.getOrDefault(p, 0) + 1);
         calculateTotalPrice(p.getPrice());
+        notifyObservers();
 
     }
 
     /**
-     *    accesses the product's price and decrements it from totalPrice
+     * accesses the product's price and decrements it from totalPrice
      */
-    public void removeProduct(Product p){
+    public void removeProduct(Product p) {
         if (cartContents.containsKey(p) && cartContents.get(p) > 0) {
             cartContents.put(p, cartContents.get(p) - 1);
             calculateTotalPrice(-p.getPrice());
@@ -45,19 +68,19 @@ public class CartManager  {
                 cartContents.remove(p);
             }
         }
-
+        notifyObservers();
     }
 
     /**
      * purges the map, and total price
      */
-    public void emptyCart(){
+    public void emptyCart() {
         cartContents.clear();
         totalPrice = 0;
     }
 
-    private void calculateTotalPrice(double price){
-        totalPrice+=price;
+    private void calculateTotalPrice(double price) {
+        totalPrice += price;
     }
 
     public double getTotalPrice() {
@@ -69,4 +92,7 @@ public class CartManager  {
         return Collections.unmodifiableMap(cartContents); //added security, ensures map isn't exposed to modification
     }
 
+    public boolean isEmpty() {
+        return cartContents.isEmpty();
+    }
 }

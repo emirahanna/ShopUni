@@ -117,7 +117,7 @@ public class ProductListingView extends JFrame {
 
 //    public void displayProducts(ArrayList<Product> products, int currentPage, int totalPages) {
 //        System.out.println();
-//        System.out.println("=== Product Catalog (Page " + currentPage + " of " + totalPages + ") ===");
+//        System.out.println("=== Product Catalog F ===");
 //
 //        if (products.isEmpty()) {
 //            System.out.println("No products available.");
