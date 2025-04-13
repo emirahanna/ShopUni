@@ -22,11 +22,12 @@ public class ProductListingController {
         showCatalog();
 
     }
+
     public void showCatalog() {
         ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
         int totalPages = catalog.getTotalPages();
         view.initializeProducts(products, currentPage, totalPages);
-        }
+    }
 
     private void nextPage(int totalPages) {
         if (currentPage < totalPages) {
@@ -60,8 +61,14 @@ public class ProductListingController {
     }
 
     private void setupListeners() {
-        view.getNextButton().addActionListener(e -> nextPage(catalog.getTotalPages()));
-        view.getPreviousButton().addActionListener(e -> prevPage());
+        view.getNextButton().addActionListener(e -> {
+            nextPage(catalog.getTotalPages());
+            showCatalog();
+        });
+        view.getPreviousButton().addActionListener(e -> {
+            prevPage();
+            showCatalog();
+        });
 
         view.getP1ViewProductButton().addActionListener(e -> openProductPage(0));
         view.getP2ViewProductButton().addActionListener(e -> openProductPage(1));
@@ -79,7 +86,6 @@ public class ProductListingController {
             new ProductPageController(selectedProduct);
         }
     }
-
 
 
     //this show catalog was mostly for the scanner, i changed the method for the gui - saving it just in case we need it for later

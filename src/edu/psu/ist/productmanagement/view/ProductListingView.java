@@ -101,7 +101,6 @@ public class ProductListingView extends JFrame {
                 titles[i].setText("<html>" + title + "</html>"); //atempt to make the text wrap
                 descriptions[i].setText("<html>" + desc + "</html>");
                 cards[i].setVisible(true);
-                System.out.println(title);
             } else {
                 titles[i].setText("");
                 descriptions[i].setText("");

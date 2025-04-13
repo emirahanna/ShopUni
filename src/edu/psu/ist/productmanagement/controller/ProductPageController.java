@@ -1,6 +1,7 @@
 package edu.psu.ist.productmanagement.controller;
 
 import edu.psu.ist.cartmanagement.controller.CartController;
+import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.view.ProductPageView;
 
@@ -42,7 +43,8 @@ public class ProductPageController {
         switch (choice) {
             case "A" -> {
                 view.succAddToCart();
-                new CartController(productDetails);
+                CartController cm  = new CartController();
+                cm.addProduct(productDetails);
             }
             case "X" -> {
                 new ProductListingController();
@@ -53,10 +55,13 @@ public class ProductPageController {
 
     public void attachActionListeners() {
         view.getBackButton().addActionListener(e -> {
-            JOptionPane.showMessageDialog(view.getBasePanel(), "Back Button Pressed");
+            new ProductListingController();
+            view.setVisible(false);
         });
         view.getAddToCartButton().addActionListener(e -> {
-            JOptionPane.showMessageDialog(view.getBasePanel(), "Add To Cart Button Pressed");
+            view.setVisible(false);
+            CartController cm  = new CartController();
+            cm.addProduct(productDetails);
         });
         //using mouse listeners for the breadcrumbs, but that means I need to implement all the Mouse Listener methods ouch
         view.getProductCatalogBreadCrumb().addMouseListener(new MouseAdapter() {
