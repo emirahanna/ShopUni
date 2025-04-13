@@ -4,6 +4,9 @@ import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.model.ProductCatalog;
 import edu.psu.ist.productmanagement.view.ProductListingView;
 
+import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class ProductListingController {
@@ -20,6 +23,7 @@ public class ProductListingController {
 
         setupListeners();
         showCatalog();
+
     }
     public void showCatalog() {
         ArrayList<Product> products = catalog.getProductsOnPage(currentPage);

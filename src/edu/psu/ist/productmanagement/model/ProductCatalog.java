@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class ProductCatalog {
     private ArrayList<Product> products;
-    private int productPerPage = 3;
+    private final int productPerPage = 5;
 
     public ProductCatalog() {
         this.products = new ArrayList<>();

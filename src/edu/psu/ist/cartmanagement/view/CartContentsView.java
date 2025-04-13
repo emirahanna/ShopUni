@@ -4,6 +4,7 @@ import edu.psu.ist.productmanagement.model.Product;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -16,7 +17,9 @@ public class CartContentsView extends JFrame{
     private JButton emptyCartButton;
     private JButton buyNowButton;
     private JButton backButton;
-    private JLabel cartTitle;
+    private JLabel cartBreadcrumb;
+    private JLabel productCtlgBreadcrumb;
+    private JLabel productPageBreadcrumb;
     private Scanner scnr;
 
     public CartContentsView(){
@@ -27,14 +30,19 @@ public class CartContentsView extends JFrame{
 
     /*
     notes:
-    GridBag - grid, need to specify rows and columns. (good for strict adherence to the code ig)
+    GridBag - grid. allows for most customization, need to specify rows and columns. (good for strict adherence to the code ig)
+    box layout - good for single row/column - can use for the one line panels
+    flow layout - line up left to right and wrap as needed (but no precise control)
+    border layout - good if you want to arrange around the border (can anchor to 5 regions)
+
+    why are there so many layouts, this is my 13th reason
 
      */
 
     private void setUpComponents(){
         basePanel = new JPanel(new GridBagLayout());
-        cartContentsPanel = new JPanel();
-        cartContentsPanel.setLayout(new BoxLayout(cartContentsPanel, BoxLayout.Y_AXIS));
+        cartContentsPanel = new JPanel(new GridBagLayout());
+        cartContentsPanel.setLayout(new BoxLayout(cartContentsPanel, BoxLayout.Y_AXIS)); //because i only want it to go down vertically? idk seems like the best choice
 
 
         cartContentsScrollPane = new JScrollPane(cartContentsPanel);
@@ -47,9 +55,16 @@ public class CartContentsView extends JFrame{
 
         topPanel = new JPanel();
         topPanel.setLayout(new GridBagLayout());
-        cartTitle = new JLabel("Your Cart");
-        topPanel.add(backButton, new GridBagConstraints());
-        topPanel.add(cartTitle, new GridBagConstraints());
+        productCtlgBreadcrumb = new JLabel("Catalog > ");
+        productPageBreadcrumb = new JLabel("Product Page > "); //TODO: make this dynamic according to product Title
+        cartBreadcrumb = new JLabel("Cart");
+
+
+        //back button uses the method because I wanted to specify the Inset to make it look better
+        addToPanel(backButton, topPanel, 0,0,1,1, GridBagConstraints.WEST, new Insets(0,0,0,16), GridBagConstraints.NONE);
+        topPanel.add(productCtlgBreadcrumb, new GridBagConstraints());
+        topPanel.add(productPageBreadcrumb, new GridBagConstraints());
+        topPanel.add(cartBreadcrumb, new GridBagConstraints());
 
         bottomButtonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         bottomButtonsPanel.add(emptyCartButton);
@@ -66,12 +81,12 @@ public class CartContentsView extends JFrame{
         // Padding for the whole frame
         basePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        addToPanel(topPanel, basePanel,  0, 0, 1, 1, GridBagConstraints.WEST, new Insets(0, 0, 10, 0));
-        addToPanel(cartContentsScrollPane, basePanel, 0, 1, 1, 1, GridBagConstraints.CENTER , new Insets(0, 0, 10, 0));
-        addToPanel(bottomButtonsPanel, basePanel, 0, 2, 1, 1, GridBagConstraints.SOUTH, new Insets(0, 0, 0, 0));
+        addToPanel(topPanel, basePanel,  0, 0, 1, 1, GridBagConstraints.WEST, new Insets(0, 0, 10, 0), GridBagConstraints.NONE);
+        addToPanel(cartContentsScrollPane, basePanel, 0, 1, 1, 1, GridBagConstraints.CENTER , new Insets(0, 0, 10, 0), GridBagConstraints.BOTH);
+        addToPanel(bottomButtonsPanel, basePanel, 0, 2, 1, 1, GridBagConstraints.SOUTH, new Insets(0, 0, 0, 0), GridBagConstraints.HORIZONTAL);
     }
 
-    private void addToPanel(Component comp, JPanel panel, int x, int y, int width, int height, int anchor, Insets insets) {
+    private void addToPanel(Component comp, JPanel panel, int x, int y, int width, int height, int anchor, Insets insets, int fill) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = x;
         gbc.gridy = y;
@@ -80,33 +95,30 @@ public class CartContentsView extends JFrame{
         gbc.weightx = 1.0;
         gbc.weighty = (anchor == GridBagConstraints.CENTER) ? 1.0 : 0;
         gbc.anchor = anchor;
-        gbc.fill = (anchor == GridBagConstraints.CENTER) ? GridBagConstraints.BOTH : GridBagConstraints.HORIZONTAL ;
+        gbc.fill = fill ;
         gbc.insets = insets;
         panel.add(comp, gbc);
     }
 
 
-    public void createCartItemCard(String title, int quantity, double price){
+
+
+    public void createCartItemCard(String title, int quantity, double price, ActionListener removeListener){
         JPanel itemPanel = new JPanel(new GridBagLayout());
-//        itemPanel.setBorder(BorderFactory.createCompoundBorder(
-//                BorderFactory.createLineBorder(Color.LIGHT_GRAY),
-//                BorderFactory.createEmptyBorder(10, 10, 10, 10)
-//        ));
 
         itemPanel.setPreferredSize(new Dimension(400, 60));
         itemPanel.setMaximumSize(new Dimension(400, 60)); // Prevent stretching
 
-        JLabel itemLabel = new JLabel(title + " x" + quantity + " - $" + price);
+        //TODO: MAKE THE FORMATTING STANDARD, its is not for some reason
+        JLabel itemLabel = new JLabel( String.format("%-40sx%-2d $%-5.2f", title, quantity, price));
         JButton removeButton = new JButton("❌");
         removeButton.setPreferredSize(new Dimension(50, 25));
         removeButton.setMaximumSize(new Dimension(50, 25));
 
-        removeButton.addActionListener(e -> {
-            // TODO: cart.removeProduct(product); refreshCartDisplay();
-        });
+        removeButton.addActionListener(removeListener);
 
-        addToPanel(itemLabel, itemPanel, 0, 0, 1, 1, GridBagConstraints.WEST, new Insets(0, 0, 10, 0));
-        addToPanel(removeButton, itemPanel, 2, 0, 1, 1, GridBagConstraints.EAST, new Insets(0, 0, 0, 0));
+        addToPanel(itemLabel, itemPanel, 0, 0, 2, 1, GridBagConstraints.WEST, new Insets(0, 0, 0, 0), GridBagConstraints.WEST);
+        addToPanel(removeButton, itemPanel, 2, 0, 1, 1, GridBagConstraints.EAST, new Insets(0, 0, 0, 0), GridBagConstraints.EAST);
         cartContentsPanel.add(itemPanel);
     }
 
@@ -194,5 +206,47 @@ public class CartContentsView extends JFrame{
         System.out.println("Cart is empty! Add products before purchasing.");
     }
 
+    public JPanel getBasePanel() {
+        return basePanel;
+    }
 
+    public JPanel getCartContentsPanel() {
+        return cartContentsPanel;
+    }
+
+    public JScrollPane getCartContentsScrollPane() {
+        return cartContentsScrollPane;
+    }
+
+    public JPanel getBottomButtonsPanel() {
+        return bottomButtonsPanel;
+    }
+
+    public JPanel getTopPanel() {
+        return topPanel;
+    }
+
+    public JButton getEmptyCartButton() {
+        return emptyCartButton;
+    }
+
+    public JButton getBuyNowButton() {
+        return buyNowButton;
+    }
+
+    public JButton getBackButton() {
+        return backButton;
+    }
+
+    public JLabel getCartBreadcrumb() {
+        return cartBreadcrumb;
+    }
+
+    public JLabel getProductCtlgBreadcrumb() {
+        return productCtlgBreadcrumb;
+    }
+
+    public JLabel getProductPageBreadcrumb() {
+        return productPageBreadcrumb;
+    }
 }

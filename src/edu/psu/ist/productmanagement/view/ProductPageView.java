@@ -13,7 +13,8 @@ public class ProductPageView {
     private JLabel productDescription;
     private JLabel productPrice;
     private JButton addToCartButton;
-    private JLabel breadCrumbs;
+    private JLabel productCatalogBreadCrumb;
+    private JLabel productPageBreadCrumb;
 
     private Scanner scnr;
     public ProductPageView()  {

@@ -1,3 +1,4 @@
+import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.usermanagement.controller.LogInController;
 
 import java.sql.*;
@@ -5,7 +6,14 @@ import java.sql.*;
 public class TestHarness {
     public static void main(String[] args) {
         //testUserDBConnection();
-        testFullFlow();
+        //testFullFlow();
+        testProductListing();
+    }
+
+    public static void testProductListing()
+    {
+        //am tired of entering the credentials again and again
+        new ProductListingController();
     }
 
     public static void testFullFlow() {
@@ -35,4 +43,4 @@ public class TestHarness {
             ex.printStackTrace();
         }
     }
-}
+}  
