@@ -1,3 +1,4 @@
+//OLD FILE KEEPING JUST IN CASE!!! - WORKS FOR SCANNER
 package edu.psu.ist.usermanagement.view;
 
 import java.util.Scanner;
