@@ -3,14 +3,11 @@ package edu.psu.ist.productmanagement.view;
 import edu.psu.ist.productmanagement.model.Product;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class FeaturedProductsView extends JFrame{
     private JPanel basePanel;
-    private JPanel cardPanel;
     private JButton previousButton;
     private JButton nextButton;
     private JLabel titleText;

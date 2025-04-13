@@ -1,13 +1,9 @@
 package edu.psu.ist.productmanagement.controller;
 
-import edu.psu.ist.cartmanagement.controller.CartController;
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.model.ProductCatalog;
 import edu.psu.ist.productmanagement.view.FeaturedProductsView;
 
-import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class FeaturedProductsController {

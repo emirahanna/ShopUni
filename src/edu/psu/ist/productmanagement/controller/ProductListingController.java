@@ -2,7 +2,6 @@ package edu.psu.ist.productmanagement.controller;
 
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.model.ProductCatalog;
-import edu.psu.ist.productmanagement.view.FeaturedProductsView;
 import edu.psu.ist.productmanagement.view.ProductListingView;
 
 import java.util.ArrayList;
