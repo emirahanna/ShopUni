@@ -10,9 +10,9 @@ public class TestHarness {
         //testProductListing();
     }
 
+    //to test just product listing page without having to log in/authenticate
     public static void testProductListing()
     {
-        //am tired of entering the credentials again and again
         new ProductListingController();
     }
 

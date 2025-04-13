@@ -2,6 +2,7 @@ package edu.psu.ist.productmanagement.controller;
 
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.model.ProductCatalog;
+import edu.psu.ist.productmanagement.view.FeaturedProductsView;
 import edu.psu.ist.productmanagement.view.ProductListingView;
 
 import java.util.ArrayList;
@@ -69,6 +70,10 @@ public class ProductListingController {
         view.getPreviousButton().addActionListener(e -> {
             prevPage();
             showCatalog();
+        });
+        view.getFeaturedProductsButton().addActionListener(e -> {
+            new FeaturedProductsController();
+            view.setVisible(false);
         });
 
         view.getP1ViewProductButton().addActionListener(e -> openProductPage(0));

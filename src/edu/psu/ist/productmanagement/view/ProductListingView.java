@@ -38,6 +38,7 @@ public class ProductListingView extends JFrame {
     private JLabel appLogoName;
     private JLabel productCatalogBreadCrumb;
     private JLabel pageIndicator;
+    private JButton featuredProductsButton;
 
     private Scanner scnr;
 
@@ -99,7 +100,7 @@ public class ProductListingView extends JFrame {
                 Product p = products.get(i);
                 title = p.getTitle();
                 desc = p.getDescription();
-                titles[i].setText("<html>" + title + "</html>"); //atempt to make the text wrap
+                titles[i].setText("<html>" + title + "</html>"); //attempt to make the text wrap
                 descriptions[i].setText("<html>" + desc + "</html>");
                 cards[i].setVisible(true);
             } else {
@@ -270,4 +271,5 @@ public class ProductListingView extends JFrame {
     public JLabel getPageIndicator() {
         return pageIndicator;
     }
+    public JButton getFeaturedProductsButton(){return featuredProductsButton;}
 }

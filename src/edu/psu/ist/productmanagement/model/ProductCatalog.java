@@ -3,6 +3,7 @@ package edu.psu.ist.productmanagement.model;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ProductCatalog {
     private ArrayList<Product> products;
@@ -69,5 +70,10 @@ public class ProductCatalog {
 
     public int getTotalPages() {
         return products.size() / productPerPage;
+    }
+
+    public ArrayList<Product> getFeaturedProducts(){
+        int featuredProductCount = Math.min(3, products.size());
+        return new ArrayList<>(products.subList(0,featuredProductCount));
     }
 }

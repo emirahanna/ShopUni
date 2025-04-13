@@ -4,7 +4,6 @@ import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.usermanagement.model.UserAccount;
 import edu.psu.ist.usermanagement.model.UserRole;
 import edu.psu.ist.usermanagement.view.LogInView;
-import edu.psu.ist.usermanagement.view.UserLogInView;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -25,12 +24,7 @@ public class LogInController {
     }
 
     private void initializeActionListeners(){
-        logInView.getLogInButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                login();
-            }
-        });
+        logInView.getLogInButton().addActionListener(e -> login());
     }
 
     public void login() {
