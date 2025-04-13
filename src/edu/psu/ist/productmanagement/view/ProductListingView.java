@@ -37,6 +37,7 @@ public class ProductListingView extends JFrame {
     private JPanel p5Card;
     private JLabel appLogoName;
     private JLabel productCatalogBreadCrumb;
+    private JLabel pageIndicator;
 
     private Scanner scnr;
 
@@ -260,5 +261,13 @@ public class ProductListingView extends JFrame {
 
     public JPanel getP5Card() {
         return p5Card;
+    }
+
+    public JLabel getProductCatalogBreadCrumb() {
+        return productCatalogBreadCrumb;
+    }
+
+    public JLabel getPageIndicator() {
+        return pageIndicator;
     }
 }

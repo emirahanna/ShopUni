@@ -27,6 +27,7 @@ public class ProductListingController {
         ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
         int totalPages = catalog.getTotalPages();
         view.initializeProducts(products, currentPage, totalPages);
+        view.getPageIndicator().setText(("Page " + currentPage + " of " + totalPages));
     }
 
     private void nextPage(int totalPages) {
