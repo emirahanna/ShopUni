@@ -4,9 +4,6 @@ import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.model.ProductCatalog;
 import edu.psu.ist.productmanagement.view.ProductListingView;
 
-import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class ProductListingController {
@@ -66,20 +63,24 @@ public class ProductListingController {
         view.getNextButton().addActionListener(e -> nextPage(catalog.getTotalPages()));
         view.getPreviousButton().addActionListener(e -> prevPage());
 
-        view.getP1AddToCartButton().addActionListener(e -> openProductPage(0));
-        view.getP2AddToCartButton().addActionListener(e -> openProductPage(1));
-        view.getP3AddToCartButton().addActionListener(e -> openProductPage(2));
-        view.getP4AddToCartButton().addActionListener(e -> openProductPage(3));
-        view.getP5AddToCartButton().addActionListener(e -> openProductPage(4));
+        view.getP1ViewProductButton().addActionListener(e -> openProductPage(0));
+        view.getP2ViewProductButton().addActionListener(e -> openProductPage(1));
+        view.getP3ViewProductButton().addActionListener(e -> openProductPage(2));
+        view.getP4ViewProductButton().addActionListener(e -> openProductPage(3));
+        view.getP5ViewProductButton().addActionListener(e -> openProductPage(4));
     }
 
     private void openProductPage(int index) {
         ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
         if (index < products.size()) {
             Product selectedProduct = products.get(index);
+            System.out.println(selectedProduct.getTitle());
+            view.setVisible(false);
             new ProductPageController(selectedProduct);
         }
     }
+
+
 
     //this show catalog was mostly for the scanner, i changed the method for the gui - saving it just in case we need it for later
 //    public void showCatalog() {

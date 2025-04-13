@@ -51,7 +51,7 @@ public class CartContentsView extends JFrame{
 
         emptyCartButton = createStyledButton("Empty Cart");
         buyNowButton = createStyledButton("Buy Now");
-        backButton = new JButton("<");
+        backButton = new JButton("Back");
 
         topPanel = new JPanel();
         topPanel.setLayout(new GridBagLayout());

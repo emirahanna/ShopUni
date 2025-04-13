@@ -8,16 +8,16 @@ import java.util.Scanner;
 
 public class ProductListingView extends JFrame {
     private JPanel basePanel;
-    private JButton p1AddToCartButton;
+    private JButton p1ViewProductButton;
     private JLabel p1ProductImage;
     private JLabel p1ProductTitle;
     private JLabel p1ProductDescription;
     private JButton nextButton;
     private JButton previousButton;
-    private JButton p2AddToCartButton;
-    private JButton p3AddToCartButton;
-    private JButton p4AddToCartButton;
-    private JButton p5AddToCartButton;
+    private JButton p2ViewProductButton;
+    private JButton p3ViewProductButton;
+    private JButton p4ViewProductButton;
+    private JButton p5ViewProductButton;
     private JLabel p2ProductImage;
     private JLabel p3ProductImage;
     private JLabel p4ProductImage;
@@ -41,8 +41,8 @@ public class ProductListingView extends JFrame {
     private Scanner scnr;
 
     public ProductListingView() {
-        this.scnr = new Scanner(System.in);
         setView();
+        this.scnr = new Scanner(System.in);
     }
 
     public String getSelectedProduct() {
@@ -155,8 +155,8 @@ public class ProductListingView extends JFrame {
         return appLogoName;
     }
 
-    public JButton getP1AddToCartButton() {
-        return p1AddToCartButton;
+    public JButton getP1ViewProductButton() {
+        return p1ViewProductButton;
     }
 
     public JLabel getP1ProductImage() {
@@ -179,8 +179,8 @@ public class ProductListingView extends JFrame {
         return previousButton;
     }
 
-    public JButton getP2AddToCartButton() {
-        return p2AddToCartButton;
+    public JButton getP2ViewProductButton() {
+        return p2ViewProductButton;
     }
 
     public JLabel getP2ProductImage() {
@@ -195,8 +195,8 @@ public class ProductListingView extends JFrame {
         return p2ProductDescription;
     }
 
-    public JButton getP3AddToCartButton() {
-        return p3AddToCartButton;
+    public JButton getP3ViewProductButton() {
+        return p3ViewProductButton;
     }
 
     public JLabel getP3ProductImage() {
@@ -211,8 +211,8 @@ public class ProductListingView extends JFrame {
         return p3ProductDescription;
     }
 
-    public JButton getP4AddToCartButton() {
-        return p4AddToCartButton;
+    public JButton getP4ViewProductButton() {
+        return p4ViewProductButton;
     }
 
     public JLabel getP4ProductImage() {
@@ -227,8 +227,8 @@ public class ProductListingView extends JFrame {
         return p4ProductDescription;
     }
 
-    public JButton getP5AddToCartButton() {
-        return p5AddToCartButton;
+    public JButton getP5ViewProductButton() {
+        return p5ViewProductButton;
     }
 
     public JLabel getP5ProductImage() {

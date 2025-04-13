@@ -4,6 +4,10 @@ import edu.psu.ist.cartmanagement.controller.CartController;
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.view.ProductPageView;
 
+import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 /**
  * This class stores the model and the view
  * Establishes what occurs when user enters the view and what the buttons on the product details view do when clicked
@@ -19,8 +23,17 @@ public class ProductPageController {
     public ProductPageController(Product product) {
         this.productDetails = product;
         this.view = new ProductPageView();
-        view.displayOptions(this);
-        handleLogic();
+        attachActionListeners();
+        readProductDetails();
+        //view.displayOptions(this);
+        //handleLogic();
+    }
+
+    public void readProductDetails(){
+        //uses html tags to force the tet to wrap. its times like these where i miss web development
+        view.getProductTitle().setText("<html>" + productDetails.getTitle() + "</html>");
+        view.getProductDescription().setText("<html>" + productDetails.getDescription() + "</html>");
+        view.getProductPrice().setText(String.format("$%.2f", productDetails.getPrice()));
     }
 
     public void handleLogic() {
@@ -36,6 +49,23 @@ public class ProductPageController {
             }
             default -> view.invalidInput();
         }
+    }
+
+    public void attachActionListeners() {
+        view.getBackButton().addActionListener(e -> {
+            JOptionPane.showMessageDialog(view.getBasePanel(), "Back Button Pressed");
+        });
+        view.getAddToCartButton().addActionListener(e -> {
+            JOptionPane.showMessageDialog(view.getBasePanel(), "Add To Cart Button Pressed");
+        });
+        //using mouse listeners for the breadcrumbs, but that means I need to implement all the Mouse Listener methods ouch
+        view.getProductCatalogBreadCrumb().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                JOptionPane.showMessageDialog(view.getBasePanel(), "Product Catalog Breadcrumb Pressed");
+            }
+        });
     }
 
     //retrieves information about product requested

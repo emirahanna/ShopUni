@@ -11,7 +11,6 @@ public class ProductCatalog {
     public ProductCatalog() {
         this.products = new ArrayList<>();
         loadProducts();
-        //loadSampleProducts(); // sample data, actual shop should be reading from a database
     }
 
     private void loadProducts(){ //this is terrible if we scale since we're loading everything at once. for now, it's fine to load the first 50
