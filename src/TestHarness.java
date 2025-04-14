@@ -8,6 +8,7 @@ public class TestHarness {
         //testUserDBConnection();
         testFullFlow();
         //testProductListing();
+        //testWizardUI();
     }
 
     //to test just product listing page without having to log in/authenticate
@@ -44,4 +45,14 @@ public class TestHarness {
             ex.printStackTrace();
         }
     }
+
+/**
+ * method to test the wizard ui in the payment class
+ */
+   /* public static void testWizardUI() {
+        new edu.psu.ist.paymentmanagement.view.WizardFrame();
+    }
+    */
+
+
 }  
