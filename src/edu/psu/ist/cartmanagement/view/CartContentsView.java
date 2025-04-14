@@ -144,6 +144,7 @@ public class CartContentsView extends JFrame {
         this.setSize(500, 800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+        layoutComponents();
     }
 
 
