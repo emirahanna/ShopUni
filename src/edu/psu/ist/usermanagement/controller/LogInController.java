@@ -38,6 +38,7 @@ public class LogInController {
                 JOptionPane.showMessageDialog(logInView, "Buyer Login Success");
                 authenticatedUser = user;
                 new ProductListingController();
+                logInView.setVisible(false);
             }
 
         } catch (IllegalArgumentException e) {

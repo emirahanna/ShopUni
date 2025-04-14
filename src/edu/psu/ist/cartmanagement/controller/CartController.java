@@ -18,6 +18,7 @@ import java.util.Map;
 public class CartController implements CartObserver {
     private CartManager cart;
     private CartContentsView view;
+    private Product recentProduct;
 
     public CartController() {
         this.cart = CartManager.getInstance(); //singleton model since there should only be one cart per session per user
@@ -31,6 +32,8 @@ public class CartController implements CartObserver {
 
     public void addProduct(Product p) {
         cart.addProduct(p);
+        recentProduct = p;
+        view.getProductPageBreadcrumb().setText(p.getTitle()+ ">");
         update();
     }
 
@@ -66,7 +69,6 @@ public class CartController implements CartObserver {
         crtl.addProduct(new Product("Zara Pants", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance.\nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", new Pricing(60.0)));
         crtl.addProduct(new Product("Lorem Ipsum", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", new Pricing(100.0)));
 
-        crtl.update();
     }
     public void attachActionListeners() {
         view.getEmptyCartButton().addActionListener(e -> {
@@ -87,15 +89,19 @@ public class CartController implements CartObserver {
         view.getProductCtlgBreadcrumb().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                JOptionPane.showMessageDialog(view.getBasePanel(), "Product Catalog Breadcrumb Pressed");
+                new ProductListingController();
+                view.setVisible(false);
+
+                //JOptionPane.showMessageDialog(view.getBasePanel(), "Product Catalog Breadcrumb Pressed");
             }
         });
         view.getProductPageBreadcrumb().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                JOptionPane.showMessageDialog(view.getBasePanel(), "Product Page Breadcrumb Pressed");
+                new ProductPageController(recentProduct);
+                view.setVisible(false);
+
+                //JOptionPane.showMessageDialog(view.getBasePanel(), "Product Page Breadcrumb Pressed");
             }
         });
     }
@@ -107,7 +113,7 @@ public class CartController implements CartObserver {
         for (Map.Entry<Product, Integer> entry : cart.getCartContents().entrySet()) { //I want both the product, and the quantity
             Product product = entry.getKey();
             int quantity = entry.getValue();
-            System.out.println(product + " - " + quantity);
+            //System.out.println(product + " - " + quantity);
             view.createCartItemCard(product.getTitle(), quantity, product.getPrice(), e -> {
                 JOptionPane.showMessageDialog(view.getBasePanel(), "Remove button for " + product + " pressed");
             });

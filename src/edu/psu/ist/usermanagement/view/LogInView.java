@@ -20,7 +20,7 @@ public class LogInView extends JFrame{
     private void setView() {
         this.setTitle("ShopUni");
         this.setContentPane(logInPanel);
-        this.setSize(600, 600);
+        this.setSize(500, 800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }

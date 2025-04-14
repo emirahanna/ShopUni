@@ -40,7 +40,7 @@ public class ProductPageView extends JFrame{
         this.setTitle("ShopUni");
         this.setContentPane(basePanel);
         //sets the window to open with this resolution
-        this.setSize(500, 700);
+        this.setSize(500, 800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }

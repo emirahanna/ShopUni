@@ -1,13 +1,12 @@
 package edu.psu.ist.cartmanagement.view;
 
-import edu.psu.ist.cartmanagement.util.CartObserver;
 import edu.psu.ist.productmanagement.model.Product;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Map;
-import java.util.Observer;
 import java.util.Scanner;
 
 public class CartContentsView extends JFrame {
@@ -139,10 +138,10 @@ public class CartContentsView extends JFrame {
 
     private void setView() {
         //names the text at the top of the window
-        this.setTitle("ShopUni - Cart");
+        this.setTitle("ShopUni");
         this.setContentPane(basePanel);
         //sets the window to open with this resolution
-        this.setSize(500, 700);
+        this.setSize(500, 800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }

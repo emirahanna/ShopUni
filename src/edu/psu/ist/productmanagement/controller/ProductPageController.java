@@ -26,6 +26,7 @@ public class ProductPageController {
         this.view = new ProductPageView();
         attachActionListeners();
         readProductDetails();
+        view.getProductPageBreadCrumb().setText(product.getTitle());
         //view.displayOptions(this);
         //handleLogic();
     }
@@ -67,8 +68,10 @@ public class ProductPageController {
         view.getProductCatalogBreadCrumb().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                JOptionPane.showMessageDialog(view.getBasePanel(), "Product Catalog Breadcrumb Pressed");
+                new ProductListingController();
+                view.setVisible(false);
+
+                //JOptionPane.showMessageDialog(view.getBasePanel(), "Product Catalog Breadcrumb Pressed");
             }
         });
     }

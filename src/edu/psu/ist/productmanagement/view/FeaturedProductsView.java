@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class FeaturedProductsView extends JFrame{
     private JPanel basePanel;
+    private JPanel cardPanel;
     private JButton previousButton;
     private JButton nextButton;
     private JLabel titleText;
@@ -74,7 +75,7 @@ public void initializeFeaturedProducts(List<Product> products){
     private void setView() {
         this.setTitle("ShopUni");
         this.setContentPane(basePanel);
-        this.setSize(500, 700);
+        this.setSize(500, 800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
