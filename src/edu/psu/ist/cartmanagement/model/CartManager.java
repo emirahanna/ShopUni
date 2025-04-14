@@ -25,6 +25,10 @@ public class CartManager implements CartSubject {
         totalPrice = 0;
     }
 
+    public static CartManager getInstance() {
+        return instance;
+    }
+
     @Override
     public void addObserver(CartObserver observer) {
         observers.add(observer);
@@ -40,10 +44,6 @@ public class CartManager implements CartSubject {
         for (CartObserver observer : observers) {
             observer.update();
         }
-    }
-
-    public static CartManager getInstance() {
-        return instance;
     }
 
     /**
