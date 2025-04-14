@@ -27,12 +27,10 @@ public class ProductPageController {
         attachActionListeners();
         readProductDetails();
         view.getProductPageBreadCrumb().setText(product.getTitle());
-        //view.displayOptions(this);
-        //handleLogic();
     }
 
     public void readProductDetails(){
-        //uses html tags to force the tet to wrap. its times like these where i miss web development
+        //uses html tags to force the text to wrap. its times like these where i miss web development
         view.getProductTitle().setText("<html>" + productDetails.getTitle() + "</html>");
         view.getProductDescription().setText("<html>" + productDetails.getDescription() + "</html>");
         view.getProductPrice().setText(String.format("$%.2f", productDetails.getPrice()));
