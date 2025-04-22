@@ -13,10 +13,10 @@ M04-A03 Two Implemented Use Cases with Clean, Refactored Code:
 | hlt5125 | Heaven Thomas     | %                       |                                                                                                     |
 USE CASES
 1. View Product Details ✅
-2. Add Product to Cart
+2. Add Product to Cart - working on
 3. Track Order
-4. Purchase Order
-5. Authenticate Account
+4. Purchase Order - working on
+5. Authenticate Account ✅
 
 Log In Credentials
 username: buyer
