@@ -12,7 +12,7 @@ M04-A03 Two Implemented Use Cases with Clean, Refactored Code:
 | hmf5339 | Haley Fitzgerald  | %                       | Implemented ability to clear cart completely and delete products one by one from cart.              |
 | hlt5125 | Heaven Thomas     | %                       |                                                                                                     |
 USE CASES
-1. View Product Details
+1. View Product Details ✅
 2. Add Product to Cart
 3. Track Order
 4. Purchase Order
