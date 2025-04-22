@@ -1,11 +1,9 @@
 package edu.psu.ist.productmanagement.controller;
 
 import edu.psu.ist.cartmanagement.controller.CartController;
-import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.view.ProductPageView;
 
-import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

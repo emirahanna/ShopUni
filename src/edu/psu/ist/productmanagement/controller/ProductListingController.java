@@ -91,34 +91,5 @@ public class ProductListingController {
             new ProductPageController(selectedProduct);
         }
     }
-
-
-    //this show catalog was mostly for the scanner, i changed the method for the gui - saving it just in case we need it for later
-//    public void showCatalog() {
-//        int totalPages = catalog.getTotalPages();
-//        while (isCatalogOpen) {
-//            ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
-//            view.displayProducts(products, currentPage, totalPages);
-//
-//            String choice = view.getUserChoice().toUpperCase();
-//
-//            switch (choice) {
-//                case "N" -> nextPage(totalPages);
-//                case "P" -> prevPage();
-//                case "S" -> {
-//                    Product selectedProduct = selectProduct(products);
-//                    if (selectedProduct != null){
-//                        new ProductPageController(selectedProduct);
-//                    }
-//                    isCatalogOpen = false;
-//                }
-//                case "X" -> {
-//                    view.exitCatalog();
-//                    isCatalogOpen = false;
-//                }
-//                default -> view.invalidInput();
-//            }
-//        }
-//    }
 }
 

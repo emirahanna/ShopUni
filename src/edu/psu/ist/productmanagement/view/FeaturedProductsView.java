@@ -84,9 +84,5 @@ public void initializeFeaturedProducts(List<Product> products){
     public JButton getBackButton() {
         return backButton;
     }
-    public JPanel getBasePanel(){return basePanel;}
-    public JButton getPreviousButton(){return previousButton;}
-    public JButton getNextButton(){return nextButton;}
-    public JLabel getTitleText(){return titleText;}
 
 }

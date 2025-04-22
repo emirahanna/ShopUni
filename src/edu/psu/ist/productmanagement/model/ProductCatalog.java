@@ -3,7 +3,6 @@ package edu.psu.ist.productmanagement.model;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ProductCatalog {
     private ArrayList<Product> products;

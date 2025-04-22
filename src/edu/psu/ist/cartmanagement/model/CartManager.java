@@ -6,7 +6,6 @@ import edu.psu.ist.cartmanagement.util.CartObserver;
 import edu.psu.ist.cartmanagement.util.CartSubject;
 import edu.psu.ist.productmanagement.model.Product;
 
-import javax.security.auth.Subject;
 
 /**
  * Class that emulates the behavior of an actual cart
