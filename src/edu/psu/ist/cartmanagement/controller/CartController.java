@@ -11,6 +11,7 @@ import javax.swing.SwingUtilities;
 import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.cartmanagement.util.CartObserver;
 import edu.psu.ist.cartmanagement.view.CartContentsView;
+import edu.psu.ist.paymentmanagement.view.WizardFrame;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.productmanagement.controller.ProductPageController;
 import edu.psu.ist.productmanagement.model.Pricing;
@@ -91,7 +92,9 @@ public class CartController implements CartObserver {
             if (cart.isEmpty()) {
                 JOptionPane.showMessageDialog(view.getBasePanel(), "Cart is empty! Add products before purchasing.");
             } else {
-                JOptionPane.showMessageDialog(view.getBasePanel(), "Buy Now Button Pressed");
+//                JOptionPane.showMessageDialog(view.getBasePanel(), "Buy Now Button Pressed");
+                new WizardFrame();
+                view.setVisible(false);
             }
         });
         view.getBackButton().addActionListener(e -> {
