@@ -28,7 +28,16 @@ public class LogInView extends JFrame{
         this.setSize(500, 800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+        focusOnDummyPanel();
+
     }
+
+    private void focusOnDummyPanel(){
+        logInPanel.setFocusable(true);
+        logInPanel.requestFocusInWindow();
+    }
+
+
 
     public JPanel getLogInPanel() {
         return logInPanel;

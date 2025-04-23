@@ -15,10 +15,8 @@ import edu.psu.ist.productmanagement.model.Product;
  */
 public class CartManager implements CartSubject {
     private double totalPrice;
-    final Map<Product, Integer> cartContents;
-    final List<CartObserver> observers = new ArrayList<>();
-    final List<String> items = new ArrayList<>();
-
+    private final Map<Product, Integer> cartContents;
+    private final List<CartObserver> observers = new ArrayList<>();
     final static CartManager instance = new CartManager();  // Singleton instance, eager loaded for thread safety
 
     private CartManager() {

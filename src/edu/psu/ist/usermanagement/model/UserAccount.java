@@ -1,14 +1,27 @@
 package edu.psu.ist.usermanagement.model;
 
+import java.sql.*;
+
 public class UserAccount {
-    final String username;
-    final String password;
+    private final String username;
+    private final String password;
+    private UserRole role;
     private boolean hasSavedPayment;
     private boolean hasCartItems;
 
+    //constructor for logging in
     public UserAccount(String username, String password) {
         this.username = username;
         this.password = password;
+        this.hasSavedPayment = false;
+        this.hasCartItems = false;
+    }
+
+    //constructor for registering an account
+    public UserAccount(String username, String password, UserRole role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
         this.hasSavedPayment = false;
         this.hasCartItems = false;
     }
@@ -24,16 +37,30 @@ public class UserAccount {
     public boolean isHasCartItems() { return hasCartItems; }
 
     public UserRole verifyUser(){
-        if (username.equals("buyer") && password.equals("pwd")) {
-            return UserRole.BUYER;
+        String databaseURL = "jdbc:ucanaccess://src/ProductList.accdb";
+
+        try (Connection connection = DriverManager.getConnection(databaseURL)) {
+            String sql = "SELECT * FROM user_database";
+
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(sql);
+
+            while (result.next()) {
+                String user = result.getString("username");
+                String pwd = result.getString("password");
+                String role = result.getString("role").toUpperCase();
+                System.out.println(role);
+                if (user.equals(username) && pwd.equals(password)){
+                    //returns the corresponding role as an enum
+                    return Enum.valueOf(UserRole.class, role);
+                }
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        else if (username.equals("seller") && password.equals("pwd")) {
-            return UserRole.SELLER;
-        }
-        else if (username.equals("admin") && password.equals("pwd")) {
-            return UserRole.ADMIN;
-        }
-        throw new IllegalArgumentException("Not a valid user");
+        //not a registered user, so it has no role
+        return UserRole.NONE;
     }
 
     public String getUsername() {

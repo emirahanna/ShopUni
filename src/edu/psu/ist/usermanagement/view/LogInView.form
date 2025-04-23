@@ -26,6 +26,7 @@
         </constraints>
         <properties>
           <text value="Username"/>
+          <toolTipText value=""/>
         </properties>
       </component>
       <component id="83321" class="javax.swing.JButton" binding="logInButton" default-binding="true">
@@ -72,6 +73,7 @@
         </constraints>
         <properties>
           <text value="Password"/>
+          <toolTipText value=""/>
         </properties>
       </component>
       <hspacer id="6a5bc">
