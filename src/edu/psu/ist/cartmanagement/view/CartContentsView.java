@@ -1,13 +1,25 @@
 package edu.psu.ist.cartmanagement.view;
 
-import edu.psu.ist.productmanagement.model.Product;
-
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.util.Map;
 import java.util.Scanner;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+
+import edu.psu.ist.productmanagement.model.Product;
 
 public class CartContentsView extends JFrame {
     private JPanel basePanel;
@@ -21,15 +33,13 @@ public class CartContentsView extends JFrame {
     private JLabel cartBreadcrumb;
     private JLabel productCtlgBreadcrumb;
     private JLabel productPageBreadcrumb;
-    private Scanner scnr;
+    final Scanner scnr;
 
     public CartContentsView(){
         scnr = new Scanner(System.in);
         setUpComponents();
         setView();
     }
-
-
 
     /*
     notes:

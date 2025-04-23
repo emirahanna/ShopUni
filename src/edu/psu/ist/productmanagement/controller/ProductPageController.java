@@ -1,13 +1,11 @@
 package edu.psu.ist.productmanagement.controller;
 
-import edu.psu.ist.cartmanagement.controller.CartController;
-import edu.psu.ist.cartmanagement.model.CartManager;
-import edu.psu.ist.productmanagement.model.Product;
-import edu.psu.ist.productmanagement.view.ProductPageView;
-
-import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import edu.psu.ist.cartmanagement.controller.CartController;
+import edu.psu.ist.productmanagement.model.Product;
+import edu.psu.ist.productmanagement.view.ProductPageView;
 
 /**
  * This class stores the model and the view
@@ -15,9 +13,8 @@ import java.awt.event.MouseEvent;
  */
 
 public class ProductPageController {
-
-    private Product productDetails;
-    private ProductPageView view;
+    final Product productDetails;
+    final ProductPageView view;
 
 
     //constructor stores model and view

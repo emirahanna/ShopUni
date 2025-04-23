@@ -1,9 +1,12 @@
 package edu.psu.ist.productmanagement.model;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ProductCatalog {
     private ArrayList<Product> products;
@@ -56,8 +59,6 @@ public class ProductCatalog {
 
     /**
      * This basically returns the products in the list that will be displayed on a certain page
-     * @param page
-     * @return
      */
     public ArrayList<Product> getProductsOnPage(int page) {
         int start = (page - 1) * productPerPage;

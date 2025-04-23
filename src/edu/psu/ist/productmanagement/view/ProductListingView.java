@@ -1,15 +1,18 @@
 package edu.psu.ist.productmanagement.view;
 
-import edu.psu.ist.productmanagement.model.Product;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import edu.psu.ist.productmanagement.model.Product;
 
 public class ProductListingView extends JFrame {
     private JPanel basePanel;
     private JButton p1ViewProductButton;
-    private JLabel p1ProductImage;
     private JLabel p1ProductTitle;
     private JLabel p1ProductDescription;
     private JButton nextButton;
@@ -18,10 +21,6 @@ public class ProductListingView extends JFrame {
     private JButton p3ViewProductButton;
     private JButton p4ViewProductButton;
     private JButton p5ViewProductButton;
-    private JLabel p2ProductImage;
-    private JLabel p3ProductImage;
-    private JLabel p4ProductImage;
-    private JLabel p5ProductImage;
     private JLabel p2ProductTitle;
     private JLabel p3ProductTitle;
     private JLabel p4ProductTitle;
@@ -35,12 +34,11 @@ public class ProductListingView extends JFrame {
     private JPanel p2Card;
     private JPanel p3Card;
     private JPanel p5Card;
-    private JLabel appLogoName;
     private JLabel productCatalogBreadCrumb;
     private JLabel pageIndicator;
     private JButton featuredProductsButton;
 
-    private Scanner scnr;
+    final Scanner scnr;
 
     public ProductListingView() {
         setView();
@@ -114,62 +112,9 @@ public class ProductListingView extends JFrame {
         nextButton.setEnabled(currentPage < totalPages);
     }
 
-    //moved this just in case we need later - i thought this was mostly for stuff when we are fully in the scanner
-
-//    public void displayProducts(ArrayList<Product> products, int currentPage, int totalPages) {
-//        System.out.println();
-//        System.out.println("=== Product Catalog F ===");
-//
-//        if (products.isEmpty()) {
-//            System.out.println("No products available.");
-//            return;
-//        }
-//
-//        for (int i = 0; i < products.size(); i++) {
-//            System.out.println((i + 1) + ". " + products.get(i).getTitle());
-//        }
-//
-//        System.out.println("Options:");
-//        if (currentPage > 1) {
-//            System.out.println("P - Previous Page");
-//        }
-//        if (currentPage < totalPages) {
-//            System.out.println("N - Next Page");
-//        }
-//        System.out.println("S - Select a Product");
-//        System.out.println("X - Exit");
-//    }
-//
-//    public String getUserChoice() {
-//        System.out.println("Enter selected choice: ");
-//        return scnr.next();
-//    }
-
-    //end of moved code
-
-    public JPanel getBasePanel() {
-        return basePanel;
-    }
-
-
-    public JLabel getAppLogoName() {
-        return appLogoName;
-    }
 
     public JButton getP1ViewProductButton() {
         return p1ViewProductButton;
-    }
-
-    public JLabel getP1ProductImage() {
-        return p1ProductImage;
-    }
-
-    public JLabel getP1ProductTitle() {
-        return p1ProductTitle;
-    }
-
-    public JLabel getP1ProductDescription() {
-        return p1ProductDescription;
     }
 
     public JButton getNextButton() {
@@ -184,84 +129,17 @@ public class ProductListingView extends JFrame {
         return p2ViewProductButton;
     }
 
-    public JLabel getP2ProductImage() {
-        return p2ProductImage;
-    }
-
-    public JLabel getP2ProductTitle() {
-        return p2ProductTitle;
-    }
-
-    public JLabel getP2ProductDescription() {
-        return p2ProductDescription;
-    }
 
     public JButton getP3ViewProductButton() {
         return p3ViewProductButton;
-    }
-
-    public JLabel getP3ProductImage() {
-        return p3ProductImage;
-    }
-
-    public JLabel getP3ProductTitle() {
-        return p3ProductTitle;
-    }
-
-    public JLabel getP3ProductDescription() {
-        return p3ProductDescription;
     }
 
     public JButton getP4ViewProductButton() {
         return p4ViewProductButton;
     }
 
-    public JLabel getP4ProductImage() {
-        return p4ProductImage;
-    }
-
-    public JLabel getP4ProductTitle() {
-        return p4ProductTitle;
-    }
-
-    public JLabel getP4ProductDescription() {
-        return p4ProductDescription;
-    }
-
     public JButton getP5ViewProductButton() {
         return p5ViewProductButton;
-    }
-
-    public JLabel getP5ProductImage() {
-        return p5ProductImage;
-    }
-
-    public JLabel getP5ProductTitle() {
-        return p5ProductTitle;
-    }
-
-    public JLabel getP5ProductDescription() {
-        return p5ProductDescription;
-    }
-
-    public JPanel getP1Card() {
-        return p1Card;
-    }
-
-    public JPanel getP2Card() {
-        return p2Card;
-    }
-
-    public JPanel getP3Card() {
-        return p3Card;
-    }
-
-    public JPanel getP4Card() {
-        return p4Card;
-    }
-
-    public JPanel getP5Card() {
-        return p5Card;
     }
 
     public JLabel getProductCatalogBreadCrumb() {

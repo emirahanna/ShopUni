@@ -1,23 +1,25 @@
 package edu.psu.ist.cartmanagement.controller;
 
-import edu.psu.ist.cartmanagement.model.CartManager;
-
-import edu.psu.ist.cartmanagement.util.CartObserver;
-import edu.psu.ist.cartmanagement.view.CartContentsView;
-import edu.psu.ist.productmanagement.controller.ProductListingController;
-import edu.psu.ist.productmanagement.controller.ProductPageController;
-import edu.psu.ist.productmanagement.model.Pricing;
-import edu.psu.ist.productmanagement.model.Product;
-
-import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import edu.psu.ist.cartmanagement.model.CartManager;
+import edu.psu.ist.cartmanagement.util.CartObserver;
+import edu.psu.ist.cartmanagement.view.CartContentsView;
+import edu.psu.ist.paymentmanagement.view.WizardFrame;
+import edu.psu.ist.productmanagement.controller.ProductListingController;
+import edu.psu.ist.productmanagement.controller.ProductPageController;
+import edu.psu.ist.productmanagement.model.Pricing;
+import edu.psu.ist.productmanagement.model.Product;
+
 public class CartController implements CartObserver {
-    private CartManager cart;
-    private CartContentsView view;
+    final CartManager cart;
+    final CartContentsView view;
     private Product recentProduct;
 
     public CartController() {
@@ -58,7 +60,6 @@ public class CartController implements CartObserver {
         cart.emptyCart();  // Simulate purchase
     }
 
-
     //you can test the cart page here
 
     public static void main(String[] args) {
@@ -74,13 +75,25 @@ public class CartController implements CartObserver {
 
     public void attachActionListeners() {
         view.getEmptyCartButton().addActionListener(e -> {
-            JOptionPane.showMessageDialog(view.getBasePanel(), "Empty Cart Button Pressed");
+            if(cart.isEmpty()){
+                JOptionPane.showMessageDialog(view.getBasePanel(), "Cart is empty!");
+            } else {
+                int confirmMessage = JOptionPane.showConfirmDialog(view.getBasePanel(), "Are you sure you want to empty your cart?", "Empty Cart",JOptionPane.YES_NO_OPTION);
+
+                if(confirmMessage == JOptionPane.YES_OPTION){
+                    cart.emptyCart();
+                    update();
+                    JOptionPane.showMessageDialog(view.getBasePanel(), "Cart has been emptied");
+                }
+            }
         });
         view.getBuyNowButton().addActionListener(e -> {
             if (cart.isEmpty()) {
                 JOptionPane.showMessageDialog(view.getBasePanel(), "Cart is empty! Add products before purchasing.");
             } else {
-                JOptionPane.showMessageDialog(view.getBasePanel(), "Buy Now Button Pressed");
+//                JOptionPane.showMessageDialog(view.getBasePanel(), "Buy Now Button Pressed");
+                new WizardFrame();
+                view.setVisible(false);
             }
         });
         view.getBackButton().addActionListener(e -> {
@@ -111,9 +124,9 @@ public class CartController implements CartObserver {
         for (Map.Entry<Product, Integer> entry : cart.getCartContents().entrySet()) { //I want both the product, and the quantity
             Product product = entry.getKey();
             int quantity = entry.getValue();
-            //System.out.println(product + " - " + quantity);
             view.createCartItemCard(product.getTitle(), quantity, product.getPrice(), e -> {
-                JOptionPane.showMessageDialog(view.getBasePanel(), "Remove button for " + product + " pressed");
+                cart.removeProduct(product);
+                JOptionPane.showMessageDialog(view.getBasePanel(), product + " removed from cart");
             });
         }
         view.layoutComponents();

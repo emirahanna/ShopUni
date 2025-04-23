@@ -1,10 +1,10 @@
 package edu.psu.ist.usermanagement.controller;
 
 public class UpdatePasswordController {
-    private String username;
-    private String oldPassword;
-    private String newPassword;
-    private String confirmPassword;
+    final String username;
+    final String oldPassword;
+    final String newPassword;
+    final String confirmPassword;
 
     public UpdatePasswordController(String username, String oldPassword, String newPassword, String confirmPassword) {
         this.username = username;

@@ -1,15 +1,17 @@
 package edu.psu.ist.ordermanagement.controller;
 
+import java.util.Date;
+
 import edu.psu.ist.cartmanagement.model.CartManager;
-import edu.psu.ist.ordermanagement.handler.*;
+import edu.psu.ist.ordermanagement.handler.PaymentHandler;
+import edu.psu.ist.ordermanagement.handler.ShippingHandler;
+import edu.psu.ist.ordermanagement.handler.ValidationHandler;
 import edu.psu.ist.ordermanagement.model.Order;
 import edu.psu.ist.ordermanagement.model.Shipping;
 import edu.psu.ist.ordermanagement.view.OrderConfirmedView;
 import edu.psu.ist.ordermanagement.view.OrderDetailView;
 import edu.psu.ist.paymentmanagement.controller.PaymentController;
 import edu.psu.ist.trackingmanagement.controller.TrackingController;
-
-import java.util.Date;
 
 public class OrderController {
     Order orderModel;
@@ -58,11 +60,9 @@ public class OrderController {
         switch (orderConfirmedView.displayOptions()){
             case 1 -> new TrackingController(orderModel);
             case 2 -> {
-                return;
+                orderConfirmedView.printOrderDetails(orderModel.generateOrderSummary());
+                orderConfirmedView.orderSuccessCreated();
             }
         }
     }
-
-
-
 }

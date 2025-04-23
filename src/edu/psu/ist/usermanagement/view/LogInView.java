@@ -1,7 +1,12 @@
 package edu.psu.ist.usermanagement.view;
 
-import javax.swing.*;
 import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class LogInView extends JFrame{
     private JPanel logInPanel;
@@ -10,7 +15,7 @@ public class LogInView extends JFrame{
     private JLabel shopUniLabel;
     private JTextField passwordField;
 
-    private Scanner scnr;
+    final Scanner scnr;
 
     public LogInView(){
         setView();

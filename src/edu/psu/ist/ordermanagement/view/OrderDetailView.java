@@ -3,7 +3,7 @@ package edu.psu.ist.ordermanagement.view;
 import java.util.Scanner;
 
 public class OrderDetailView  {
-    private Scanner scnr;
+    final Scanner scnr;
     public OrderDetailView() {
         scnr = new Scanner(System.in);
     }

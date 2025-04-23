@@ -1,16 +1,16 @@
 package edu.psu.ist.productmanagement.controller;
 
+import java.util.ArrayList;
+
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.model.ProductCatalog;
 import edu.psu.ist.productmanagement.view.ProductListingView;
 
-import java.util.ArrayList;
-
 public class ProductListingController {
-    private ProductCatalog catalog;
-    private ProductListingView view;
+    final ProductCatalog catalog;
+    final ProductListingView view;
     private int currentPage;
-    private boolean isCatalogOpen;
+    final boolean isCatalogOpen;
 
     public ProductListingController() {
         this.catalog = new ProductCatalog();

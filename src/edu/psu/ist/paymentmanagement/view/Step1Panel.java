@@ -1,8 +1,6 @@
 package edu.psu.ist.paymentmanagement.view;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Step1Panel extends JPanel {
     public Step1Panel(WizardFrame frame) {

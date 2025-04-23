@@ -3,7 +3,7 @@ package edu.psu.ist.paymentmanagement.view;
 import java.util.Scanner;
 
 public class PaymentView {
-    private Scanner scnr;
+    final Scanner scnr;
     public PaymentView() {
         scnr = new Scanner(System.in);
     }

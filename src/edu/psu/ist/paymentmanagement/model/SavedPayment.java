@@ -1,7 +1,7 @@
 package edu.psu.ist.paymentmanagement.model;
 
 public class SavedPayment {
-    private String userID;
+    final String userID;
     private Payment.PaymentOption paymentOption;
     private String billingAddress;
 
