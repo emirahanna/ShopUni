@@ -68,8 +68,6 @@ public class ProductPageController {
             public void mouseClicked(MouseEvent e) {
                 new ProductListingController();
                 view.setVisible(false);
-
-                //JOptionPane.showMessageDialog(view.getBasePanel(), "Product Catalog Breadcrumb Pressed");
             }
         });
     }

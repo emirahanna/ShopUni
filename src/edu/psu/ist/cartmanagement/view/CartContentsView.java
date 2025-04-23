@@ -84,8 +84,8 @@ public class CartContentsView extends JFrame {
         // Padding for the whole frame
         basePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        addToPanel(topPanel, basePanel,  0, 0, 1, 1, GridBagConstraints.WEST, new Insets(0, 0, 10, 0), GridBagConstraints.NONE);
-        addToPanel(cartContentsScrollPane, basePanel, 0, 1, 1, 1, GridBagConstraints.CENTER , new Insets(0, 0, 10, 0), GridBagConstraints.BOTH);
+        addToPanel(topPanel, basePanel,  0, 0, 1, 1, GridBagConstraints.WEST, new Insets(0, 0, 0, 0), GridBagConstraints.NONE);
+        addToPanel(cartContentsScrollPane, basePanel, 0, 1, 1, 1, GridBagConstraints.CENTER , new Insets(0, 0, 0, 0), GridBagConstraints.BOTH);
         addToPanel(bottomButtonsPanel, basePanel, 0, 2, 1, 1, GridBagConstraints.SOUTH, new Insets(0, 0, 0, 0), GridBagConstraints.HORIZONTAL);
     }
 

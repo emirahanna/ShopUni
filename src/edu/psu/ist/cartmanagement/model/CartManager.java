@@ -6,8 +6,6 @@ import edu.psu.ist.cartmanagement.util.CartObserver;
 import edu.psu.ist.cartmanagement.util.CartSubject;
 import edu.psu.ist.productmanagement.model.Product;
 
-import javax.security.auth.Subject;
-
 /**
  * Class that emulates the behavior of an actual cart
  */
@@ -15,7 +13,6 @@ public class CartManager implements CartSubject {
     private double totalPrice;
     private Map<Product, Integer> cartContents;
     private List<CartObserver> observers = new ArrayList<>();
-    private List<String> items = new ArrayList<>();
 
     private static CartManager instance = new CartManager();  // Singleton instance, eager loaded for thread safety
 

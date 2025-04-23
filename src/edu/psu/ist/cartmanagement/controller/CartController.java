@@ -40,7 +40,6 @@ public class CartController implements CartObserver {
     private void removeProduct() {
         view.removeProductPrompt();
         String productName = view.getProductName();
-
         for (Product p : cart.getCartContents().keySet()) {
             if (p.getTitle().equalsIgnoreCase(productName)) {
                 cart.removeProduct(p);
@@ -94,8 +93,6 @@ public class CartController implements CartObserver {
             public void mouseClicked(MouseEvent e) {
                 new ProductListingController();
                 view.setVisible(false);
-
-                //JOptionPane.showMessageDialog(view.getBasePanel(), "Product Catalog Breadcrumb Pressed");
             }
         });
         view.getProductPageBreadcrumb().addMouseListener(new MouseAdapter() {
@@ -103,8 +100,6 @@ public class CartController implements CartObserver {
             public void mouseClicked(MouseEvent e) {
                 new ProductPageController(recentProduct);
                 view.setVisible(false);
-
-                //JOptionPane.showMessageDialog(view.getBasePanel(), "Product Page Breadcrumb Pressed");
             }
         });
     }
@@ -124,47 +119,5 @@ public class CartController implements CartObserver {
         view.layoutComponents();
         view.repaintCartDisplay();
     }
-
-//    public void refreshCartDisplay() {
-//        view.clearCartDisplay();
-//
-//        for (Map.Entry<Product, Integer> entry : cart.getCartContents().entrySet()) { //I want both the product, and the quantity
-//            Product product = entry.getKey();
-//            int quantity = entry.getValue();
-//            System.out.println(product + " - " + quantity);
-//            view.createCartItemCard(product.getTitle(), quantity, product.getPrice(), e -> {
-//                JOptionPane.showMessageDialog(view.getBasePanel(), "Remove button for " + product + " pressed");
-//            });
-//        }
-//        view.layoutComponents();
-//        view.repaintCartDisplay();
-//    }
-    //    public void manageCart() {
-//        int choice;
-//        do {
-//            view.displayCart(cart.getCartContents(), cart.getTotalPrice());
-//            choice = view.displayOptions();
-//
-//            switch (choice) {
-//                case 1 -> {
-//                    removeProduct();
-//                }
-//                case 2 -> {
-//                    cart.emptyCart();
-//                    view.cartEmptied();
-//                }
-//                case 3 -> {
-//                    buyCart();
-//                    choice = 4;
-//                    new OrderController(cart);
-//                }
-//                case 4 -> {
-//                    view.exitingCart();
-//                    new ProductListingController();
-//                }
-//                default -> view.invalidChoice();
-//            }
-//        } while (choice != 4);
-//    }
 }
 
