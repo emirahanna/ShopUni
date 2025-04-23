@@ -1,7 +1,7 @@
 package edu.psu.ist.productmanagement.model;
 
 public class Pricing {
-    private double price;
+    final double price;
 
     public Pricing(double price) {
         this.price = price;

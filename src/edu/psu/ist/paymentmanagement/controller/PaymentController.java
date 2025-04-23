@@ -1,16 +1,14 @@
 package edu.psu.ist.paymentmanagement.controller;
 
+import java.util.Date;
+
 import edu.psu.ist.paymentmanagement.model.Payment;
 import edu.psu.ist.paymentmanagement.view.PaymentView;
 
-import java.util.Date;
-
 public class PaymentController {
     private Payment paymentModel;
-    private PaymentView paymentView;
+    final PaymentView paymentView;
 
-    /**Constructor to initialize with an existing Payment model
-     */
     public PaymentController() {
         this.paymentView = new PaymentView();
         processPayment();
@@ -47,11 +45,8 @@ public class PaymentController {
         paymentView.paymentSuccessful();
     }
 
-
     /**
      * Method to refund a payment
-     *
-     * @return
      */
     public boolean refundPayment() {
         System.out.println("refundPayment called.");
@@ -65,8 +60,8 @@ public class PaymentController {
         }
     }
 
-    /** Method to show payment details
-     *
+    /** 
+     *  Method to show payment details
      */
     public void showPaymentDetails() {
         System.out.println("showPaymentDetails called.");

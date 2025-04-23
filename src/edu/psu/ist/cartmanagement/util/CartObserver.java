@@ -8,55 +8,56 @@ public interface CartObserver {
     void update();
 }
 
-//public interface Subject {
-//    void addObserver(CartObserver observer);
-//    void removeObserver(CartObserver observer);
-//    void notifyObservers();
-//}
+/* public interface Subject {
+    void addObserver(CartObserver observer);
+    void removeObserver(CartObserver observer);
+    void notifyObservers();
+} */
 
 // we need to connect this to database -nicole
-//class Cart implements Subject {
-//    private List<CartObserver> observers = new ArrayList<>();
-//    private List<String> items = new ArrayList<>();
-//
-//    @Override
-//    public void addObserver(CartObserver observer) {
-//        observers.add(observer);
-//    }
-//
-//    @Override
-//    public void removeObserver(CartObserver observer) {
-//        observers.remove(observer);
-//    }
-//
-//    @Override
-//    public void notifyObservers() {
-//        for(CartObserver observer : observers) {
-//            observer.update();
-//        }
-//    }
-//
-//    public void addItem(String item) {
-//        items.add(item);
-//        notifyObservers();
-//    }
-//
-//    public void removeItem(String item) {
-//        items.remove(item);
-//    }
-//
-//    public boolean isEmpty() {
-//        return items.isEmpty();
-//    }
-//
-//    public int getItemCount() {
-//        return items.size();
-//    }
-//}
+
+/* class Cart implements Subject {
+  private List<CartObserver> observers = new ArrayList<>();
+    private List<String> items = new ArrayList<>();
+
+    @Override
+    public void addObserver(CartObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(CartObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(CartObserver observer : observers) {
+            observer.update();
+        }
+    }
+
+    public void addItem(String item) {
+        items.add(item);
+        notifyObservers();
+    }
+
+    public void removeItem(String item) {
+        items.remove(item);
+    }
+
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
+
+    public int getItemCount() {
+        return items.size();
+    }
+} */
 
 class User implements CartObserver {
-    private UserAccount account;
-    private CartManager cart;
+    final UserAccount account;
+    final CartManager cart;
 
     public User(UserAccount account, CartManager cart) {
         this.account = account;

@@ -1,10 +1,14 @@
 package edu.psu.ist.productmanagement.view;
 
-import edu.psu.ist.productmanagement.model.Product;
-
-import javax.swing.*;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import edu.psu.ist.productmanagement.model.Product;
 
 public class FeaturedProductsView extends JFrame{
     private JPanel basePanel;
@@ -15,11 +19,11 @@ public class FeaturedProductsView extends JFrame{
     private JButton backButton;
     private JLabel nameLabel;
     private JLabel priceLabel;
-
+    
     private List<Product> featuredProducts;
     private int currIndex =0;
 
-    private Scanner scnr;
+    final Scanner scnr;
 
 public FeaturedProductsView(){
     setView();

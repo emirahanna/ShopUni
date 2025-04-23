@@ -1,6 +1,10 @@
 package edu.psu.ist.cartmanagement.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import edu.psu.ist.cartmanagement.util.CartObserver;
 import edu.psu.ist.cartmanagement.util.CartSubject;
@@ -12,12 +16,11 @@ import edu.psu.ist.productmanagement.model.Product;
  */
 public class CartManager implements CartSubject {
     private double totalPrice;
-    private Map<Product, Integer> cartContents;
-    private List<CartObserver> observers = new ArrayList<>();
-    private List<String> items = new ArrayList<>();
+    final Map<Product, Integer> cartContents;
+    final List<CartObserver> observers = new ArrayList<>();
+    final List<String> items = new ArrayList<>();
 
-    private static CartManager instance = new CartManager();  // Singleton instance, eager loaded for thread safety
-
+    final static CartManager instance = new CartManager();  // Singleton instance, eager loaded for thread safety
 
     private CartManager() {
         cartContents = new HashMap<Product, Integer>();

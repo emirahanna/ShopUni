@@ -1,12 +1,12 @@
 package edu.psu.ist.paymentmanagement.controller;
+import java.util.Date;
+
 import edu.psu.ist.paymentmanagement.model.Payment;
 import edu.psu.ist.paymentmanagement.model.SavedPayment;
 import edu.psu.ist.paymentmanagement.view.PaymentView;
 
-import java.util.Date;
-
 public class PaymentFacade {
-    private PaymentView paymentView;
+    final PaymentView paymentView;
     private Payment paymentModel;
     private SavedPayment savedPayment;
 

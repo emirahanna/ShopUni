@@ -4,7 +4,7 @@ package edu.psu.ist.ordermanagement.view;
 import java.util.Scanner;
 
 public class OrderConfirmedView {
-    private Scanner scnr;
+    final Scanner scnr;
     public OrderConfirmedView() {
         scnr = new Scanner(System.in);
     }

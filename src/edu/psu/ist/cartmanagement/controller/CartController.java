@@ -1,7 +1,14 @@
 package edu.psu.ist.cartmanagement.controller;
 
-import edu.psu.ist.cartmanagement.model.CartManager;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Date;
+import java.util.Map;
 
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.cartmanagement.util.CartObserver;
 import edu.psu.ist.cartmanagement.view.CartContentsView;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
@@ -9,15 +16,9 @@ import edu.psu.ist.productmanagement.controller.ProductPageController;
 import edu.psu.ist.productmanagement.model.Pricing;
 import edu.psu.ist.productmanagement.model.Product;
 
-import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.Date;
-import java.util.Map;
-
 public class CartController implements CartObserver {
-    private CartManager cart;
-    private CartContentsView view;
+    final CartManager cart;
+    final CartContentsView view;
     private Product recentProduct;
 
     public CartController() {

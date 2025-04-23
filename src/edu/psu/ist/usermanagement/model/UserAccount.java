@@ -1,8 +1,8 @@
 package edu.psu.ist.usermanagement.model;
 
 public class UserAccount {
-    private String username;
-    private String password;
+    final String username;
+    final String password;
     private boolean hasSavedPayment;
     private boolean hasCartItems;
 

@@ -6,14 +6,14 @@ import java.util.Date;
  * Encapsulates the features of a product, which can be created and sold
  */
 public class Product {
-    private String title;
-    private String description;
-    private String ID;
-    private String imageID;
-    private String sellerID;
-    private Date dateListed;
-    private String productCategory;
-    private Pricing price;
+    final String title;
+    final String description;
+    final String ID;
+    final String imageID;
+    final String sellerID;
+    final Date dateListed;
+    final String productCategory;
+    final Pricing price;
 
 
     public Product(String title, String description, String productID, String imageID, String sellerID, Date dateListed, String productCategory, Pricing price) {

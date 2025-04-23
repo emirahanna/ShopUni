@@ -3,10 +3,10 @@ package edu.psu.ist.trackingmanagement.model;
 import java.util.Date;
 
 public class Tracking {
-    private String orderID;
+    final String orderID;
     private Date arrivalDate;
     private String location;
-    private String status;
+    final String status;
 
 
     public Tracking(String orderID, Date arrivalDate, String location, String status) {
@@ -16,9 +16,6 @@ public class Tracking {
         this.status = status;
     }
 
-    /**
-     * Estimates the remaining time for delivery based on the arrival date.
-     */
     public String estimateDeliveryTime() {
         if (arrivalDate == null || arrivalDate == null) {
             return "Arrival date not available.";
@@ -26,24 +23,14 @@ public class Tracking {
         return "Estimated delivery in X days (based on " + arrivalDate + ")";
     }
 
-    /**
-     * Validates if the tracking information is correctly formatted.
-     */
     public boolean validateTracking() {
         return orderID != null && location != null && !location.isEmpty();
     }
 
-
-    /**
-     * Updates the location of the product as its status changes
-     */
     public void updateLocation(String location) {
         this.location = location;
     }
 
-    /**
-     * Updates the arrival date of the product as it reaches the customer
-     */
     public void updateDate(Date arrivalDate) {
         this.arrivalDate = arrivalDate;
     }

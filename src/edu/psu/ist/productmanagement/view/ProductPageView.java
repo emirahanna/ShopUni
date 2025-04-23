@@ -1,9 +1,13 @@
 package edu.psu.ist.productmanagement.view;
 
-import edu.psu.ist.productmanagement.controller.ProductPageController;
-
-import javax.swing.*;
 import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import edu.psu.ist.productmanagement.controller.ProductPageController;
 
 public class ProductPageView extends JFrame{
     private JPanel basePanel;
@@ -17,7 +21,8 @@ public class ProductPageView extends JFrame{
     private JLabel productPageBreadCrumb;
     private JLabel productImage;
 
-    private Scanner scnr;
+    final Scanner scnr;
+    
     public ProductPageView()  {
         this.scnr = new Scanner(System.in);
         setView();

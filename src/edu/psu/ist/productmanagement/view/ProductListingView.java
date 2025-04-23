@@ -1,10 +1,14 @@
 package edu.psu.ist.productmanagement.view;
 
-import edu.psu.ist.productmanagement.model.Product;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import edu.psu.ist.productmanagement.model.Product;
 
 public class ProductListingView extends JFrame {
     private JPanel basePanel;
@@ -34,7 +38,7 @@ public class ProductListingView extends JFrame {
     private JLabel pageIndicator;
     private JButton featuredProductsButton;
 
-    private Scanner scnr;
+    final Scanner scnr;
 
     public ProductListingView() {
         setView();
