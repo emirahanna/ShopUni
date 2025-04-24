@@ -8,35 +8,74 @@ public class Step2Panel extends WizardStepPanel {
     private JTextField addressTextField;
     private JButton nextButton;
     private JButton backButton;
+    private JPanel basePanel;
+    private JPanel textFieldPanel;
+    private JPanel deliveryOptionPanel;
+    private JPanel headerPanel;
+    private JRadioButton deliveryRadioButton;
+    private JRadioButton pickupRadioButton;
+    private ButtonGroup paymentMethodButtonGroup;
 
 
     public Step2Panel() {
+        setUpBasePanel();
+        setUpHeaderPanel();
+        setUpDeliveryOptionPanel();
+        setUpInfoFieldPanel();
+    }
 
-        setLayout(new BorderLayout());
-
-        JPanel headerPanel = new JPanel();
-        JLabel label = new JLabel("Step 2: Enter Payment Details");
+    private void setUpBasePanel(){
+        basePanel = new JPanel();
+        basePanel.setLayout(new BorderLayout());;
+        add(basePanel);
+    }
+    private void setUpHeaderPanel(){
+        headerPanel = new JPanel();
         backButton = new JButton("Back");
         nextButton = new JButton("Next");
         headerPanel.add(backButton);
-        headerPanel.add(label);
+        headerPanel.add(new JLabel("Step 2: Enter Payment Details"));
         headerPanel.add(nextButton);
+        basePanel.add(headerPanel, BorderLayout.NORTH);
 
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new GridLayout(2, 2, 10, 10));
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+    }
 
-        contentPanel.add(new JLabel("Full Name"));
+    private void setUpDeliveryOptionPanel(){
+        deliveryOptionPanel = new JPanel();
+        deliveryOptionPanel.setLayout(new GridLayout(1, 2, 10, 10));
+        deliveryOptionPanel.setBorder(BorderFactory.createTitledBorder("Delivery Options"));
+        deliveryOptionPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        pickupRadioButton = new JRadioButton("Pickup");
+        deliveryRadioButton = new JRadioButton("Delivery");
+
+        paymentMethodButtonGroup = new ButtonGroup();
+        paymentMethodButtonGroup.add(pickupRadioButton);
+        paymentMethodButtonGroup.add(deliveryRadioButton);
+
+        deliveryOptionPanel.add(pickupRadioButton);
+        deliveryOptionPanel.add(deliveryRadioButton);
+
+        basePanel.add(deliveryOptionPanel, BorderLayout.CENTER);
+
+    }
+
+    private void setUpInfoFieldPanel(){
+        textFieldPanel = new JPanel();
+        textFieldPanel.setLayout(new GridLayout(2, 2, 10, 10));
+        textFieldPanel.setBorder(BorderFactory.createTitledBorder("Payment Information"));
+        textFieldPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        textFieldPanel.add(new JLabel("Full Name"));
         nameTextField = new JTextField();
-        contentPanel.add(nameTextField);
+        nameTextField.setPreferredSize(new Dimension(200, 50));
+        textFieldPanel.add(nameTextField);
 
-        contentPanel.add(new JLabel("Billing Address"));
+        textFieldPanel.add(new JLabel("Billing Address"));
         addressTextField = new JTextField();
-        contentPanel.add(addressTextField);
-
-
-        add(headerPanel, BorderLayout.NORTH);
-        add(contentPanel, BorderLayout.CENTER);
+        addressTextField.setPreferredSize(new Dimension(200, 50));
+        textFieldPanel.add(addressTextField);
+        basePanel.add(textFieldPanel, BorderLayout.SOUTH);
     }
 
 
