@@ -14,7 +14,6 @@ import edu.psu.ist.cartmanagement.view.CartContentsView;
 import edu.psu.ist.paymentmanagement.view.WizardFrame;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.productmanagement.controller.ProductPageController;
-import edu.psu.ist.productmanagement.model.Pricing;
 import edu.psu.ist.productmanagement.model.Product;
 
 public class CartController implements CartObserver {
@@ -66,10 +65,10 @@ public class CartController implements CartObserver {
         //ensure the code runs on time, without invoke later, it had UI bugs
         SwingUtilities.invokeLater(() -> {
             CartController crtl = new CartController();
-            crtl.addProduct(new Product("Levi Pants", "Effortlessly chic, this draped front top is crafted from a MicroModal blend offering a soft, luxurious feel with a hint of stretch.\nWith a slim fit and high neckline, it features gathered detailing across the front creating a flattering, asymmetrical silhouette.\nPair with skirts or tailored trousers for a sophisticated take.", "20342391331", "imageID", "sellerID", new Date(), "Tops", new Pricing(40)));
-            crtl.addProduct(new Product("Nike Hoodie", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", new Pricing(30.0)));
-            crtl.addProduct(new Product("Zara Pants", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance.\nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", new Pricing(60.0)));
-            crtl.addProduct(new Product("Lorem Ipsum", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", new Pricing(100.0)));
+            crtl.addProduct(new Product("Levi Pants", "Effortlessly chic, this draped front top is crafted from a MicroModal blend offering a soft, luxurious feel with a hint of stretch.\nWith a slim fit and high neckline, it features gathered detailing across the front creating a flattering, asymmetrical silhouette.\nPair with skirts or tailored trousers for a sophisticated take.", "20342391331", "imageID", "sellerID", new Date(), "Tops", 40.0));
+            crtl.addProduct(new Product("Nike Hoodie", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", 30.0));
+            crtl.addProduct(new Product("Zara Pants", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance.\nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", 60.0));
+            crtl.addProduct(new Product("Lorem Ipsum", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", 100.0));
         });
     }
 

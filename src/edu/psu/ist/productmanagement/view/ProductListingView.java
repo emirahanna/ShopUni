@@ -37,6 +37,11 @@ public class ProductListingView extends JFrame {
     private JLabel productCatalogBreadCrumb;
     private JLabel pageIndicator;
     private JButton featuredProductsButton;
+    private JLabel p1PriceLabel;
+    private JLabel p2PriceLabel;
+    private JLabel p3PriceLabel;
+    private JLabel p4PriceLabel;
+    private JLabel p5PriceLabel;
 
     final Scanner scnr;
 
@@ -87,10 +92,12 @@ public class ProductListingView extends JFrame {
     public void initializeProducts(ArrayList<Product> products, int currentPage, int totalPages) {
         JLabel[] titles = {p1ProductTitle, p2ProductTitle, p3ProductTitle, p4ProductTitle, p5ProductTitle};
         JLabel[] descriptions = {p1ProductDescription, p2ProductDescription, p3ProductDescription, p4ProductDescription, p5ProductDescription};
+        JLabel[] prices = {p1PriceLabel, p2PriceLabel, p3PriceLabel, p4PriceLabel, p5PriceLabel};
         JPanel[] cards = {p1Card, p2Card, p3Card, p4Card, p5Card};
 
         String title = "";
         String desc = "";
+        String price = "";
 
         // Get and display individual product card's data
         for (int i = 0; i < 5; i++) {
@@ -98,8 +105,10 @@ public class ProductListingView extends JFrame {
                 Product p = products.get(i);
                 title = p.getTitle();
                 desc = p.getDescription();
+                price = String.format("$%.2f", p.getPrice());
                 titles[i].setText("<html>" + title + "</html>"); //attempt to make the text wrap
                 descriptions[i].setText("<html>" + desc + "</html>");
+                prices[i].setText(price);
                 cards[i].setVisible(true);
             } else {
                 titles[i].setText("");

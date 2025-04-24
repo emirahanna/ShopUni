@@ -13,8 +13,6 @@ public class UserAccount {
     public UserAccount(String username, String password) {
         this.username = username;
         this.password = password;
-        this.hasSavedPayment = false;
-        this.hasCartItems = false;
     }
 
     //constructor for registering an account
@@ -49,8 +47,10 @@ public class UserAccount {
                 String user = result.getString("username");
                 String pwd = result.getString("password");
                 String role = result.getString("role").toUpperCase();
-                System.out.println(role);
                 if (user.equals(username) && pwd.equals(password)){
+                    this.role = Enum.valueOf(UserRole.class, role);
+                    this.hasSavedPayment = result.getBoolean("hasSavedPayment");
+                    this.hasCartItems = result.getBoolean("hasItemInCart");
                     //returns the corresponding role as an enum
                     return Enum.valueOf(UserRole.class, role);
                 }

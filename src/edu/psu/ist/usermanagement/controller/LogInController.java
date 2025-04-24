@@ -1,8 +1,6 @@
 package edu.psu.ist.usermanagement.controller;
 
 import edu.psu.ist.productmanagement.controller.ProductListingController;
-import edu.psu.ist.productmanagement.model.Pricing;
-import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.usermanagement.model.UserAccount;
 import edu.psu.ist.usermanagement.model.UserRole;
 import edu.psu.ist.usermanagement.view.LogInView;
@@ -13,8 +11,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.sql.*;
-import java.util.Date;
 
 public class LogInController {
     private static final Log log = LogFactory.getLog(LogInController.class);
