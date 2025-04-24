@@ -1,3 +1,4 @@
+import edu.psu.ist.paymentmanagement.controller.PaymentWizardController;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.usermanagement.controller.LogInController;
 
@@ -6,9 +7,8 @@ import java.sql.*;
 public class TestHarness {
     public static void main(String[] args) {
         //testUserDBConnection();
-        testFullFlow();
-        //testProductListing();
-        //testWizardUI();
+        //testFullFlow();
+        testProductListing();
     }
 
     //to test just product listing page without having to log in/authenticate
@@ -45,14 +45,6 @@ public class TestHarness {
             ex.printStackTrace();
         }
     }
-
-/**
- * method to test the wizard ui in the payment class
- */
-   /* public static void testWizardUI() {
-        new edu.psu.ist.paymentmanagement.view.WizardFrame();
-    }
-    */
 
 
 }  

@@ -2,15 +2,31 @@ package edu.psu.ist.paymentmanagement.view;
 
 import javax.swing.*;
 
-public class Step3Panel extends JPanel {
-    public Step3Panel(WizardFrame frame) {
-        JLabel label = new JLabel("Step 3: Confirm & Print Receipt");
-        JButton backButton = new JButton("Back");
+public class Step3Panel extends WizardStepPanel {
 
-        backButton.addActionListener(e -> frame.previousStep());
+    private JButton backButton;
+    private JLabel instructionLabel;
+    private JLabel orderLabel;
+    private JButton printReceiptButton;
+    public Step3Panel() {
+        instructionLabel = new JLabel("Step 3: Confirm & Print Receipt");
+        backButton = new JButton("Back");
+        printReceiptButton = new JButton("Confirm Order");
+        orderLabel = new JLabel();
 
-        add(label);
         add(backButton);
+        add(instructionLabel);
+        add(orderLabel);
+    }
+
+    @Override
+    public JButton getNextButton() {
+        return null;
+    }
+
+    @Override
+    public JButton getBackButton() {
+        return backButton;
     }
 }
 
