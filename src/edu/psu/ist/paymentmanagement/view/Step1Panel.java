@@ -10,36 +10,37 @@ public class Step1Panel extends WizardStepPanel {
     private JRadioButton creditCardRadioButton;
     private JTextField cardNumberTextField;
     private JTextField expirationDateTextField;
+    private JTextField nameTextField;
     private JLabel step1BreadCrumb;
     private JLabel instructionLabel;
     private JButton backButton;
     private JButton nextButton;
     private JPanel contentPanel;
     private JPanel headerPanel;
-    private JPanel buttonPanel;
     private JPanel paymentMethodPanel;
     private JPanel cardInfoPanel;
+    private JPanel giftCardInfoPanel;
     private JButton confirmButton;
     private ButtonGroup paymentMethodButtonGroup;
 
     public Step1Panel() {
         setUpHeaderPanel();
         setUpContentPanel();
-        setUpButtonPanel();
         setUpFrame();
     }
 
     private void setUpFrame() {
         add(headerPanel, BorderLayout.NORTH);
         add(contentPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     private void setUpContentPanel() {
         contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-        setUpCardInfoPanel();
         setUpPaymentMethodPanel();
+        setUpGiftCardInfoPanel();
+        setUpCardInfoPanel();
+        cardInfoPanel.setVisible(false);
     }
 
     private void setUpPaymentMethodPanel() {
@@ -52,6 +53,8 @@ public class Step1Panel extends WizardStepPanel {
         creditCardRadioButton = new JRadioButton("Credit Card");
         debitCardRadioButton = new JRadioButton("Debit Card");
 
+        giftCardRadioButton.setPreferredSize(new Dimension(200, 10));
+
         paymentMethodButtonGroup = new ButtonGroup();
         paymentMethodButtonGroup.add(giftCardRadioButton);
         paymentMethodButtonGroup.add(creditCardRadioButton);
@@ -63,9 +66,9 @@ public class Step1Panel extends WizardStepPanel {
         contentPanel.add(paymentMethodPanel);
     }
 
-    private void setUpCardInfoPanel() {
+    public void setUpCardInfoPanel() {
         cardInfoPanel = new JPanel();
-        cardInfoPanel.setLayout(new GridLayout(2, 2, 10, 10));
+        cardInfoPanel.setLayout(new GridLayout(3, 2, 10, 10));
         cardInfoPanel.setBorder(BorderFactory.createTitledBorder("Card Information"));
         cardInfoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -73,16 +76,36 @@ public class Step1Panel extends WizardStepPanel {
         cardNumberTextField = new JTextField(15);
         cardInfoPanel.add(cardNumberTextField);
 
-        cardInfoPanel.add(new JLabel("Expiration Date"));
-        expirationDateTextField = new JTextField(5);
+        cardInfoPanel.add(new JLabel("Name"));
+        nameTextField = new JTextField(15);
+        cardInfoPanel.add(nameTextField);
+
+        cardInfoPanel.add(new JLabel("Expiration Date (mmyy)"));
+        expirationDateTextField = new JTextField(15);
         cardInfoPanel.add(expirationDateTextField);
         contentPanel.add(cardInfoPanel);
+        cardInfoPanel.setVisible(true);
     }
 
-    private void setUpButtonPanel() {
-        buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        confirmButton = new JButton("Confirm");
-        buttonPanel.add(confirmButton);
+    public void setUpGiftCardInfoPanel() {
+        giftCardInfoPanel = new JPanel();
+        giftCardInfoPanel.setLayout(new GridLayout(1, 2, 10, 10));
+        giftCardInfoPanel.setBorder(BorderFactory.createTitledBorder("Card Information"));
+        giftCardInfoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        giftCardInfoPanel.add(new JLabel("Card Number"));
+        cardNumberTextField = new JTextField(15);
+        giftCardInfoPanel.add(cardNumberTextField);
+        contentPanel.add(giftCardInfoPanel);
+        giftCardInfoPanel.setVisible(true);
+    }
+
+    public void toggleGiftCardDisplay(boolean b) {
+        giftCardInfoPanel.setVisible(b);
+    }
+
+    public void toggleCardDisplay(boolean b) {
+        cardInfoPanel.setVisible(b);
     }
 
     private void setUpHeaderPanel() {
@@ -124,6 +147,10 @@ public class Step1Panel extends WizardStepPanel {
 
     public JRadioButton getCreditCardRadioButton() {
         return creditCardRadioButton;
+    }
+
+    public JTextField getNameTextField() {
+        return nameTextField;
     }
 
     public JTextField getCardNumberTextField() {

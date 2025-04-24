@@ -20,18 +20,13 @@ public class PaymentFacade {
 
         switch (choice) {
             case 1 -> {
-                String currency = paymentView.promptCurrency();
-                paymentOption = new Payment.Cash(currency);
-            }
-            case 2 -> {
-                int cardNumber = paymentView.promptCardNumber();
-                int CVV = paymentView.promptCVV();
+                String cardNumber = paymentView.promptCardNumber();
                 int expirationDate = paymentView.promptExpirationDate();
                 String name = paymentView.promptCardHolderName();
-                paymentOption = new Payment.Card(cardNumber, CVV, expirationDate, name);
+                paymentOption = new Payment.Card(cardNumber, expirationDate, name);
             }
-            case 3 -> {
-                int giftCardCode = paymentView.promptGiftCardCode();
+            case 2-> {
+                String giftCardCode = paymentView.promptGiftCardCode();
                 paymentOption = new Payment.GiftCard(giftCardCode);
             }
             default -> {

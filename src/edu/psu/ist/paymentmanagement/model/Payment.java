@@ -6,9 +6,8 @@ public class Payment {
     //don't mind this, I am testing out using sealed interfaces and records
     public sealed interface PaymentOption {
     }
-    public record Card(int cardNumber, int CVV, int expirationDate, String name) implements PaymentOption {}
-    public record GiftCard(int giftCardCode) implements PaymentOption {}
-    public record Cash(String currency) implements PaymentOption {}
+    public record Card(String cardNumber, int expirationDate, String name) implements PaymentOption {}
+    public record GiftCard(String giftCardCode) implements PaymentOption {}
 
     public  String paymentID;
     public  PaymentOption paymentOption;

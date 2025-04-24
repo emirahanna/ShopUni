@@ -1,27 +1,22 @@
 package edu.psu.ist.ordermanagement.model;
 
 import edu.psu.ist.paymentmanagement.model.Payment;
-import edu.psu.ist.productmanagement.model.Product;
 
 import java.util.Date;
-import java.util.Map;
 
 public class Order {
     private String orderID;
     private Payment payment;
     private double orderTotal;
     private Date orderDate;
-    private Map<Product, Integer>  cartContents;
     private OrderStatusManager orderStatusManager;
     private Shipping shippingDetails;
 
-    public Order(String orderID, Payment payment, double orderTotal, Date orderDate,
-                 Map<Product, Integer> cartContents, String address, Shipping.DeliveryOption deliveryOption) {
+    public Order(String orderID, Payment payment, double orderTotal, Date orderDate, String address, Shipping.DeliveryOption deliveryOption) {
         this.orderID = orderID;
         this.payment = payment;
         this.orderTotal = orderTotal;
         this.orderDate = orderDate;
-        this.cartContents = cartContents;
         this.orderStatusManager = new OrderStatusManager();
         this.shippingDetails = new Shipping(address, deliveryOption, orderDate);
     }
@@ -51,9 +46,6 @@ public class Order {
         return orderDate;
     }
 
-    public Map<Product, Integer>  getCartContents() {
-        return cartContents;
-    }
 
     public OrderStatusManager getOrderStatusManager() { return orderStatusManager;}
 

@@ -23,9 +23,9 @@ public class PaymentView {
         return scnr.next();
     }
 
-    public int promptCardNumber() {
+    public String promptCardNumber() {
         System.out.print("Enter card number: ");
-        return scnr.nextInt();
+        return scnr.next();
     }
 
     public int promptCVV() {
@@ -43,9 +43,9 @@ public class PaymentView {
         return scnr.next();
     }
 
-    public int promptGiftCardCode() {
+    public String promptGiftCardCode() {
         System.out.print("Enter gift card code: ");
-        return scnr.nextInt();
+        return scnr.next();
     }
 
     public double promptAmount() {

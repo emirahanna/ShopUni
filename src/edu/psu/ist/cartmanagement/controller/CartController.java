@@ -75,12 +75,12 @@ public class CartController implements CartObserver {
 
     public void attachActionListeners() {
         view.getEmptyCartButton().addActionListener(e -> {
-            if(cart.isEmpty()){
+            if (cart.isEmpty()) {
                 JOptionPane.showMessageDialog(view.getBasePanel(), "Cart is empty!");
             } else {
-                int confirmMessage = JOptionPane.showConfirmDialog(view.getBasePanel(), "Are you sure you want to empty your cart?", "Empty Cart",JOptionPane.YES_NO_OPTION);
+                int confirmMessage = JOptionPane.showConfirmDialog(view.getBasePanel(), "Are you sure you want to empty your cart?", "Empty Cart", JOptionPane.YES_NO_OPTION);
 
-                if(confirmMessage == JOptionPane.YES_OPTION){
+                if (confirmMessage == JOptionPane.YES_OPTION) {
                     cart.emptyCart();
                     update();
                     JOptionPane.showMessageDialog(view.getBasePanel(), "Cart has been emptied");
@@ -132,7 +132,15 @@ public class CartController implements CartObserver {
         view.repaintCartDisplay();
     }
 
-    public double getPrice(){
+    public String getCartContents() {
+        StringBuilder sb = new StringBuilder();
+        for (Product p : cart.getCartContents().keySet()) {
+            sb.append(String.format("%-30s %5d %5.2f\n", p.getTitle(), cart.getCartContents().get(p), p.getPrice()));
+        }
+        return sb.toString();
+    }
+
+    public double getPrice() {
         return cart.getTotalPrice();
     }
 }

@@ -7,58 +7,53 @@ import edu.psu.ist.paymentmanagement.view.PaymentView;
 
 public class PaymentController {
     private Payment paymentModel;
-    final PaymentView paymentView;
+    private PaymentView paymentView;
 
     public PaymentController() {
         this.paymentView = new PaymentView();
-        processPayment();
     }
-
-    public void processPayment() {
-        int choice = paymentView.promptPaymentOption();
-        Payment.PaymentOption paymentOption;
-
-        switch (choice) {
-            case 1 -> { // Cash Payment
-                String currency = paymentView.promptCurrency();
-                paymentOption = new Payment.Cash(currency);
-            }
-            case 2 -> { // Card Payment
-                int cardNumber = paymentView.promptCardNumber();
-                int CVV = paymentView.promptCVV();
-                int expirationDate = paymentView.promptExpirationDate();
-                String name = paymentView.promptCardHolderName();
-                paymentOption = new Payment.Card(cardNumber, CVV, expirationDate, name);
-            }
-            case 3 -> { // Gift Card Payment
-                int giftCardCode = paymentView.promptGiftCardCode();
-                paymentOption = new Payment.GiftCard(giftCardCode);
-            }
-            default -> {
-                paymentView.invalidInput();
-                return;
-            }
-        }
-        paymentModel = new Payment("RANDOM ID", paymentOption, paymentView.promptAmount(), new Date());
-
-
-        paymentView.paymentSuccessful();
-    }
-
-    /**
-     * Method to refund a payment
-     */
-    public boolean refundPayment() {
-        System.out.println("refundPayment called.");
-
-        if (paymentModel != null && paymentModel.isRefundable()) {
-            System.out.println("Refund processed.");
-            return true;
-        } else {
-            System.out.println("Refund denied.");
-            return false;
-        }
-    }
+//
+//    public void processPayment() {
+//        int choice = paymentView.promptPaymentOption();
+//        Payment.PaymentOption paymentOption;
+//
+//        switch (choice) {
+//            case 1 -> { // Card Payment
+//                String cardNumber = paymentView.promptCardNumber();
+//                int CVV = paymentView.promptCVV();
+//                int expirationDate = paymentView.promptExpirationDate();
+//                String name = paymentView.promptCardHolderName();
+//                paymentOption = new Payment.Card(cardNumber, CVV, expirationDate, name);
+//            }
+//            case 2 -> { // Gift Card Payment
+//                int giftCardCode = paymentView.promptGiftCardCode();
+//                paymentOption = new Payment.GiftCard(giftCardCode);
+//            }
+//            default -> {
+//                paymentView.invalidInput();
+//                return;
+//            }
+//        }
+//        paymentModel = new Payment("RANDOM ID", paymentOption, paymentView.promptAmount(), new Date());
+//
+//
+//        paymentView.paymentSuccessful();
+//    }
+//
+//    /**
+//     * Method to refund a payment
+//     */
+//    public boolean refundPayment() {
+//        System.out.println("refundPayment called.");
+//
+//        if (paymentModel != null && paymentModel.isRefundable()) {
+//            System.out.println("Refund processed.");
+//            return true;
+//        } else {
+//            System.out.println("Refund denied.");
+//            return false;
+//        }
+//    }
 
     /** 
      *  Method to show payment details
