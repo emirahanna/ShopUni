@@ -2,6 +2,7 @@ package edu.psu.ist.paymentmanagement.controller;
 
 import edu.psu.ist.cartmanagement.controller.CartController;
 import edu.psu.ist.ordermanagement.model.Order;
+import edu.psu.ist.ordermanagement.model.OrderIDGenerator;
 import edu.psu.ist.ordermanagement.model.Shipping;
 import edu.psu.ist.paymentmanagement.model.Payment;
 import edu.psu.ist.paymentmanagement.model.PaymentIDGenerator;
@@ -46,40 +47,49 @@ public class PaymentWizardController {
         try {
             view.getStepPanels().get(0).getNextButton().addActionListener(e -> {
                 Step1Panel panel = (Step1Panel) view.getStepPanels().get(0);
-                if (panel.getDebitCardRadioButton().isSelected() || panel.getDebitCardRadioButton().isSelected()) {
-                    createPayment(new Payment.Card(panel.getCardNumberTextField().getText(), Integer.parseInt(panel.getExpirationDateTextField().toString()), panel.getNameTextField().toString()));
-                } else {
-                    createPayment(new Payment.GiftCard(panel.getCardNumberTextField().getText()));
+                if (validateForm(panel.getNameTextField()) && validateForm(panel.getCardNumberTextField()) && validateForm(panel.getExpirationDateTextField())) {
+                    if (panel.getDebitCardRadioButton().isSelected() || panel.getDebitCardRadioButton().isSelected()) {
+                        createPayment(new Payment.Card(panel.getCardNumberTextField().getText(), Integer.parseInt(panel.getExpirationDateTextField().toString()), panel.getNameTextField().toString()));
+                    } else {
+                        createPayment(new Payment.GiftCard(panel.getCardNumberTextField().getText()));
+                    }
+                    nextStep();
                 }
-                nextStep();
+                else {
+                    JOptionPane.showMessageDialog(view, "Fill in all text fields");
+                }
             });
             view.getStepPanels().get(1).getNextButton().addActionListener(e -> {
                 Step2Panel panel = (Step2Panel) view.getStepPanels().get(1);
                 if (validateForm(panel.getNameTextField()) && validateForm(panel.getAddressTextField())) {
                     nextStep();
+                    if (panel.getPickupRadioButton().isSelected()) {
+                        createOrder(panel.getNameTextField().toString(), panel.getAddressTextField().toString(), Shipping.DeliveryOption.PICKUP);
+                    } else {
+                        createOrder(panel.getNameTextField().toString(), panel.getAddressTextField().toString(), Shipping.DeliveryOption.DELIVERY);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(view, "Fill in all text fields");
                 }
             });
-        }
-        catch (Exception e){
-            JOptionPane.showMessageDialog (view,"Please ensure the details are correct");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, "Please ensure the details are correct");
         }
     }
 
     private void attachRadioButtonListeners() {
-        Step1Panel panel = (Step1Panel) view.getStepPanels().get(0);
-        panel.getGiftCardRadioButton().addActionListener(e -> {
-            panel.toggleCardDisplay(false);
-            panel.toggleGiftCardDisplay(true);
+        Step1Panel step1Panel = (Step1Panel) view.getStepPanels().get(0);
+        step1Panel.getGiftCardRadioButton().addActionListener(e -> {
+            step1Panel.toggleCardDisplay(false);
+            step1Panel.toggleGiftCardDisplay(true);
         });
-        panel.getCreditCardRadioButton().addActionListener(e -> {
-            panel.toggleCardDisplay(true);
-            panel.toggleGiftCardDisplay(false);
+        step1Panel.getCreditCardRadioButton().addActionListener(e -> {
+            step1Panel.toggleCardDisplay(true);
+            step1Panel.toggleGiftCardDisplay(false);
         });
-        panel.getDebitCardRadioButton().addActionListener(e -> {
-            panel.toggleCardDisplay(true);
-            panel.toggleGiftCardDisplay(false);
+        step1Panel.getDebitCardRadioButton().addActionListener(e -> {
+            step1Panel.toggleCardDisplay(true);
+            step1Panel.toggleGiftCardDisplay(false);
         });
     }
 
@@ -103,7 +113,7 @@ public class PaymentWizardController {
     }
 
     private void createOrder(String name, String address, Shipping.DeliveryOption deliveryOption) {
-        order = new Order("",payment, cart.getPrice(), new Date(), address, deliveryOption);
+        order = new Order(OrderIDGenerator.createID() , payment, cart.getPrice(), new Date(), address, deliveryOption);
     }
 
     private boolean validateForm(JTextField textField) {

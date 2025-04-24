@@ -96,4 +96,12 @@ public class Step2Panel extends WizardStepPanel {
     public JButton getBackButton() {
         return backButton;
     }
+
+    public JRadioButton getDeliveryRadioButton() {
+        return deliveryRadioButton;
+    }
+
+    public JRadioButton getPickupRadioButton() {
+        return pickupRadioButton;
+    }
 }
