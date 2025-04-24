@@ -5,11 +5,11 @@ We are four Penn State students who intend to create a comprehensive storefront 
 
 M04-A03 Two Implemented Use Cases with Clean, Refactored Code: 
 
-| User ID | Name              | % Efforts in Assignment | Brief of Efforts in the Task Contribution                                                           |
-|---------|-------------------|-------------------------|-----------------------------------------------------------------------------------------------------|
-| nvl5303 | Nicole Leon       | %                       | Design Pattern for Individual Assignment was individual product pages, and helped create Login GUI. |
-| ezy5092 | Emira Hanna Yahya | %                       |                                                                                                     |
-| hmf5339 | Haley Fitzgerald  | %                       | Implemented ability to clear cart completely and delete products one by one from cart.              |
+| User ID | Name              | % Efforts in Assignment | Brief of Efforts in the Task Contribution                                                                                                                                                                                   |
+|---------|-------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| nvl5303 | Nicole Leon       | %                       |                                                                                                                                                                                                                             |
+| ezy5092 | Emira Hanna Yahya | %                       |                                                                                                                                                                                                                             |
+| hmf5339 | Haley Fitzgerald  | %                       | Implemented ability to clear cart completely and delete products one by one from cart. Made it so when you click buy now in cart it directs user to payment wizard. Implemented UI for Step 1 and Step 2 of Payment Wizard. |
 | hlt5125 | Heaven Thomas     | %                       |                                                                                            
 1. View Product Details ✅
 2. Add Product to Cart - working on
