@@ -3,14 +3,14 @@ package edu.psu.ist.paymentmanagement.controller;
 import edu.psu.ist.cartmanagement.controller.CartController;
 import edu.psu.ist.cartmanagement.model.CartSnapshot;
 import edu.psu.ist.ordermanagement.model.Order;
-import edu.psu.ist.ordermanagement.model.OrderIDGenerator;
 import edu.psu.ist.ordermanagement.model.Shipping;
 import edu.psu.ist.paymentmanagement.model.Payment;
+import edu.psu.ist.paymentmanagement.model.PaymentDAO;
 import edu.psu.ist.paymentmanagement.model.PaymentIDGenerator;
 import edu.psu.ist.paymentmanagement.view.*;
 
 import javax.swing.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PaymentWizardController {
     private int currentStep;
@@ -31,6 +31,7 @@ public class PaymentWizardController {
         attachBackButtonListeners();
         attachRadioButtonListeners();
     }
+
 
     private void attachBackButtonListeners() {
         for (WizardStepPanel panel : view.getStepPanels()) {
@@ -123,16 +124,21 @@ public class PaymentWizardController {
     }
 
     private String generateOrderLabel(){
-        String summary = order.generateOrderSummary();
+        String summary = order.generateOrderSummary() + "\n" + payment.generatesReceipt();
         return "<html>" + summary.replaceAll("\n", "<br>") + "</html>";
     }
 
     private void createPayment(Payment.PaymentOption paymentOption) {
-        payment = new Payment(PaymentIDGenerator.createID(), paymentOption, cart.getTotal(), new Date());
+        payment = new Payment(PaymentIDGenerator.createID(), paymentOption, cart.getTotal(),  LocalDate.now());
+        PaymentDAO.insertPayment(payment);
     }
 
     private void createOrder(String name, String address, Shipping.DeliveryOption deliveryOption) {
-        order = new Order(payment.getPaymentID(), new Date(),cart, address, deliveryOption);
+        order = new Order(payment.getPaymentID(),
+                LocalDate.now(),
+                cart,
+                address,
+                deliveryOption);
     }
 
     //  Helpers Please work....please....I need this to work! I will give my first 2 born, 2 childrens, please!

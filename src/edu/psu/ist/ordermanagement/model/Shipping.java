@@ -1,25 +1,34 @@
 package edu.psu.ist.ordermanagement.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Shipping {
     public enum DeliveryOption {PICKUP, DELIVERY}
     private DeliveryOption deliveryOption;
-    private Date orderDate;
+    private LocalDate orderDate;
     private String address;
+    private String ID;
+    private String orderID;
 
-    public Shipping(String address, DeliveryOption deliveryOption, Date orderDate) {
+    public Shipping(String ID, String orderID, String address, DeliveryOption deliveryOption, LocalDate orderDate) {
+        this.ID = ID;
+        this.orderID = orderID;
         this.address = address;
         this.deliveryOption = deliveryOption;
         this.orderDate = orderDate;
     }
 
-    public Date estimateDeliveryDate() {
+    public LocalDate estimateDeliveryDate() {
         if (deliveryOption == DeliveryOption.DELIVERY) {
-            return new Date(orderDate.getTime() + 99999999); // figure out how to add to Date
+                return orderDate.plusDays(15);
         }
         //can also estimate delivery based on distance
         return orderDate; // Pickup orders are available immediately
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public String getAddress() {

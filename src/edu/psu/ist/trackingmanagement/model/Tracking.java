@@ -1,15 +1,16 @@
 package edu.psu.ist.trackingmanagement.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Tracking {
     final String orderID;
-    private Date arrivalDate;
+    private LocalDate arrivalDate;
     private String location;
     final String status;
 
 
-    public Tracking(String orderID, Date arrivalDate, String location, String status) {
+    public Tracking(String orderID, LocalDate arrivalDate, String location, String status) {
         this.orderID = orderID;
         this.arrivalDate = arrivalDate;
         this.location = location;
@@ -31,7 +32,7 @@ public class Tracking {
         this.location = location;
     }
 
-    public void updateDate(Date arrivalDate) {
+    public void updateDate(LocalDate arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 
@@ -39,7 +40,7 @@ public class Tracking {
         return orderID;
     }
 
-    public Date getArrivalDate() {
+    public LocalDate getArrivalDate() {
         return arrivalDate;
     }
 

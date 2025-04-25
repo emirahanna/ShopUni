@@ -1,4 +1,5 @@
 package edu.psu.ist.paymentmanagement.controller;
+import java.time.LocalDate;
 import java.util.Date;
 
 import edu.psu.ist.paymentmanagement.model.Payment;
@@ -36,7 +37,7 @@ public class PaymentFacade {
         }
 
         double amount = paymentView.promptAmount();
-        paymentModel = new Payment("PAY-" + System.currentTimeMillis(), paymentOption, amount, new Date());
+        paymentModel = new Payment("PAY-" + System.currentTimeMillis(), paymentOption, amount, LocalDate.now());
 
         paymentView.paymentSuccessful();
         paymentView.printReceipt(paymentModel.generatesReceipt());

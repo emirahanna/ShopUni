@@ -1,5 +1,6 @@
 package edu.psu.ist.ordermanagement.controller;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import edu.psu.ist.cartmanagement.model.CartManager;
@@ -38,7 +39,7 @@ public class OrderController {
             default -> null;
             };
 
-        this.orderModel = new Order(paymentController.getPaymentModel().getPaymentID(), new Date(), cart , address, deliveryOption);
+        this.orderModel = new Order(paymentController.getPaymentModel().getPaymentID(), LocalDate.now(), cart , address, deliveryOption);
 
         //establish chain of responsibility and handlers
         ValidationHandler validationHandler = new ValidationHandler();

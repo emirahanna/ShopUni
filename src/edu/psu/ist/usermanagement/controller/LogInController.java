@@ -63,7 +63,6 @@ public class LogInController {
         try {
             UserRole role = user.verifyUser();
             if (role == UserRole.BUYER) {
-                System.out.println("masuk");
                 authenticatedUser = user;
                 new ProductListingController();
                 logInView.setVisible(false);

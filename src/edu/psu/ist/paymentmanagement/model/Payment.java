@@ -2,6 +2,7 @@ package edu.psu.ist.paymentmanagement.model;
 
 import edu.psu.ist.usermanagement.model.UserSession;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Payment {
@@ -26,10 +27,10 @@ public class Payment {
     private String paymentID;
     private PaymentOption paymentOption;
     private double amountPaid;
-    private Date transactionDate;
+    private LocalDate transactionDate;
     private String userID;
 
-    public Payment(String paymentID, PaymentOption paymentOption, double amountPaid, Date transactionDate) {
+    public Payment(String paymentID, PaymentOption paymentOption, double amountPaid, LocalDate transactionDate) {
         this.paymentID = paymentID;
         this.paymentOption = paymentOption;
         this.amountPaid = amountPaid;
@@ -69,7 +70,7 @@ public class Payment {
         return amountPaid;
     }
 
-    public Date getTransactionDate() {
+    public LocalDate getTransactionDate() {
         return transactionDate;
     }
 

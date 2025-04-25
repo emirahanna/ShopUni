@@ -1,35 +1,47 @@
 package edu.psu.ist.ordermanagement.model;
 
 import edu.psu.ist.cartmanagement.model.CartSnapshot;
-import edu.psu.ist.paymentmanagement.model.Payment;
+import edu.psu.ist.productmanagement.model.Product;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Map;
 
 public class Order {
     private String orderID;
     private String paymentID;
     private double orderTotal;
-    private Date orderDate;
+    private LocalDate orderDate;
     private CartSnapshot cartSnapshot;
     private OrderStatusManager orderStatusManager;
     private Shipping shippingDetails;
 
-    public Order(String paymentID, Date orderDate, CartSnapshot cartSnapshot, String address, Shipping.DeliveryOption deliveryOption) {
+    public Order(String paymentID, LocalDate orderDate, CartSnapshot cartSnapshot, String address, Shipping.DeliveryOption deliveryOption) {
         this.orderID = OrderIDGenerator.createID();
         this.paymentID = paymentID;
         this.cartSnapshot = cartSnapshot;
+        this.orderTotal = cartSnapshot.getTotal();
         this.orderDate = orderDate;
         this.orderStatusManager = new OrderStatusManager();
-        this.shippingDetails = new Shipping(address, deliveryOption, orderDate);
+        this.shippingDetails = new Shipping(ShippingIDGenerator.createID() , orderID,address, deliveryOption, orderDate);
     }
 
     public String generateOrderSummary() {
-        return "Order ID: " + orderID + "\n" +
-                "Order Total: $" + orderTotal + "\n" +
-                "Status: " + orderStatusManager.getOrderStatus() + "\n" +
-                "Delivery: " + shippingDetails.getDeliveryOption() + " to " + shippingDetails.getAddress() + "\n" +
-                "Estimated Delivery: " + shippingDetails.estimateDeliveryDate();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Order ID: ").append(orderID).append("\n");
+        sb.append("Order Total: $").append(orderTotal).append("\n");
+        sb.append("Status: ").append(orderStatusManager.getOrderStatus()).append("\n");
+        sb.append("Delivery: ").append(shippingDetails.getDeliveryOption()).append(" to ").append(shippingDetails.getAddress()).append("\n");
+        sb.append("Estimated Delivery: ").append(shippingDetails.estimateDeliveryDate()).append("\n");
+        sb.append("\n");
+        sb.append("Order Summary:").append("\n");
+        for (Product p : cartSnapshot.getItems().keySet()) {
+            sb.append(String.format("%-40sx%-2d\n",p, cartSnapshot.getItems().get(p)));
+        }
+        sb.append("\n");
+        sb.append("\n");
+        sb.append("------------------------------------------------");
+
+        return sb.toString();
     }
 
 
@@ -42,19 +54,24 @@ public class Order {
     }
 
     public double getOrderTotal() {
-        return cartSnapshot.getTotal();
+        return orderTotal;
     }
+
     public Map getCartContents() {
         return cartSnapshot.getItems();
     }
 
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
 
-    public OrderStatusManager getOrderStatusManager() { return orderStatusManager;}
+    public OrderStatusManager getOrderStatusManager() {
+        return orderStatusManager;
+    }
 
-    public Shipping getShippingDetails() { return shippingDetails; }
+    public Shipping getShippingDetails() {
+        return shippingDetails;
+    }
 }
 

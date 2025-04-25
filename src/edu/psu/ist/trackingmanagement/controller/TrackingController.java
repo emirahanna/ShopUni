@@ -4,6 +4,7 @@ import edu.psu.ist.ordermanagement.model.Order;
 import edu.psu.ist.trackingmanagement.model.Tracking;
 import edu.psu.ist.trackingmanagement.view.TrackingView;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -17,13 +18,8 @@ public class TrackingController {
         showTracking();
     }
 
-    private Date updateArrivalDate(Order order){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(order.getOrderDate());
-
-        // Add 5 days
-        calendar.add(Calendar.DAY_OF_MONTH, 15);
-        return calendar.getTime();
+    private LocalDate updateArrivalDate(Order order) {
+        return order.getOrderDate().plusDays(15);
     }
     public void showTracking() {
         String trackingNumber = view.showTracking();

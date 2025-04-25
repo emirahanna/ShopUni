@@ -7,8 +7,8 @@ import java.sql.*;
 public class TestHarness {
     public static void main(String[] args) {
         //testUserDBConnection();
-        //testFullFlow();
-        testProductListing();
+        testFullFlow();
+        //testProductListing();
     }
 
 
