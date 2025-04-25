@@ -2,11 +2,9 @@ package edu.psu.ist.cartmanagement.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Date;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.cartmanagement.util.CartObserver;
@@ -27,7 +25,7 @@ public class CartController implements CartObserver {
         attachActionListeners();
         cart.addObserver(this);
         update(); // Populate view at start
-        //manageCart();
+
     }
 
 
@@ -38,39 +36,15 @@ public class CartController implements CartObserver {
         update();
     }
 
-    private void removeProduct() {
-        view.removeProductPrompt();
-        String productName = view.getProductName();
-        for (Product p : cart.getItems().keySet()) {
-            if (p.getTitle().equalsIgnoreCase(productName)) {
-                cart.removeProduct(p);
-                view.productWasRemoved(p.getTitle());
-                return;
-            }
-        }
-        view.productNotFound();
-    }
-
     private void buyCart() {
-        if (cart.getItems().isEmpty()) {
-            view.cartEmptyReminder();
-            return;
+        if (cart.isEmpty()) {
+            JOptionPane.showMessageDialog(view.getBasePanel(), "Cart is empty! Add products before purchasing.");
+        } else {
+            new PaymentWizardController(cart);
+            view.setVisible(false);
         }
-        cart.emptyCart();  // Simulate purchase
     }
 
-    //you can test the cart page here
-
-    public static void main(String[] args) {
-        //ensure the code runs on time, without invoke later, it had UI bugs
-        SwingUtilities.invokeLater(() -> {
-            CartController crtl = new CartController();
-            crtl.addProduct(new Product("Levi Pants", "Effortlessly chic, this draped front top is crafted from a MicroModal blend offering a soft, luxurious feel with a hint of stretch.\nWith a slim fit and high neckline, it features gathered detailing across the front creating a flattering, asymmetrical silhouette.\nPair with skirts or tailored trousers for a sophisticated take.", "20342391331", "imageID", "sellerID", new Date(), "Tops", 40.0));
-            crtl.addProduct(new Product("Nike Hoodie", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", 30.0));
-            crtl.addProduct(new Product("Zara Pants", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance.\nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", 60.0));
-            crtl.addProduct(new Product("Lorem Ipsum", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", 100.0));
-        });
-    }
 
     public void attachActionListeners() {
         view.getEmptyCartButton().addActionListener(e -> {
@@ -87,12 +61,7 @@ public class CartController implements CartObserver {
             }
         });
         view.getBuyNowButton().addActionListener(e -> {
-            if (cart.isEmpty()) {
-                JOptionPane.showMessageDialog(view.getBasePanel(), "Cart is empty! Add products before purchasing.");
-            } else {
-                new PaymentWizardController(cart);
-                view.setVisible(false);
-            }
+            buyCart();
         });
         view.getBackButton().addActionListener(e -> {
             new ProductListingController();
@@ -137,10 +106,6 @@ public class CartController implements CartObserver {
             sb.append(String.format("%-30s %5d %5.2f\n", p.getTitle(), cart.getItems().get(p), p.getPrice()));
         }
         return sb.toString();
-    }
-
-    public double getPrice() {
-        return cart.getTotal();
     }
 }
 

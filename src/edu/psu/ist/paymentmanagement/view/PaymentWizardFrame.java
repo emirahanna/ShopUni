@@ -18,7 +18,7 @@ public class PaymentWizardFrame extends JFrame {
     private void setView() {
         setTitle("ShopUni - Payment Wizard");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 300);
+        setSize(500, 800);
 
         setVisible(true);
     }

@@ -31,6 +31,14 @@ public class Shipping {
         return ID;
     }
 
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+
+    public String getOrderID() {
+        return orderID;
+    }
+
     public String getAddress() {
         return address;
     }

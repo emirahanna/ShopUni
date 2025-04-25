@@ -4,7 +4,6 @@ import edu.psu.ist.cartmanagement.model.CartSnapshot;
 import edu.psu.ist.productmanagement.model.Product;
 
 import java.time.LocalDate;
-import java.util.Map;
 
 public class Order {
     private String orderID;
@@ -22,7 +21,8 @@ public class Order {
         this.orderTotal = cartSnapshot.getTotal();
         this.orderDate = orderDate;
         this.orderStatusManager = new OrderStatusManager();
-        this.shippingDetails = new Shipping(ShippingIDGenerator.createID() , orderID,address, deliveryOption, orderDate);
+        this.shippingDetails = new Shipping(ShippingIDGenerator.createID(), orderID, address, deliveryOption, orderDate);
+        ShippingDAO.insertShipping(shippingDetails);
     }
 
     public String generateOrderSummary() {
@@ -31,15 +31,12 @@ public class Order {
         sb.append("Order Total: $").append(orderTotal).append("\n");
         sb.append("Status: ").append(orderStatusManager.getOrderStatus()).append("\n");
         sb.append("Delivery: ").append(shippingDetails.getDeliveryOption()).append(" to ").append(shippingDetails.getAddress()).append("\n");
-        sb.append("Estimated Delivery: ").append(shippingDetails.estimateDeliveryDate()).append("\n");
-        sb.append("\n");
+        sb.append("Estimated Delivery: ").append(shippingDetails.estimateDeliveryDate()).append("\n").append("\n");
         sb.append("Order Summary:").append("\n");
         for (Product p : cartSnapshot.getItems().keySet()) {
-            sb.append(String.format("%-40sx%-2d\n",p, cartSnapshot.getItems().get(p)));
+            sb.append(String.format("%-40s     x%-2d\n", p, cartSnapshot.getItems().get(p)));
         }
-        sb.append("\n");
-        sb.append("\n");
-        sb.append("------------------------------------------------");
+        sb.append("\n").append("\n").append("-------------------------------------------------------------------------------").append("\n");
 
         return sb.toString();
     }
@@ -57,14 +54,9 @@ public class Order {
         return orderTotal;
     }
 
-    public Map getCartContents() {
-        return cartSnapshot.getItems();
-    }
-
     public LocalDate getOrderDate() {
         return orderDate;
     }
-
 
     public OrderStatusManager getOrderStatusManager() {
         return orderStatusManager;

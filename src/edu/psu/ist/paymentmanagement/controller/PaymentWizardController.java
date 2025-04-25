@@ -3,6 +3,7 @@ package edu.psu.ist.paymentmanagement.controller;
 import edu.psu.ist.cartmanagement.controller.CartController;
 import edu.psu.ist.cartmanagement.model.CartSnapshot;
 import edu.psu.ist.ordermanagement.model.Order;
+import edu.psu.ist.ordermanagement.model.OrderDAO;
 import edu.psu.ist.ordermanagement.model.Shipping;
 import edu.psu.ist.paymentmanagement.model.Payment;
 import edu.psu.ist.paymentmanagement.model.PaymentDAO;
@@ -139,6 +140,8 @@ public class PaymentWizardController {
                 cart,
                 address,
                 deliveryOption);
+        OrderDAO.insertOrder(order);
+
     }
 
     //  Helpers Please work....please....I need this to work! I will give my first 2 born, 2 childrens, please!

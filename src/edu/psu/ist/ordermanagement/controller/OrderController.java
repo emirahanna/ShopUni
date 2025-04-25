@@ -31,7 +31,6 @@ public class OrderController {
     }
 
     public void createOrder(CartManager cart){
-        orderDetailView.promptFillInOrder();
         String address = orderDetailView.promptAddress();
         Shipping.DeliveryOption deliveryOption = switch (orderDetailView.promptDelivery()){
             case 1 -> Shipping.DeliveryOption.DELIVERY;
