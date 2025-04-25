@@ -123,7 +123,8 @@ public class PaymentWizardController {
     }
 
     private String generateOrderLabel(){
-        return order.generateOrderSummary();
+        String summary = order.generateOrderSummary();
+        return "<html>" + summary.replaceAll("\n", "<br>") + "</html>";
     }
 
     private void createPayment(Payment.PaymentOption paymentOption) {

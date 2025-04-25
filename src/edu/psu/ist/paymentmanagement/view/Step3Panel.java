@@ -12,6 +12,7 @@ public class Step3Panel extends WizardStepPanel {
     private JPanel headerPanel;
     private JPanel orderPanel;
     private JPanel buttonPanel;
+
     public Step3Panel() {
         setUpHeaderPanel();
         setUpOrderPanel();
@@ -35,8 +36,6 @@ public class Step3Panel extends WizardStepPanel {
         headerPanel.add(instructionLabel);
         add(orderPanel, BorderLayout.CENTER);
     }
-
-
 
     private void setUpButtonPanel(){
         buttonPanel = new JPanel();
