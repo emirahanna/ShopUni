@@ -11,8 +11,13 @@ public class Step1Panel extends WizardStepPanel {
     private JTextField cardNumberTextField;
     private JTextField expirationDateTextField;
     private JTextField nameTextField;
+    private JTextField giftCardNumberTextField;
     private JLabel step1BreadCrumb;
     private JLabel instructionLabel;
+    private JLabel cardNumLabel;
+    private JLabel nameLabel;
+    private JLabel expDateLabel;
+    private JLabel cardNumLabelForGiftCard;
     private JButton backButton;
     private JButton nextButton;
     private JPanel contentPanel;
@@ -24,9 +29,16 @@ public class Step1Panel extends WizardStepPanel {
     private ButtonGroup paymentMethodButtonGroup;
 
     public Step1Panel() {
+        createTextFields();
         setUpHeaderPanel();
         setUpContentPanel();
         setUpFrame();
+    }
+
+    private void createTextFields(){
+        cardNumberTextField = new JTextField(15);
+        nameTextField = new JTextField(15);
+        expirationDateTextField = new JTextField(15);
     }
 
     private void setUpFrame() {
@@ -72,16 +84,16 @@ public class Step1Panel extends WizardStepPanel {
         cardInfoPanel.setBorder(BorderFactory.createTitledBorder("Card Information"));
         cardInfoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        cardInfoPanel.add(new JLabel("Card Number"));
-        cardNumberTextField = new JTextField(15);
+        cardNumLabel = new JLabel("Card Number");
+        cardInfoPanel.add(cardNumLabel);
         cardInfoPanel.add(cardNumberTextField);
 
-        cardInfoPanel.add(new JLabel("Name"));
-        nameTextField = new JTextField(15);
+        nameLabel = new JLabel("Name");
+        cardInfoPanel.add(nameLabel);
         cardInfoPanel.add(nameTextField);
 
-        cardInfoPanel.add(new JLabel("Expiration Date (mmyy)"));
-        expirationDateTextField = new JTextField(15);
+        expDateLabel = new JLabel("Expiration Date (mmyy)");
+        cardInfoPanel.add(expDateLabel);
         cardInfoPanel.add(expirationDateTextField);
         contentPanel.add(cardInfoPanel);
         cardInfoPanel.setVisible(true);
@@ -93,9 +105,10 @@ public class Step1Panel extends WizardStepPanel {
         giftCardInfoPanel.setBorder(BorderFactory.createTitledBorder("Card Information"));
         giftCardInfoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        giftCardInfoPanel.add(new JLabel("Card Number"));
-        cardNumberTextField = new JTextField(15);
-        giftCardInfoPanel.add(cardNumberTextField);
+         cardNumLabelForGiftCard = new JLabel("Gift Card Number");
+         giftCardNumberTextField = new JTextField(15);
+        giftCardInfoPanel.add(cardNumLabelForGiftCard);
+        giftCardInfoPanel.add(giftCardNumberTextField);
         contentPanel.add(giftCardInfoPanel);
         giftCardInfoPanel.setVisible(true);
     }
@@ -173,5 +186,7 @@ public class Step1Panel extends WizardStepPanel {
         return nextButton;
     }
 
-
+    public JTextField getGiftCardNumberTextField() {
+        return giftCardNumberTextField;
+    }
 }

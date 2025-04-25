@@ -6,10 +6,7 @@ import edu.psu.ist.ordermanagement.model.OrderIDGenerator;
 import edu.psu.ist.ordermanagement.model.Shipping;
 import edu.psu.ist.paymentmanagement.model.Payment;
 import edu.psu.ist.paymentmanagement.model.PaymentIDGenerator;
-import edu.psu.ist.paymentmanagement.view.PaymentWizardFrame;
-import edu.psu.ist.paymentmanagement.view.Step1Panel;
-import edu.psu.ist.paymentmanagement.view.Step2Panel;
-import edu.psu.ist.paymentmanagement.view.WizardStepPanel;
+import edu.psu.ist.paymentmanagement.view.*;
 
 import javax.swing.*;
 import java.util.Date;
@@ -20,7 +17,6 @@ public class PaymentWizardController {
     private CartController cart;
     private Payment payment;
     private Order order;
-
 
     public PaymentWizardController(CartController cart) {
         currentStep = 0;
@@ -44,55 +40,70 @@ public class PaymentWizardController {
     }
 
     private void attachNextButtonListeners() {
-        try {
-            view.getStepPanels().get(0).getNextButton().addActionListener(e -> {
-                Step1Panel panel = (Step1Panel) view.getStepPanels().get(0);
-                if (validateForm(panel.getNameTextField()) && validateForm(panel.getCardNumberTextField()) && validateForm(panel.getExpirationDateTextField())) {
-                    if (panel.getDebitCardRadioButton().isSelected() || panel.getDebitCardRadioButton().isSelected()) {
-                        createPayment(new Payment.Card(panel.getCardNumberTextField().getText(), Integer.parseInt(panel.getExpirationDateTextField().toString()), panel.getNameTextField().toString()));
-                    } else {
-                        createPayment(new Payment.GiftCard(panel.getCardNumberTextField().getText()));
-                    }
-                    nextStep();
-                }
-                else {
-                    JOptionPane.showMessageDialog(view, "Fill in all text fields");
-                }
-            });
-            view.getStepPanels().get(1).getNextButton().addActionListener(e -> {
-                Step2Panel panel = (Step2Panel) view.getStepPanels().get(1);
-                if (validateForm(panel.getNameTextField()) && validateForm(panel.getAddressTextField())) {
-                    nextStep();
-                    if (panel.getPickupRadioButton().isSelected()) {
-                        createOrder(panel.getNameTextField().toString(), panel.getAddressTextField().toString(), Shipping.DeliveryOption.PICKUP);
-                    } else {
-                        createOrder(panel.getNameTextField().toString(), panel.getAddressTextField().toString(), Shipping.DeliveryOption.DELIVERY);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(view, "Fill in all text fields");
-                }
-            });
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(view, "Please ensure the details are correct");
+        Step1Panel step1 = (Step1Panel) view.getStepPanels().get(0);
+        Step2Panel step2 = (Step2Panel) view.getStepPanels().get(1);
+
+        step1.getNextButton().addActionListener(e -> handleStep1Next(step1));
+        step2.getNextButton().addActionListener(e -> handleStep2Next(step2));
+    }
+
+    private void handleStep1Next(Step1Panel panel) {
+        if (panel.getCreditCardRadioButton().isSelected() || panel.getDebitCardRadioButton().isSelected()) {
+            if (validateFields(panel, panel.getCardNumberTextField(), panel.getExpirationDateTextField(), panel.getNameTextField())) {
+                Integer expDate = parseInteger(panel, panel.getExpirationDateTextField().getText(), "Expiration Date");
+                if (expDate == null) return;
+
+                createPayment(new Payment.Card(
+                        panel.getCardNumberTextField().getText().trim(),
+                        expDate,
+                        panel.getNameTextField().getText().trim()
+                ));
+                nextStep();
+            }
+        } else if (panel.getGiftCardRadioButton().isSelected()) {
+            if (validateFields(panel, panel.getGiftCardNumberTextField())) {
+                createPayment(new Payment.GiftCard(
+                        panel.getGiftCardNumberTextField().getText().trim()
+                ));
+                nextStep();
+            }
+        } else {
+            JOptionPane.showMessageDialog(panel, "Please select a payment method.");
+        }
+    }
+
+    private void handleStep2Next(Step2Panel panel) {
+        if (validateFields(panel, panel.getNameTextField(), panel.getAddressTextField())) {
+            Shipping.DeliveryOption option = panel.getPickupRadioButton().isSelected()
+                    ? Shipping.DeliveryOption.PICKUP
+                    : Shipping.DeliveryOption.DELIVERY;
+
+            createOrder(
+                    panel.getNameTextField().getText().trim(),
+                    panel.getAddressTextField().getText().trim(),
+                    option
+            );
+            nextStep();
+            Step3Panel step3Panel = (Step3Panel) view.getStepPanels().get(2);
+            step3Panel.getOrderLabel().setText(generateOrderLabel());
         }
     }
 
     private void attachRadioButtonListeners() {
-        Step1Panel step1Panel = (Step1Panel) view.getStepPanels().get(0);
-        step1Panel.getGiftCardRadioButton().addActionListener(e -> {
-            step1Panel.toggleCardDisplay(false);
-            step1Panel.toggleGiftCardDisplay(true);
+        Step1Panel panel = (Step1Panel) view.getStepPanels().get(0);
+        panel.getGiftCardRadioButton().addActionListener(e -> {
+            panel.toggleCardDisplay(false);
+            panel.toggleGiftCardDisplay(true);
         });
-        step1Panel.getCreditCardRadioButton().addActionListener(e -> {
-            step1Panel.toggleCardDisplay(true);
-            step1Panel.toggleGiftCardDisplay(false);
+        panel.getCreditCardRadioButton().addActionListener(e -> {
+            panel.toggleCardDisplay(true);
+            panel.toggleGiftCardDisplay(false);
         });
-        step1Panel.getDebitCardRadioButton().addActionListener(e -> {
-            step1Panel.toggleCardDisplay(true);
-            step1Panel.toggleGiftCardDisplay(false);
+        panel.getDebitCardRadioButton().addActionListener(e -> {
+            panel.toggleCardDisplay(true);
+            panel.toggleGiftCardDisplay(false);
         });
     }
-
 
     public void nextStep() {
         currentStep++;
@@ -104,8 +115,12 @@ public class PaymentWizardController {
             currentStep--;
             view.repaintPreviousStep();
         } else {
-            new CartController();
+            new CartController(); // Go back to cart
         }
+    }
+
+    private String generateOrderLabel(){
+        return order.generateOrderSummary();
     }
 
     private void createPayment(Payment.PaymentOption paymentOption) {
@@ -113,10 +128,27 @@ public class PaymentWizardController {
     }
 
     private void createOrder(String name, String address, Shipping.DeliveryOption deliveryOption) {
-        order = new Order(OrderIDGenerator.createID() , payment, cart.getPrice(), new Date(), address, deliveryOption);
+        order = new Order(OrderIDGenerator.createID(), payment, cart.getPrice(), new Date(), address, deliveryOption);
     }
 
-    private boolean validateForm(JTextField textField) {
-        return !textField.getText().isEmpty();
+    //  Helpers Please
+
+    private boolean validateFields(JComponent parent, JTextField... fields) { //helps to validate n number of fields, yay
+        for (JTextField field : fields) {
+            if (field.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(parent, "Please fill in all required fields.");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Integer parseInteger(JComponent parent, String input, String fieldName) {
+        try {
+            return Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(parent, fieldName + " must be a valid number.");
+            return null;
+        }
     }
 }

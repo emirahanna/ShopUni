@@ -37,7 +37,6 @@ public class Step2Panel extends WizardStepPanel {
         headerPanel.add(new JLabel("Step 2: Enter Payment Details"));
         headerPanel.add(nextButton);
         basePanel.add(headerPanel, BorderLayout.NORTH);
-
     }
 
     private void setUpDeliveryOptionPanel(){
