@@ -38,7 +38,7 @@ public class OrderController {
             default -> null;
             };
 
-        this.orderModel = new Order("RANDOM ID", paymentController.getPaymentModel(), cart.getTotalPrice(), new Date(), address, deliveryOption);
+        this.orderModel = new Order(paymentController.getPaymentModel().getPaymentID(), new Date(), cart , address, deliveryOption);
 
         //establish chain of responsibility and handlers
         ValidationHandler validationHandler = new ValidationHandler();

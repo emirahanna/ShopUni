@@ -13,7 +13,7 @@ import edu.psu.ist.productmanagement.model.Product;
 /**
  * Class that emulates the behavior of an actual cart
  */
-public class CartManager implements CartSubject {
+public class CartManager implements CartSubject, CartSnapshot {
     private double totalPrice;
     private final Map<Product, Integer> cartContents;
     private final List<CartObserver> observers = new ArrayList<>();
@@ -82,12 +82,11 @@ public class CartManager implements CartSubject {
         totalPrice += price;
     }
 
-    public double getTotalPrice() {
+    public double getTotal() {
         return totalPrice;
     }
 
-
-    public Map<Product, Integer> getCartContents() {
+    public Map<Product, Integer> getItems() {
         return Collections.unmodifiableMap(cartContents); //added security, ensures map isn't exposed to modification
     }
 

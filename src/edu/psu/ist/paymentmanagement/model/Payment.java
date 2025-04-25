@@ -1,24 +1,40 @@
 package edu.psu.ist.paymentmanagement.model;
 
+import edu.psu.ist.usermanagement.model.UserSession;
+
 import java.util.Date;
 
 public class Payment {
     //don't mind this, I am testing out using sealed interfaces and records
     public sealed interface PaymentOption {
     }
-    public record Card(String cardNumber, int expirationDate, String name) implements PaymentOption {}
-    public record GiftCard(String giftCardCode) implements PaymentOption {}
 
-    public  String paymentID;
-    public  PaymentOption paymentOption;
-    public  double amountPaid;
-    public  Date transactionDate;
+    public record Card(String cardNumber, int expirationDate, String name) implements PaymentOption {
+        @Override
+        public String toString() {
+            return getClass().getSimpleName();
+        }
+    }
+
+    public record GiftCard(String giftCardCode) implements PaymentOption {
+        @Override
+        public String toString() {
+            return getClass().getSimpleName();
+        }
+    }
+
+    private String paymentID;
+    private PaymentOption paymentOption;
+    private double amountPaid;
+    private Date transactionDate;
+    private String userID;
 
     public Payment(String paymentID, PaymentOption paymentOption, double amountPaid, Date transactionDate) {
         this.paymentID = paymentID;
         this.paymentOption = paymentOption;
         this.amountPaid = amountPaid;
         this.transactionDate = transactionDate;
+        this.userID = UserSession.getInstance().getUserID();
     }
 
     public void refundPayment() {
@@ -38,9 +54,23 @@ public class Payment {
     public String generatesReceipt() {
         System.out.println("generatesReceipt method called.");
 
-        return "Receipt:\nPayment ID: " + paymentID +
-                "\nAmount Paid: $" + amountPaid +
-                "\nDate: " + transactionDate +
-                "\nPayment Method: " + paymentOption;
+        return "Receipt:\nPayment ID: " + paymentID + "\nAmount Paid: $" + amountPaid + "\nDate: " + transactionDate + "\nPayment Method: " + paymentOption;
     }
+
+    public PaymentOption getPaymentOption() {
+        return paymentOption;
+    }
+
+    public String getPaymentID() {
+        return paymentID;
+    }
+
+    public double getAmountPaid() {
+        return amountPaid;
+    }
+
+    public Date getTransactionDate() {
+        return transactionDate;
+    }
+
 }

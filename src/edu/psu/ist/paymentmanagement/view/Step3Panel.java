@@ -14,9 +14,8 @@ public class Step3Panel extends WizardStepPanel {
     private JPanel buttonPanel;
     public Step3Panel() {
         setUpHeaderPanel();
-        orderLabel = new JLabel();
-
-        add(orderLabel);
+        setUpOrderPanel();
+        setUpButtonPanel();
     }
 
     private void setUpHeaderPanel(){
@@ -41,7 +40,7 @@ public class Step3Panel extends WizardStepPanel {
 
     private void setUpButtonPanel(){
         buttonPanel = new JPanel();
-        backButton = new JButton("Confirm Order");
+        printReceiptButton = new JButton("Confirm Order");
         add(buttonPanel, BorderLayout.SOUTH);
     }
 

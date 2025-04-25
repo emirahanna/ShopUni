@@ -52,15 +52,15 @@ public class PaymentFacade {
     }
 
     public void savePaymentMethod(String userID, String billingAddress) {
-        if (paymentModel != null && paymentModel.paymentOption != null) {
-            savedPayment = new SavedPayment(userID, paymentModel.paymentOption, billingAddress);
+        if (paymentModel != null && paymentModel.getPaymentOption() != null) {
+            savedPayment = new SavedPayment(userID, paymentModel.getPaymentOption(), billingAddress);
             savedPayment.savePaymentMethod();
         }
     }
 
     public void updateSavedPayment(String billingAddress) {
         if (savedPayment != null && paymentModel != null) {
-            savedPayment.updatePaymentMethod(paymentModel.paymentOption, billingAddress);
+            savedPayment.updatePaymentMethod(paymentModel.getPaymentOption(), billingAddress);
         }
     }
 }

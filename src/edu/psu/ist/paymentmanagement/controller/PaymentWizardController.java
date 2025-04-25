@@ -1,6 +1,7 @@
 package edu.psu.ist.paymentmanagement.controller;
 
 import edu.psu.ist.cartmanagement.controller.CartController;
+import edu.psu.ist.cartmanagement.model.CartSnapshot;
 import edu.psu.ist.ordermanagement.model.Order;
 import edu.psu.ist.ordermanagement.model.OrderIDGenerator;
 import edu.psu.ist.ordermanagement.model.Shipping;
@@ -14,11 +15,11 @@ import java.util.Date;
 public class PaymentWizardController {
     private int currentStep;
     private PaymentWizardFrame view;
-    private CartController cart;
+    private CartSnapshot cart;
     private Payment payment;
     private Order order;
 
-    public PaymentWizardController(CartController cart) {
+    public PaymentWizardController(CartSnapshot cart) {
         currentStep = 0;
         this.cart = cart;
         view = new PaymentWizardFrame();
@@ -47,6 +48,7 @@ public class PaymentWizardController {
         step2.getNextButton().addActionListener(e -> handleStep2Next(step2));
     }
 
+    //this made the attachListener methods too long, so it now gets its own method
     private void handleStep1Next(Step1Panel panel) {
         if (panel.getCreditCardRadioButton().isSelected() || panel.getDebitCardRadioButton().isSelected()) {
             if (validateFields(panel, panel.getCardNumberTextField(), panel.getExpirationDateTextField(), panel.getNameTextField())) {
@@ -74,6 +76,7 @@ public class PaymentWizardController {
 
     private void handleStep2Next(Step2Panel panel) {
         if (validateFields(panel, panel.getNameTextField(), panel.getAddressTextField())) {
+            //ternary operators.. so slick.. so divine
             Shipping.DeliveryOption option = panel.getPickupRadioButton().isSelected()
                     ? Shipping.DeliveryOption.PICKUP
                     : Shipping.DeliveryOption.DELIVERY;
@@ -124,15 +127,14 @@ public class PaymentWizardController {
     }
 
     private void createPayment(Payment.PaymentOption paymentOption) {
-        payment = new Payment(PaymentIDGenerator.createID(), paymentOption, cart.getPrice(), new Date());
+        payment = new Payment(PaymentIDGenerator.createID(), paymentOption, cart.getTotal(), new Date());
     }
 
     private void createOrder(String name, String address, Shipping.DeliveryOption deliveryOption) {
-        order = new Order(OrderIDGenerator.createID(), payment, cart.getPrice(), new Date(), address, deliveryOption);
+        order = new Order(payment.getPaymentID(), new Date(),cart, address, deliveryOption);
     }
 
-    //  Helpers Please
-
+    //  Helpers Please work....please....I need this to work! I will give my first 2 born, 2 childrens, please!
     private boolean validateFields(JComponent parent, JTextField... fields) { //helps to validate n number of fields, yay
         for (JTextField field : fields) {
             if (field.getText().trim().isEmpty()) {

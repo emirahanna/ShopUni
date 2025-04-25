@@ -3,8 +3,9 @@ package edu.psu.ist.usermanagement.model;
 import java.sql.*;
 
 public class UserAccount {
-    private final String username;
-    private final String password;
+    private String userID;
+    private String username;
+    private String password;
     private UserRole role;
     private boolean hasSavedPayment;
     private boolean hasCartItems;
@@ -17,6 +18,7 @@ public class UserAccount {
 
     //constructor for registering an account
     public UserAccount(String username, String password, UserRole role) {
+        this.userID = UserIDGenerator.createID().toString();
         this.username = username;
         this.password = password;
         this.role = role;
@@ -24,17 +26,7 @@ public class UserAccount {
         this.hasCartItems = false;
     }
 
-    public void toggleHasSavedPayment() {
-        hasSavedPayment = !hasSavedPayment;
-    }
-
-    public boolean isHasSavedPayment() {
-        return hasSavedPayment;
-    }
-
-    public boolean isHasCartItems() { return hasCartItems; }
-
-    public UserRole verifyUser(){
+    public UserRole verifyUser() {
         String databaseURL = "jdbc:ucanaccess://src/ProductList.accdb";
 
         try (Connection connection = DriverManager.getConnection(databaseURL)) {
@@ -47,10 +39,12 @@ public class UserAccount {
                 String user = result.getString("username");
                 String pwd = result.getString("password");
                 String role = result.getString("role").toUpperCase();
-                if (user.equals(username) && pwd.equals(password)){
+                if (user.equals(username) && pwd.equals(password)) {
                     this.role = Enum.valueOf(UserRole.class, role);
                     this.hasSavedPayment = result.getBoolean("hasSavedPayment");
                     this.hasCartItems = result.getBoolean("hasItemInCart");
+                    UserSession.getInstance().setUserID(result.getString("ID"));
+                    System.out.println(UserSession.getInstance().getUserID());
                     //returns the corresponding role as an enum
                     return Enum.valueOf(UserRole.class, role);
                 }
@@ -67,8 +61,29 @@ public class UserAccount {
         return username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+
     public void setHasCartItems(boolean hasCartItems) {
         this.hasCartItems = hasCartItems;
+    }
+
+    public void toggleHasSavedPayment() {
+        hasSavedPayment = !hasSavedPayment;
+    }
+
+    public boolean isHasSavedPayment() {
+        return hasSavedPayment;
+    }
+
+    public boolean isHasCartItems() {
+        return hasCartItems;
     }
 
 }

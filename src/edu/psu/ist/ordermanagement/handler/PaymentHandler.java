@@ -5,7 +5,7 @@ import edu.psu.ist.ordermanagement.model.Order;
 public class PaymentHandler extends OrderHandler{
     @Override
     protected boolean process (Order order){
-        if (order.getPayment() == null){
+        if (order.getPaymentID() == null){
             System.out.println("No payment info: Processing Failed");
             return false;
         }

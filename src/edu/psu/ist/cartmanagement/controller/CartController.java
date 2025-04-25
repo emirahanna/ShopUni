@@ -12,7 +12,6 @@ import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.cartmanagement.util.CartObserver;
 import edu.psu.ist.cartmanagement.view.CartContentsView;
 import edu.psu.ist.paymentmanagement.controller.PaymentWizardController;
-import edu.psu.ist.paymentmanagement.view.PaymentWizardFrame;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.productmanagement.controller.ProductPageController;
 import edu.psu.ist.productmanagement.model.Product;
@@ -42,7 +41,7 @@ public class CartController implements CartObserver {
     private void removeProduct() {
         view.removeProductPrompt();
         String productName = view.getProductName();
-        for (Product p : cart.getCartContents().keySet()) {
+        for (Product p : cart.getItems().keySet()) {
             if (p.getTitle().equalsIgnoreCase(productName)) {
                 cart.removeProduct(p);
                 view.productWasRemoved(p.getTitle());
@@ -53,7 +52,7 @@ public class CartController implements CartObserver {
     }
 
     private void buyCart() {
-        if (cart.getCartContents().isEmpty()) {
+        if (cart.getItems().isEmpty()) {
             view.cartEmptyReminder();
             return;
         }
@@ -91,7 +90,7 @@ public class CartController implements CartObserver {
             if (cart.isEmpty()) {
                 JOptionPane.showMessageDialog(view.getBasePanel(), "Cart is empty! Add products before purchasing.");
             } else {
-                new PaymentWizardController(this);
+                new PaymentWizardController(cart);
                 view.setVisible(false);
             }
         });
@@ -120,7 +119,7 @@ public class CartController implements CartObserver {
     public void update() {
         view.clearCartDisplay();
 
-        for (Map.Entry<Product, Integer> entry : cart.getCartContents().entrySet()) { //I want both the product, and the quantity
+        for (Map.Entry<Product, Integer> entry : cart.getItems().entrySet()) { //I want both the product, and the quantity
             Product product = entry.getKey();
             int quantity = entry.getValue();
             view.createCartItemCard(product.getTitle(), quantity, product.getPrice(), e -> {
@@ -134,14 +133,14 @@ public class CartController implements CartObserver {
 
     public String getCartContents() {
         StringBuilder sb = new StringBuilder();
-        for (Product p : cart.getCartContents().keySet()) {
-            sb.append(String.format("%-30s %5d %5.2f\n", p.getTitle(), cart.getCartContents().get(p), p.getPrice()));
+        for (Product p : cart.getItems().keySet()) {
+            sb.append(String.format("%-30s %5d %5.2f\n", p.getTitle(), cart.getItems().get(p), p.getPrice()));
         }
         return sb.toString();
     }
 
     public double getPrice() {
-        return cart.getTotalPrice();
+        return cart.getTotal();
     }
 }
 

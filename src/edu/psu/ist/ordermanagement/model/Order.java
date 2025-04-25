@@ -1,21 +1,24 @@
 package edu.psu.ist.ordermanagement.model;
 
+import edu.psu.ist.cartmanagement.model.CartSnapshot;
 import edu.psu.ist.paymentmanagement.model.Payment;
 
 import java.util.Date;
+import java.util.Map;
 
 public class Order {
     private String orderID;
-    private Payment payment;
+    private String paymentID;
     private double orderTotal;
     private Date orderDate;
+    private CartSnapshot cartSnapshot;
     private OrderStatusManager orderStatusManager;
     private Shipping shippingDetails;
 
-    public Order(String orderID, Payment payment, double orderTotal, Date orderDate, String address, Shipping.DeliveryOption deliveryOption) {
-        this.orderID = orderID;
-        this.payment = payment;
-        this.orderTotal = orderTotal;
+    public Order(String paymentID, Date orderDate, CartSnapshot cartSnapshot, String address, Shipping.DeliveryOption deliveryOption) {
+        this.orderID = OrderIDGenerator.createID();
+        this.paymentID = paymentID;
+        this.cartSnapshot = cartSnapshot;
         this.orderDate = orderDate;
         this.orderStatusManager = new OrderStatusManager();
         this.shippingDetails = new Shipping(address, deliveryOption, orderDate);
@@ -34,12 +37,15 @@ public class Order {
         return orderID;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public String getPaymentID() {
+        return paymentID;
     }
 
     public double getOrderTotal() {
-        return orderTotal;
+        return cartSnapshot.getTotal();
+    }
+    public Map getCartContents() {
+        return cartSnapshot.getItems();
     }
 
     public Date getOrderDate() {
