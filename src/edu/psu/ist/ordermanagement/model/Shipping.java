@@ -1,7 +1,6 @@
 package edu.psu.ist.ordermanagement.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Shipping {
     public enum DeliveryOption {PICKUP, DELIVERY}

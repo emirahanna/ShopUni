@@ -1,8 +1,5 @@
 package edu.psu.ist.productmanagement.view;
 
-import java.net.URL;
-import java.util.Scanner;
-
 import javax.swing.*;
 
 public class ProductPageView extends JFrame{

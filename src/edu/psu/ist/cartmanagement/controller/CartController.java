@@ -14,6 +14,7 @@ import edu.psu.ist.paymentmanagement.controller.PaymentWizardController;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.productmanagement.controller.ProductPageController;
 import edu.psu.ist.productmanagement.model.Product;
+import edu.psu.ist.usermanagement.model.UserSession;
 
 public class CartController implements CartObserver {
     final CartManager cart;
@@ -57,6 +58,7 @@ public class CartController implements CartObserver {
 
                 if (confirmMessage == JOptionPane.YES_OPTION) {
                     cart.emptyCart();
+                    CartDAO.deleteCartItemsForUser(UserSession.getInstance().getUserID());
                     update();
                     JOptionPane.showMessageDialog(view.getBasePanel(), "Cart has been emptied");
                 }

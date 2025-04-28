@@ -1,7 +1,6 @@
 package edu.psu.ist.usermanagement.controller;
 
 import edu.psu.ist.cartmanagement.model.CartManager;
-import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.menumanagement.controller.MenuController;
 import edu.psu.ist.usermanagement.model.UserAccount;
 import edu.psu.ist.usermanagement.model.UserRole;

@@ -1,7 +1,5 @@
 package edu.psu.ist.paymentmanagement.controller;
 
-import java.util.Date;
-
 import edu.psu.ist.paymentmanagement.model.Payment;
 import edu.psu.ist.paymentmanagement.view.PaymentView;
 

@@ -1,7 +1,6 @@
 package edu.psu.ist.trackingmanagement.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Tracking {
     final String orderID;

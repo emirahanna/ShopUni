@@ -1,6 +1,8 @@
 package edu.psu.ist.paymentmanagement.controller;
 
 import edu.psu.ist.cartmanagement.controller.CartController;
+import edu.psu.ist.cartmanagement.model.CartDAO;
+import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.cartmanagement.model.CartSnapshot;
 import edu.psu.ist.ordermanagement.model.Order;
 import edu.psu.ist.ordermanagement.model.OrderDAO;
@@ -9,6 +11,7 @@ import edu.psu.ist.paymentmanagement.model.Payment;
 import edu.psu.ist.paymentmanagement.model.PaymentDAO;
 import edu.psu.ist.paymentmanagement.model.PaymentIDGenerator;
 import edu.psu.ist.paymentmanagement.view.*;
+import edu.psu.ist.usermanagement.model.UserSession;
 
 import javax.swing.*;
 import java.time.LocalDate;
@@ -89,9 +92,15 @@ public class PaymentWizardController {
                     option
             );
             nextStep();
-            Step3Panel step3Panel = (Step3Panel) view.getStepPanels().get(2);
-            step3Panel.getOrderLabel().setText(generateOrderLabel());
+            handleStep3Panel();
         }
+    }
+
+    private void handleStep3Panel(){
+        Step3Panel step3Panel = (Step3Panel) view.getStepPanels().get(2);
+        step3Panel.getOrderLabel().setText(generateOrderLabel());
+        CartDAO.deleteCartItemsForUser(UserSession.getInstance().getUserID()); //clear cart items in database
+        CartManager.getInstance().emptyCart(); //  clear in-memory cart
     }
 
     private void attachRadioButtonListeners() {

@@ -1,7 +1,6 @@
 package edu.psu.ist.productmanagement.view;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;

@@ -45,4 +45,16 @@ public class CartDAO {
         }
         return items;
     }
+
+    public static void deleteCartItemsForUser(String userID) {
+        try (Connection conn = DriverManager.getConnection("jdbc:ucanaccess://src/ProductList.accdb")) {
+            String sql = "DELETE FROM cart_items WHERE userID = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userID);
+
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

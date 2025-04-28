@@ -19,7 +19,8 @@
           <component id="e7ecf" class="javax.swing.JButton" binding="purchaseProductButton" default-binding="true">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <maximum-size width="400" height="-1"/>
+                <preferred-size width="400" height="50"/>
+                <maximum-size width="400" height="50"/>
               </grid>
             </constraints>
             <properties>
@@ -57,8 +58,8 @@
           <component id="565df" class="javax.swing.JButton" binding="viewProductDetailsButton" default-binding="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="400" height="-1"/>
-                <maximum-size width="400" height="-1"/>
+                <preferred-size width="400" height="50"/>
+                <maximum-size width="400" height="50"/>
               </grid>
             </constraints>
             <properties>
@@ -68,8 +69,8 @@
           <component id="46516" class="javax.swing.JButton" binding="addToCartButton" default-binding="true">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="400" height="-1"/>
-                <maximum-size width="400" height="-1"/>
+                <preferred-size width="400" height="50"/>
+                <maximum-size width="400" height="50"/>
               </grid>
             </constraints>
             <properties>

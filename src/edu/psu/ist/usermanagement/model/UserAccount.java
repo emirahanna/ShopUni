@@ -1,7 +1,5 @@
 package edu.psu.ist.usermanagement.model;
 
-import edu.psu.ist.cartmanagement.model.CartManager;
-
 import java.sql.*;
 
 public class UserAccount {

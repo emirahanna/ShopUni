@@ -3,7 +3,6 @@ package edu.psu.ist.paymentmanagement.model;
 import edu.psu.ist.usermanagement.model.UserSession;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Payment {
     //don't mind this, I am testing out using sealed interfaces and records

@@ -1,6 +1,5 @@
 package edu.psu.ist.paymentmanagement.controller;
 import java.time.LocalDate;
-import java.util.Date;
 
 import edu.psu.ist.paymentmanagement.model.Payment;
 import edu.psu.ist.paymentmanagement.model.SavedPayment;
