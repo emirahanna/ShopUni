@@ -33,33 +33,15 @@ public class ProductListingController {
     private void nextPage(int totalPages) {
         if (currentPage < totalPages) {
             currentPage++;
-        } else {
-            view.lastPageWarning();
         }
     }
 
     private void prevPage() {
         if (currentPage > 1) {
             currentPage--;
-        } else {
-            view.firstPageWarning();
         }
     }
 
-    private Product selectProduct(ArrayList<Product> products) {
-        try {
-            int choice = Integer.parseInt(view.getSelectedProduct());
-            if (choice < 1 || choice > products.size()) {
-                view.invalidSelection();
-            } else {
-                view.displaySelection(products.get(choice - 1).getTitle());
-                return products.get(choice - 1);
-            }
-        } catch (NumberFormatException e) {
-            view.invalidInput();
-        }
-        return null;
-    }
 
     private void setupListeners() {
         view.getNextButton().addActionListener(e -> {
@@ -86,7 +68,6 @@ public class ProductListingController {
         ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
         if (index < products.size()) {
             Product selectedProduct = products.get(index);
-            System.out.println(selectedProduct.getTitle());
             view.setVisible(false);
             new ProductPageController(selectedProduct);
         }

@@ -1,13 +1,9 @@
 package edu.psu.ist.productmanagement.view;
 
+import java.net.URL;
 import java.util.Scanner;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import edu.psu.ist.productmanagement.controller.ProductPageController;
+import javax.swing.*;
 
 public class ProductPageView extends JFrame{
     private JPanel basePanel;
@@ -21,24 +17,16 @@ public class ProductPageView extends JFrame{
     private JLabel productPageBreadCrumb;
     private JLabel productImage;
 
-    final Scanner scnr;
-    
+
     public ProductPageView()  {
-        this.scnr = new Scanner(System.in);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/lululemon_wunder.jpg"));
+        productImage.setIcon(icon);
         setView();
+        productImage.revalidate();
+        productImage.repaint();
     }
 
-    public void displayOptions(ProductPageController controller){
-        System.out.println(controller.retrieveProduct());
-        System.out.println("\nOptions:");
-        System.out.println("A - Add To Cart");
-        System.out.println("X - Back To Catalog");
-    }
 
-    public String getUserChoice() {
-        System.out.println("Enter selected choice: ");
-        return scnr.next();
-    }
 
     private void setView() {
         //names the text at the top of the window
@@ -50,12 +38,6 @@ public class ProductPageView extends JFrame{
         this.setVisible(true);
     }
 
-    public void succAddToCart(){
-        System.out.println("Successfully added to cart!\n");
-    }
-    public void invalidInput(){
-        System.out.println("Invalid input. Please try again.\n");
-    }
 
     public JPanel getBasePanel() {
         return basePanel;
@@ -63,10 +45,6 @@ public class ProductPageView extends JFrame{
 
     public JButton getBackButton() {
         return backButton;
-    }
-
-    public JPanel getProductDetails() {
-        return productDetails;
     }
 
     public JLabel getProductTitle() {

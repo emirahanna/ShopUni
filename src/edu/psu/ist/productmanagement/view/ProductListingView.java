@@ -43,40 +43,9 @@ public class ProductListingView extends JFrame {
     private JLabel p4PriceLabel;
     private JLabel p5PriceLabel;
 
-    final Scanner scnr;
-
     public ProductListingView() {
         setView();
-        this.scnr = new Scanner(System.in);
-    }
 
-    public String getSelectedProduct() {
-        System.out.println("Enter number (1-3): ");
-        return scnr.next();
-    }
-
-    public void invalidSelection() {
-        System.out.println("Invalid selection.");
-    }
-
-    public void invalidInput() {
-        System.out.println("Invalid input. Please try again.");
-    }
-
-    public void displaySelection(String s) {
-        System.out.println("You selected: " + s);
-    }
-
-    public void exitCatalog() {
-        System.out.println("Exiting product catalog...");
-    }
-
-    public void lastPageWarning() {
-        System.out.println("You are already on the last page.");
-    }
-
-    public void firstPageWarning() {
-        System.out.println("You are already on the first page.");
     }
 
     private void setView() {
@@ -150,11 +119,6 @@ public class ProductListingView extends JFrame {
     public JButton getP5ViewProductButton() {
         return p5ViewProductButton;
     }
-
-    public JLabel getProductCatalogBreadCrumb() {
-        return productCatalogBreadCrumb;
-    }
-
     public JLabel getPageIndicator() {
         return pageIndicator;
     }

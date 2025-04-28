@@ -25,7 +25,7 @@ public class ProductCatalog {
         try (Connection connection = DriverManager.getConnection(databaseURL)) {
 
 
-            String sql = "SELECT * FROM sample_products";
+            String sql = "SELECT * FROM products";
 
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -48,14 +48,6 @@ public class ProductCatalog {
         }
     }
 
-    private void loadSampleProducts() {
-        products.add(new Product("TOP", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", 40.0 ));
-        products.add(new Product("PANTS", "Effortlessly chic, this draped front top is crafted from a MicroModal blend offering a soft, luxurious feel with a hint of stretch.\nWith a slim fit and high neckline, it features gathered detailing across the front creating a flattering, asymmetrical silhouette.\nPair with skirts or tailored trousers for a sophisticated take.", "20342391331", "imageID", "sellerID", new Date(), "Tops", 40.0));
-        products.add(new Product("HOODIE", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", 30.0 ));
-        products.add(new Product("PANTS", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance.\nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", 60.0));
-        products.add(new Product("SOMETHING", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", 100.0 ));
-        products.add(new Product("SOMETHING", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. ", "20342391331", "imageID", "sellerID", new Date(), "Tops", 400.99 ));
-    }
 
     /**
      * This basically returns the products in the list that will be displayed on a certain page

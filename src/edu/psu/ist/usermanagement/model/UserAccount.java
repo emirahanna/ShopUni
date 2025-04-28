@@ -1,5 +1,7 @@
 package edu.psu.ist.usermanagement.model;
 
+import edu.psu.ist.cartmanagement.model.CartManager;
+
 import java.sql.*;
 
 public class UserAccount {
@@ -44,7 +46,6 @@ public class UserAccount {
                     this.hasSavedPayment = result.getBoolean("hasSavedPayment");
                     this.hasCartItems = result.getBoolean("hasItemInCart");
                     UserSession.getInstance().setUserID(result.getString("ID"));
-                    System.out.println(UserSession.getInstance().getUserID());
                     //returns the corresponding role as an enum
                     return Enum.valueOf(UserRole.class, role);
                 }

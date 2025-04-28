@@ -47,18 +47,6 @@ public class Product {
         return imageID;
     }
 
-    public String getSellerID() {
-        return sellerID;
-    }
-
-    public Date getDateListed() {
-        return dateListed;
-    }
-
-    public String getProductCategory() {
-        return productCategory;
-    }
-
     public double getPrice() {
         return price;
     }

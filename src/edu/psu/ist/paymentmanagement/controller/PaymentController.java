@@ -12,48 +12,7 @@ public class PaymentController {
     public PaymentController() {
         this.paymentView = new PaymentView();
     }
-//
-//    public void processPayment() {
-//        int choice = paymentView.promptPaymentOption();
-//        Payment.PaymentOption paymentOption;
-//
-//        switch (choice) {
-//            case 1 -> { // Card Payment
-//                String cardNumber = paymentView.promptCardNumber();
-//                int CVV = paymentView.promptCVV();
-//                int expirationDate = paymentView.promptExpirationDate();
-//                String name = paymentView.promptCardHolderName();
-//                paymentOption = new Payment.Card(cardNumber, CVV, expirationDate, name);
-//            }
-//            case 2 -> { // Gift Card Payment
-//                int giftCardCode = paymentView.promptGiftCardCode();
-//                paymentOption = new Payment.GiftCard(giftCardCode);
-//            }
-//            default -> {
-//                paymentView.invalidInput();
-//                return;
-//            }
-//        }
-//        paymentModel = new Payment("RANDOM ID", paymentOption, paymentView.promptAmount(), new Date());
-//
-//
-//        paymentView.paymentSuccessful();
-//    }
-//
-//    /**
-//     * Method to refund a payment
-//     */
-//    public boolean refundPayment() {
-//        System.out.println("refundPayment called.");
-//
-//        if (paymentModel != null && paymentModel.isRefundable()) {
-//            System.out.println("Refund processed.");
-//            return true;
-//        } else {
-//            System.out.println("Refund denied.");
-//            return false;
-//        }
-//    }
+
 
     /** 
      *  Method to show payment details

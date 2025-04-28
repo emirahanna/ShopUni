@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import edu.psu.ist.cartmanagement.model.CartDAO;
 import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.cartmanagement.util.CartObserver;
 import edu.psu.ist.cartmanagement.view.CartContentsView;
@@ -33,6 +34,7 @@ public class CartController implements CartObserver {
         cart.addProduct(p);
         recentProduct = p;
         view.getProductPageBreadcrumb().setText(p.getTitle() + ">");
+        CartDAO.insertCart(cart, p);
         update();
     }
 
@@ -100,12 +102,5 @@ public class CartController implements CartObserver {
         view.repaintCartDisplay();
     }
 
-    public String getCartContents() {
-        StringBuilder sb = new StringBuilder();
-        for (Product p : cart.getItems().keySet()) {
-            sb.append(String.format("%-30s %5d %5.2f\n", p.getTitle(), cart.getItems().get(p), p.getPrice()));
-        }
-        return sb.toString();
-    }
 }
 

@@ -1,4 +1,3 @@
-import edu.psu.ist.paymentmanagement.controller.PaymentWizardController;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.usermanagement.controller.LogInController;
 
@@ -39,7 +38,6 @@ public class TestHarness {
                 String username = result.getString("username");
                 String password = result.getString("password");
 
-                System.out.println(id + ", " + username + ", " + password);
             }
 
         } catch (SQLException ex) {

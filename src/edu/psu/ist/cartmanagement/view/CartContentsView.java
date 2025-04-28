@@ -7,8 +7,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-import java.util.Map;
-import java.util.Scanner;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -18,8 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-
-import edu.psu.ist.productmanagement.model.Product;
 
 public class CartContentsView extends JFrame {
     private JPanel basePanel;
@@ -33,10 +29,8 @@ public class CartContentsView extends JFrame {
     private JLabel cartBreadcrumb;
     private JLabel productCtlgBreadcrumb;
     private JLabel productPageBreadcrumb;
-    final Scanner scnr;
 
     public CartContentsView(){
-        scnr = new Scanner(System.in);
         setUpComponents();
         setView();
     }
@@ -122,7 +116,6 @@ public class CartContentsView extends JFrame {
         itemPanel.setPreferredSize(new Dimension(400, 60));
         itemPanel.setMaximumSize(new Dimension(400, 60)); // Prevent stretching
 
-        //TODO: MAKE THE FORMATTING STANDARD, its is not for some reason
         JLabel itemLabel = new JLabel( String.format("%-40sx%-2d $%-5.2f", title, quantity, price));
         JButton removeButton = new JButton("❌");
         removeButton.setPreferredSize(new Dimension(50, 25));
@@ -158,41 +151,8 @@ public class CartContentsView extends JFrame {
     }
 
 
-
-    public String getProductName(){
-        return scnr.next();
-    }
-
-    public void removeProductPrompt(){
-        System.out.print("Enter product name to remove: ");
-
-    }
-    public void productNotFound(){
-        System.out.println("Product not found in cart.");
-    }
-
-    public void productWasRemoved(String s){
-        System.out.println(s + " removed from cart.");
-    }
-
     public JPanel getBasePanel() {
         return basePanel;
-    }
-
-    public JPanel getCartContentsPanel() {
-        return cartContentsPanel;
-    }
-
-    public JScrollPane getCartContentsScrollPane() {
-        return cartContentsScrollPane;
-    }
-
-    public JPanel getBottomButtonsPanel() {
-        return bottomButtonsPanel;
-    }
-
-    public JPanel getTopPanel() {
-        return topPanel;
     }
 
     public JButton getEmptyCartButton() {
@@ -205,10 +165,6 @@ public class CartContentsView extends JFrame {
 
     public JButton getBackButton() {
         return backButton;
-    }
-
-    public JLabel getCartBreadcrumb() {
-        return cartBreadcrumb;
     }
 
     public JLabel getProductCtlgBreadcrumb() {

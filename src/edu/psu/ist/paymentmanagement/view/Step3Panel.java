@@ -19,7 +19,7 @@ public class Step3Panel extends WizardStepPanel {
     private void setUpHeaderPanel(){
         headerPanel = new JPanel();
         backButton = new JButton("Back");
-        instructionLabel = new JLabel("Step 3: Confirm & Print Receipt");
+        instructionLabel = new JLabel("Step 3: Print Receipt");
         headerPanel.add(backButton);
         headerPanel.add(instructionLabel);
         add(headerPanel, BorderLayout.NORTH);

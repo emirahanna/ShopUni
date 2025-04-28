@@ -1,8 +1,11 @@
 package edu.psu.ist.usermanagement.controller;
 
+import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
+import edu.psu.ist.menumanagement.controller.MenuController;
 import edu.psu.ist.usermanagement.model.UserAccount;
 import edu.psu.ist.usermanagement.model.UserRole;
+import edu.psu.ist.usermanagement.model.UserSession;
 import edu.psu.ist.usermanagement.view.LogInView;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -64,11 +67,16 @@ public class LogInController {
             UserRole role = user.verifyUser();
             if (role == UserRole.BUYER) {
                 authenticatedUser = user;
-                new ProductListingController();
+                CartManager.loadCartAtLogin(UserSession.getInstance().getUserID());
+                new MenuController();
                 logInView.setVisible(false);
             }
+            else {
+                JOptionPane.showMessageDialog(logInView, "Login failed. You are not a registered user", "Login Error", JOptionPane.ERROR_MESSAGE);
 
-        } catch (IllegalArgumentException e) {
+            }
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(logInView, "Login failed. Incorrect username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
         }
 

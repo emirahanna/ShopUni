@@ -33,21 +33,6 @@ public class ProductPageController {
         view.getProductPrice().setText(String.format("$%.2f", productDetails.getPrice()));
     }
 
-    public void handleLogic() {
-        String choice = view.getUserChoice().toUpperCase(); //sanitize user input :D
-
-        switch (choice) {
-            case "A" -> {
-                view.succAddToCart();
-                CartController cm  = new CartController();
-                cm.addProduct(productDetails);
-            }
-            case "X" -> {
-                new ProductListingController();
-            }
-            default -> view.invalidInput();
-        }
-    }
 
     public void attachActionListeners() {
         view.getBackButton().addActionListener(e -> {

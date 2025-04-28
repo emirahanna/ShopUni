@@ -113,7 +113,8 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Product Image Placeholder"/>
+              <text value=""/>
+              <toolTipText value="This is a PlaceHolder because these are all fake products"/>
             </properties>
           </component>
         </children>
