@@ -1,6 +1,7 @@
 package edu.psu.ist.productmanagement.view;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ProductPageView extends JFrame{
     private JPanel basePanel;
@@ -20,7 +21,7 @@ public class ProductPageView extends JFrame{
     }
 
     public void setProductImage(ImageIcon icon){
-        productImage.setIcon(icon);
+        setScaledImage(icon);
         productImage.revalidate();
         productImage.repaint();
     }
@@ -37,6 +38,30 @@ public class ProductPageView extends JFrame{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
+
+    private void setScaledImage(ImageIcon icon) {
+        int labelWidth = productImage.getWidth();
+        int labelHeight = productImage.getHeight();
+
+        if (labelWidth == 0 || labelHeight == 0) {
+            // Ensure the label is laid out first
+            productImage.setSize(productImage.getPreferredSize());
+            labelWidth = productImage.getWidth();
+            labelHeight = productImage.getHeight();
+        }
+
+        // Calculate new dimensions while maintaining aspect ratio with with typecasting to accuracymaxx
+        double widthRatio = (double) labelWidth / icon.getIconWidth();
+        double heightRatio = (double) labelHeight / icon.getIconHeight();
+        double scaleFactor = Math.min(widthRatio, heightRatio);
+
+        int newWidth = (int) (icon.getIconWidth() * scaleFactor);
+        int newHeight = (int) (icon.getIconHeight() * scaleFactor);
+
+        Image scaledImg = icon.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH); //smooth because you want it to look good
+        productImage.setIcon(new ImageIcon(scaledImg));
+    }
+
 
 
     public JPanel getBasePanel() {
