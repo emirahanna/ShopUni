@@ -16,15 +16,18 @@ public class ProductPageView extends JFrame{
 
 
     public ProductPageView()  {
-        ImageIcon icon = new ImageIcon(getClass().getResource("/lululemon_wunder.jpg"));
-        productImage.setIcon(icon);
         setView();
+    }
+
+    public void setProductImage(ImageIcon icon){
+        productImage.setIcon(icon);
         productImage.revalidate();
         productImage.repaint();
     }
 
-
-
+    public void setEmptyImage(){
+        productImage.setText("No product image available.");
+    }
     private void setView() {
         //names the text at the top of the window
         this.setTitle("ShopUni");

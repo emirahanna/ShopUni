@@ -2,10 +2,13 @@ package edu.psu.ist.productmanagement.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Objects;
 
 import edu.psu.ist.cartmanagement.controller.CartController;
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.view.ProductPageView;
+
+import javax.swing.*;
 
 /**
  * This class stores the model and the view
@@ -24,6 +27,19 @@ public class ProductPageController {
         attachActionListeners();
         readProductDetails();
         view.getProductPageBreadCrumb().setText(product.getTitle());
+        displayProductImage();
+    }
+
+    private void displayProductImage(){
+        try {
+            System.out.println(productDetails.getID());
+            System.out.println(getClass().getResource("/1.jpg"));
+            ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/" + productDetails.getID() + ".jpg")));
+            view.setProductImage(icon);
+        }
+        catch (Exception e){
+            view.setEmptyImage();
+        }
     }
 
     public void readProductDetails(){

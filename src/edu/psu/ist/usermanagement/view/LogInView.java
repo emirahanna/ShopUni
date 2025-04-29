@@ -14,12 +14,8 @@ public class LogInView extends JFrame{
     private JButton logInButton;
     private JLabel shopUniLabel;
     private JTextField passwordField;
-
-    final Scanner scnr;
-
     public LogInView(){
         setView();
-        this.scnr = new Scanner(System.in);
     }
 
     private void setView() {
