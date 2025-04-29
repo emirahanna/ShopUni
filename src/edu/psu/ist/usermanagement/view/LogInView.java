@@ -14,6 +14,8 @@ public class LogInView extends JFrame{
     private JButton logInButton;
     private JLabel shopUniLabel;
     private JTextField passwordField;
+    private JLabel signUpPrompt;
+
     public LogInView(){
         setView();
     }
@@ -24,6 +26,7 @@ public class LogInView extends JFrame{
         this.setSize(500, 800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+        signUpPrompt.setText("<html>Don't have an account? <u>Sign up here.</u></html>");
         focusOnDummyPanel();
 
     }
@@ -51,5 +54,8 @@ public class LogInView extends JFrame{
         return passwordField;
     }
 
+    public JLabel getSignUpPrompt() {
+        return signUpPrompt;
     }
+}
 

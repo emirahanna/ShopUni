@@ -2,6 +2,7 @@ package edu.psu.ist.usermanagement.controller;
 
 import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.menumanagement.controller.MenuController;
+import edu.psu.ist.productmanagement.controller.ProductPageController;
 import edu.psu.ist.usermanagement.model.UserAccount;
 import edu.psu.ist.usermanagement.model.UserRole;
 import edu.psu.ist.usermanagement.model.UserSession;
@@ -13,17 +14,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LogInController {
     private static final Log log = LogFactory.getLog(LogInController.class);
-    LogInView logInView;
+    private LogInView logInView;
     private UserAccount authenticatedUser; // Stores the logged-in user
 
 
     public LogInController() {
         this.logInView = new LogInView();
         initializeActionListeners();
-
     }
 
     private void initializeActionListeners() {
@@ -33,6 +35,13 @@ public class LogInController {
         attachHintFocusListener(logInView.getPasswordField(), "Password");
         attachHintFocusListener(logInView.getUsernameField(), "Username");
 
+        logInView.getSignUpPrompt().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new SignUpController();
+                logInView.setVisible(false);
+            }
+        });
     }
 
     public static void attachHintFocusListener(JTextField field, String hint) {

@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 public class UserDAO {
 
     public static void insertUser(UserAccount userAccount) {
-        try (Connection conn = DriverManager.getConnection("jdbc:ucanaccess://path_to_db.accdb")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:ucanaccess://src/ProductList.accdb")) {
             String sql = "INSERT INTO user_database (ID, username, password, role, hasSavedPayment, hasItemInCart ) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql); //better performance than Statement, but mainly to pass parameters at runtime
             pstmt.setString(1, UserSession.getInstance().getUserID());

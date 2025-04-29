@@ -50,7 +50,7 @@ public class ProductPageView extends JFrame{
             labelHeight = productImage.getHeight();
         }
 
-        // Calculate new dimensions while maintaining aspect ratio with with typecasting to accuracymaxx
+        // Calculate new dimensions while maintaining aspect ratio with typecasting to accuracymaxx
         double widthRatio = (double) labelWidth / icon.getIconWidth();
         double heightRatio = (double) labelHeight / icon.getIconHeight();
         double scaleFactor = Math.min(widthRatio, heightRatio);
