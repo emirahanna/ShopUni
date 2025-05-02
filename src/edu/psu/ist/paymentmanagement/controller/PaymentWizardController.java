@@ -58,10 +58,13 @@ public class PaymentWizardController {
         if (panel.getCreditCardRadioButton().isSelected() || panel.getDebitCardRadioButton().isSelected()) {
             if (validateFields(panel, panel.getCardNumberTextField(), panel.getExpirationDateTextField(), panel.getNameTextField())) {
                 Integer expDate = parseInteger(panel, panel.getExpirationDateTextField().getText(), "Expiration Date");
+                Long cardNum = parseLong(panel, panel.getCardNumberTextField().getText().trim(), "Card Number");
+
                 if (expDate == null) return;
+                if (cardNum == null) return;
 
                 createPayment(new Payment.Card(
-                        panel.getCardNumberTextField().getText().trim(),
+                        cardNum,
                         expDate,
                         panel.getNameTextField().getText().trim()
                 ));
@@ -169,6 +172,15 @@ public class PaymentWizardController {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(parent, fieldName + " must be a valid number.");
+            return null;
+        }
+    }
+
+    private Long parseLong(JComponent parent, String input, String fieldName) {
+        try {
+            return Long.parseLong(input.trim());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(parent, fieldName + " must be a valid card number.");
             return null;
         }
     }

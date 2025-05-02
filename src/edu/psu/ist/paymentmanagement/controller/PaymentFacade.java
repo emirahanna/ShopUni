@@ -20,7 +20,7 @@ public class PaymentFacade {
 
         switch (choice) {
             case 1 -> {
-                String cardNumber = paymentView.promptCardNumber();
+                long cardNumber = Long.parseLong(paymentView.promptCardNumber());
                 int expirationDate = paymentView.promptExpirationDate();
                 String name = paymentView.promptCardHolderName();
                 paymentOption = new Payment.Card(cardNumber, expirationDate, name);

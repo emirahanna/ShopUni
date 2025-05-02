@@ -31,6 +31,22 @@ public class Product {
         return "Product: " + title + "\n" + "Description: " + description + "\n" + "Category: " + productCategory + "\n" + "Price: "+ price + "\n" + "Listed on: " + dateListed;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        //handling if it's comparing with itself, or comparing with different classes.
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        //omg typecasting
+        Product product = (Product) o;
+        return ID.equals(product.getID());
+    }
+
+    @Override
+    public int hashCode() {
+        return  ID != null ? ID.hashCode() : 0;
+    }
+
+
     public String getTitle() {
         return title;
     }

@@ -30,7 +30,6 @@ public class ProductDAO {
 
                 foundProduct = new Product(title, description, id, imageID, sellerID, date, productCategory, price);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -10,6 +10,7 @@ import edu.psu.ist.cartmanagement.util.CartObserver;
 import edu.psu.ist.cartmanagement.util.CartSubject;
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.model.ProductDAO;
+import edu.psu.ist.usermanagement.model.UserSession;
 
 /**
  * Class that emulates the behavior of an actual cart
@@ -71,18 +72,6 @@ public class CartManager implements CartSubject, CartSnapshot {
         notifyObservers();
     }
 
-    public static void loadCartAtLogin(String userID) {
-        List<CartItemRecord> records = CartDAO.getCartItemsForUser(userID);
-
-        for (CartItemRecord record : records) {
-            Product p = ProductDAO.findProductByID(record.getProductID());
-            if (p != null) {
-                for (int i = 0; i < record.getQuantity(); i++) {
-                    CartManager.getInstance().addProduct(p);
-                }
-            }
-        }
-    }
 
     /**
      * purges the map, and total price

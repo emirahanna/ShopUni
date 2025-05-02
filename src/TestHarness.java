@@ -1,3 +1,4 @@
+import edu.psu.ist.cartmanagement.controller.CartController;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.usermanagement.controller.LogInController;
 
@@ -5,18 +6,13 @@ import java.sql.*;
 
 public class TestHarness {
     public static void main(String[] args) {
-        //testUserDBConnection();
         testFullFlow();
-        //testProductListing();
+        //attemptPaymentBeforeLogin();
     }
 
-
-    //to test just product listing page without having to log in/authenticate
-    public static void testProductListing()
-    {
-        new ProductListingController();
+    public static void attemptPaymentBeforeLogin(){
+        CartController c = new CartController();
     }
-
 
     public static void testFullFlow() {
         LogInController logInController = new LogInController();
@@ -44,6 +40,8 @@ public class TestHarness {
             ex.printStackTrace();
         }
     }
+
+    //ex: SELECT * FROM users_database WHERE ID =1
 
 
 }  

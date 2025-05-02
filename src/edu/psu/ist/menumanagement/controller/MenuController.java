@@ -72,4 +72,6 @@ public class MenuController {
         // Open the cart to start purchasing products
         new CartController();
     }
+
+
 }

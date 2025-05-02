@@ -1,8 +1,8 @@
 package edu.psu.ist.usermanagement.controller;
 
+import edu.psu.ist.cartmanagement.controller.CartController;
 import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.menumanagement.controller.MenuController;
-import edu.psu.ist.productmanagement.controller.ProductPageController;
 import edu.psu.ist.usermanagement.model.UserAccount;
 import edu.psu.ist.usermanagement.model.UserRole;
 import edu.psu.ist.usermanagement.model.UserSession;
@@ -75,7 +75,7 @@ public class LogInController {
             UserRole role = user.verifyUser();
             if (role == UserRole.BUYER) {
                 authenticatedUser = user;
-                CartManager.loadCartAtLogin(UserSession.getInstance().getUserID());
+                CartController.loadCartAtLogin(UserSession.getInstance().getUserID());
                 new MenuController();
                 logInView.setVisible(false);
             }
@@ -85,16 +85,13 @@ public class LogInController {
             }
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(logInView, "Login failed. Incorrect username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }
 
-    public UserAccount getAuthenticatedUser() {
-        return authenticatedUser;
-    }
-
-    public String getAuthUserID() {
-        return authenticatedUser.getUsername();
+    public LogInView getLogInView() {
+        return logInView;
     }
 }

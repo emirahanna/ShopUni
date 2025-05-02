@@ -9,7 +9,7 @@ public class Payment {
     public sealed interface PaymentOption {
     }
 
-    public record Card(String cardNumber, int expirationDate, String name) implements PaymentOption {
+    public record Card(long cardNumber, int expirationDate, String name) implements PaymentOption {
         @Override
         public String toString() {
             return getClass().getSimpleName();

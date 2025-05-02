@@ -22,31 +22,35 @@ public class ProductPageController {
 
     //constructor stores model and view
     public ProductPageController(Product product) {
+
         this.productDetails = product;
         this.view = new ProductPageView();
         attachActionListeners();
         readProductDetails();
-        view.getProductPageBreadCrumb().setText(product.getTitle());
         displayProductImage();
     }
 
-    private void displayProductImage(){
+
+    private void displayProductImage() {
         try {
-            System.out.println(productDetails.getID());
-            System.out.println(getClass().getResource("/1.jpg"));
             ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/" + productDetails.getID() + ".jpg")));
             view.setProductImage(icon);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             view.setEmptyImage();
         }
     }
 
-    public void readProductDetails(){
-        //uses html tags to force the text to wrap. its times like these where i miss web development
-        view.getProductTitle().setText("<html>" + productDetails.getTitle() + "</html>");
-        view.getProductDescription().setText("<html>" + productDetails.getDescription() + "</html>");
-        view.getProductPrice().setText(String.format("$%.2f", productDetails.getPrice()));
+    public void readProductDetails() {
+        try {
+            //uses html tags to force the text to wrap. its times like these where i miss web development
+            view.getProductTitle().setText("<html>" + productDetails.getTitle() + "</html>");
+            view.getProductDescription().setText("<html>" + productDetails.getDescription() + "</html>");
+            view.getProductPrice().setText(String.format("$%.2f", productDetails.getPrice()));
+            view.getProductPageBreadCrumb().setText(productDetails.getTitle());
+        } catch (Exception e) {
+            new ProductNotFoundController();
+            view.setVisible(false);
+        }
     }
 
 
@@ -57,7 +61,7 @@ public class ProductPageController {
         });
         view.getAddToCartButton().addActionListener(e -> {
             view.setVisible(false);
-            CartController cm  = new CartController();
+            CartController cm = new CartController();
             cm.addProduct(productDetails);
         });
         //using mouse listeners for the breadcrumbs, but that means I need to implement all the Mouse Listener methods ouch
@@ -77,7 +81,7 @@ public class ProductPageController {
 
     //changes image and goes through image carousel for product on click if there's multiple images for a listing
     public String changeImg() {
-        return productDetails.getImageID() ;
+        return productDetails.getImageID();
     }
 }
 

@@ -2,18 +2,23 @@ package edu.psu.ist.cartmanagement.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
 
 import edu.psu.ist.cartmanagement.model.CartDAO;
+import edu.psu.ist.cartmanagement.model.CartItemRecord;
 import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.cartmanagement.util.CartObserver;
 import edu.psu.ist.cartmanagement.view.CartContentsView;
 import edu.psu.ist.paymentmanagement.controller.PaymentWizardController;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
+import edu.psu.ist.productmanagement.controller.ProductNotFoundController;
 import edu.psu.ist.productmanagement.controller.ProductPageController;
 import edu.psu.ist.productmanagement.model.Product;
+import edu.psu.ist.productmanagement.model.ProductDAO;
+import edu.psu.ist.usermanagement.controller.LogInController;
 import edu.psu.ist.usermanagement.model.UserSession;
 
 public class CartController implements CartObserver {
@@ -40,6 +45,12 @@ public class CartController implements CartObserver {
     }
 
     private void buyCart() {
+        if (!UserSession.getInstance().isLoggedIn()) {
+            JOptionPane.showMessageDialog(view.getBasePanel(), "You must log in to proceed to payment.");
+            new LogInController();
+            view.setVisible(false);
+            return;
+        }
         if (cart.isEmpty()) {
             JOptionPane.showMessageDialog(view.getBasePanel(), "Cart is empty! Add products before purchasing.");
         } else {
@@ -86,6 +97,22 @@ public class CartController implements CartObserver {
                 view.setVisible(false);
             }
         });
+    }
+
+    public static void loadCartAtLogin(String userID) {
+        List<CartItemRecord> records = CartDAO.getCartItemsForUser(userID);
+
+        for (CartItemRecord record : records) {
+            Product p = ProductDAO.findProductByID(record.getProductID());
+            if (p != null) {
+                for (int i = 0; i < record.getQuantity(); i++) {
+                    CartManager.getInstance().addProduct(p);
+                }
+            }
+            else {
+                new ProductNotFoundController();
+            }
+        }
     }
 
     @Override
