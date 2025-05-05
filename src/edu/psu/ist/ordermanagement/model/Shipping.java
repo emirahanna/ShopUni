@@ -3,12 +3,13 @@ package edu.psu.ist.ordermanagement.model;
 import java.time.LocalDate;
 
 public class Shipping {
-    public enum DeliveryOption {PICKUP, DELIVERY}
-    private DeliveryOption deliveryOption;
-    private LocalDate orderDate;
-    private String address;
+
+    public enum DeliveryOption {PICKUP, DELIVERY;}
     private String ID;
     private String orderID;
+    private String address;
+    private DeliveryOption deliveryOption;
+    private LocalDate orderDate;
 
     public Shipping(String ID, String orderID, String address, DeliveryOption deliveryOption, LocalDate orderDate) {
         this.ID = ID;

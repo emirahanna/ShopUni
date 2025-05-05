@@ -15,7 +15,6 @@ public class ProductCatalog {
     public ProductCatalog() {
         this.products = new ArrayList<>();
         loadProducts();
-        //loadSampleProducts();
 
     }
 
@@ -23,8 +22,6 @@ public class ProductCatalog {
         String databaseURL = "jdbc:ucanaccess://src/ProductList.accdb";
 
         try (Connection connection = DriverManager.getConnection(databaseURL)) {
-
-
             String sql = "SELECT * FROM products";
 
             Statement statement = connection.createStatement();

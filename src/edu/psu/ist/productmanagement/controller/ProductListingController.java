@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.model.ProductCatalog;
+import edu.psu.ist.productmanagement.model.ProductCategory;
 import edu.psu.ist.productmanagement.view.ProductListingView;
 
 public class ProductListingController {
@@ -24,6 +25,11 @@ public class ProductListingController {
     }
 
     public void showCatalog() {
+//        ProductCategory pc = view.getCategoryComboBox().getSelectedItem();
+//        switch(){
+//
+//        }
+
         ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
         int totalPages = catalog.getTotalPages();
         view.initializeProducts(products, currentPage, totalPages);

@@ -2,6 +2,7 @@ package edu.psu.ist.menumanagement.controller;
 
 import edu.psu.ist.cartmanagement.controller.CartController;
 import edu.psu.ist.menumanagement.view.MenuView;
+import edu.psu.ist.ordermanagement.controller.OrderTableController;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.productmanagement.controller.ProductPageController;
 import edu.psu.ist.productmanagement.model.Product;
@@ -35,6 +36,11 @@ public class MenuController {
             view.setVisible(false);
         });
 
+        view.getTrackOrdersButton().addActionListener(e -> {
+            trackOrder();
+            view.setVisible(false);
+        });
+
         view.getPromptLabel().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -65,13 +71,19 @@ public class MenuController {
     private void openAddToCart() {
         // Open the product page to start adding things to cart
         // this is sample data
-        new ProductPageController(new Product("TOP", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. \n This is sample data and I don't know what else to write", "20342391331", "imageID", "sellerID", new Date(), "Tops", 40.0));
+        new ProductPageController(new Product("TOP", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. \n This is sample data and I don't know what else to write", "20342391331", "imageID", "sellerID", new Date(), "Top", 40.0));
     }
 
     private void openPurchaseProduct() {
         // Open the cart to start purchasing products
         new CartController();
     }
+
+    private void trackOrder() {
+        // Open the cart to start purchasing products
+        new OrderTableController();
+    }
+
 
 
 }

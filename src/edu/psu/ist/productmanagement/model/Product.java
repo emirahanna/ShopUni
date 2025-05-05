@@ -1,5 +1,6 @@
 package edu.psu.ist.productmanagement.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ public class Product {
     private final String imageID;
     private final String sellerID;
     private final Date dateListed;
-    private final String productCategory;
+    private final ProductCategory productCategory;
     private final double price;
 
 
@@ -23,7 +24,7 @@ public class Product {
         this.imageID = imageID;
         this.sellerID = sellerID;
         this.dateListed = dateListed;
-        this.productCategory = productCategory;
+        this.productCategory = ProductCategory.valueOf(productCategory.toUpperCase());
         this.price = price;
     }
 
@@ -45,7 +46,6 @@ public class Product {
     public int hashCode() {
         return  ID != null ? ID.hashCode() : 0;
     }
-
 
     public String getTitle() {
         return title;

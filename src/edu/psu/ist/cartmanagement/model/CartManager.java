@@ -58,6 +58,7 @@ public class CartManager implements CartSubject, CartSnapshot {
 
     }
 
+
     /**
      * accesses the product's price and decrements it from totalPrice
      */
@@ -79,6 +80,26 @@ public class CartManager implements CartSubject, CartSnapshot {
     public void emptyCart() {
         cartContents.clear();
         totalPrice = 0;
+    }
+
+    //attempt to export a new snapshot for DAO purposes
+    public CartSnapshot createSnapshot(HashMap<Product, Integer> map) {
+        return new CartSnapshot() {
+
+            @Override
+            public Map<Product, Integer> getItems() {
+                return Collections.unmodifiableMap(map);
+            }
+
+            @Override
+            public double getTotal() {
+                double total = 0;
+                for (Product p: map.keySet()){
+                    total += p.getPrice();
+                }
+                return total;
+            }
+        };
     }
 
     private void calculateTotalPrice(double price) {

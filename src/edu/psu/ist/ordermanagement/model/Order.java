@@ -4,6 +4,7 @@ import edu.psu.ist.cartmanagement.model.CartSnapshot;
 import edu.psu.ist.productmanagement.model.Product;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Order {
     private String orderID;
@@ -22,8 +23,18 @@ public class Order {
         this.orderDate = orderDate;
         this.orderStatusManager = new OrderStatusManager();
         this.shippingDetails = new Shipping(ShippingIDGenerator.createID(), orderID, address, deliveryOption, orderDate);
-        ShippingDAO.insertShipping(shippingDetails);
     }
+
+    public Order(String id, String paymentID, LocalDate orderDate, CartSnapshot cartSnapshot, Shipping shipping, OrderStatusManager orderStatusManager) {
+        this.orderID = id;
+        this.paymentID = paymentID;
+        this.cartSnapshot = cartSnapshot;
+        this.orderTotal = cartSnapshot.getTotal();
+        this.orderDate = orderDate;
+        this.orderStatusManager = orderStatusManager;
+        this.shippingDetails = shipping;
+    }
+
 
     public String generateOrderSummary() {
         StringBuilder sb = new StringBuilder();
@@ -64,6 +75,10 @@ public class Order {
 
     public Shipping getShippingDetails() {
         return shippingDetails;
+    }
+
+    public CartSnapshot getCartSnapshot() {
+        return cartSnapshot;
     }
 }
 

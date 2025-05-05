@@ -6,7 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class ShippingIDGenerator {
+public class OSMIDGenerator {
+    //i need to come up with better names. this shall suffice
     private static AtomicLong idCounter = new AtomicLong(fetchMaxIdFromDatabase() + 1);
 
     public static String createID()
@@ -17,7 +18,7 @@ public class ShippingIDGenerator {
     private static long fetchMaxIdFromDatabase() {
         long maxId = 0;
         try (Connection conn = DriverManager.getConnection("jdbc:ucanaccess://src/ProductList.accdb")) {
-            String sql = "SELECT MAX(ID) AS MaxID FROM shipping";
+            String sql = "SELECT MAX(ID) AS MaxID FROM order_status";
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 

@@ -12,11 +12,6 @@ public class ShippingHandler extends OrderHandler{
             System.out.println("No delivery option specified");
             return false;
         }
-
-        order.getOrderStatusManager().markAsShipped();
-
-
-        System.out.println("Shipping Started! Delivery Option Selected");
         return true;
     }
 }

@@ -2,12 +2,10 @@ package edu.psu.ist.productmanagement.view;
 
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import edu.psu.ist.productmanagement.model.Product;
+import edu.psu.ist.productmanagement.model.ProductCategory;
 
 public class ProductListingView extends JFrame {
     private JPanel basePanel;
@@ -41,10 +39,12 @@ public class ProductListingView extends JFrame {
     private JLabel p3PriceLabel;
     private JLabel p4PriceLabel;
     private JLabel p5PriceLabel;
+    private JPanel cardsPanel;
+    private JComboBox categoryComboBox;
 
     public ProductListingView() {
+        setUpComboBox();
         setView();
-
     }
 
     private void setView() {
@@ -89,6 +89,16 @@ public class ProductListingView extends JFrame {
         nextButton.setEnabled(currentPage < totalPages);
     }
 
+    private void setUpComboBox() {
+        categoryComboBox.addItem(ProductCategory.TOP);
+        categoryComboBox.addItem("Outerwear");
+        categoryComboBox.addItem("Bottom");
+        categoryComboBox.addItem("Shoes");
+        categoryComboBox.addItem("Accessories");
+        categoryComboBox.addItem("None");
+        categoryComboBox.setSelectedItem("None");
+    }
+
 
     public JButton getP1ViewProductButton() {
         return p1ViewProductButton;
@@ -101,25 +111,26 @@ public class ProductListingView extends JFrame {
     public JButton getPreviousButton() {
         return previousButton;
     }
-
     public JButton getP2ViewProductButton() {
         return p2ViewProductButton;
     }
-
-
     public JButton getP3ViewProductButton() {
         return p3ViewProductButton;
     }
-
     public JButton getP4ViewProductButton() {
         return p4ViewProductButton;
     }
-
     public JButton getP5ViewProductButton() {
         return p5ViewProductButton;
     }
     public JLabel getPageIndicator() {
         return pageIndicator;
     }
-    public JButton getFeaturedProductsButton(){return featuredProductsButton;}
+    public JButton getFeaturedProductsButton() {
+        return featuredProductsButton;
+    }
+
+    public JComboBox getCategoryComboBox() {
+        return categoryComboBox;
+    }
 }

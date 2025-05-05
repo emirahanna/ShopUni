@@ -1,12 +1,6 @@
 package edu.psu.ist.usermanagement.view;
 
-import java.util.Scanner;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class LogInView extends JFrame{
     private JPanel logInPanel;
@@ -46,9 +40,6 @@ public class LogInView extends JFrame{
     }
     public JButton getLogInButton() {
         return logInButton;
-    }
-    public JLabel getShopUniLabel() {
-        return shopUniLabel;
     }
     public JTextField getPasswordField() {
         return passwordField;

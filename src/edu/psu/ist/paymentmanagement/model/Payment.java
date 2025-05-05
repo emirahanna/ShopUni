@@ -52,8 +52,6 @@ public class Payment {
     }
 
     public String generatesReceipt() {
-        System.out.println("generatesReceipt method called.");
-
         return "Receipt:\nPayment ID: " + paymentID + "\nAmount Paid: $" + amountPaid + "\nDate: " + transactionDate + "\nPayment Method: " + paymentOption;
     }
 
