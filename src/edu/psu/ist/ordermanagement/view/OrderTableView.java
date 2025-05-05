@@ -9,6 +9,7 @@ public class OrderTableView extends JFrame {
     private JTable orderTable;
     private JScrollPane scrollPane;
     private JButton backButton;
+    private JLabel orderDetails;
 
     public OrderTableView() {
         this.setView();
@@ -31,6 +32,9 @@ public class OrderTableView extends JFrame {
 
     public JTable getOrderTable() {
         return orderTable;
+    }
+    public JLabel getOrderDetails() {
+        return orderDetails;
     }
 
     public JScrollPane getScrollPane() {

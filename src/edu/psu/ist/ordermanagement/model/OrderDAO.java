@@ -28,6 +28,7 @@ public class OrderDAO {
 
             //status id
             insertOrderStatus(order.getOrderStatusManager());
+            System.out.println(order.getOrderStatusManager().getID());
             pstmt.setString(6, order.getOrderStatusManager().getID());
 
             pstmt.executeUpdate();
@@ -40,13 +41,13 @@ public class OrderDAO {
 
     private static void insertOrderItems(Order order) {
         try (Connection connection = DriverManager.getConnection("jdbc:ucanaccess://src/ProductList.accdb")) {
-            String sql = "INSERT INTO order_items (ID, ProductID, Quantity) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO order_items ( ProductID, Quantity, OrderID) VALUES (?, ?, ?)";
 
             PreparedStatement stmt = connection.prepareStatement(sql);
             for (HashMap.Entry<Product, Integer> entry : order.getCartSnapshot().getItems().entrySet()) {
-                stmt.setString(1, order.getOrderID());
-                stmt.setString(2, entry.getKey().getID());
-                stmt.setInt(3, entry.getValue());
+                stmt.setString(1, entry.getKey().getID());
+                stmt.setInt(2, entry.getValue());
+                stmt.setString(3, order.getOrderID());
                 stmt.executeUpdate();
             }
 
@@ -82,7 +83,7 @@ public class OrderDAO {
     private static CartSnapshot remakeCartSnapshot(String orderID) {
         HashMap<Product, Integer> orderItems = new HashMap<>();
         try (Connection connection = DriverManager.getConnection("jdbc:ucanaccess://src/ProductList.accdb")) {
-            String sql = "SELECT productID, quantity FROM order_items WHERE ID = ?";
+            String sql = "SELECT productID, quantity FROM order_items WHERE OrderID = ?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, orderID);
@@ -96,6 +97,7 @@ public class OrderDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(orderItems.size());
         return CartManager.getInstance().createSnapshot(orderItems);
     }
 
@@ -121,17 +123,17 @@ public class OrderDAO {
         try (Connection conn = DriverManager.getConnection("jdbc:ucanaccess://src/ProductList.accdb")) {
             String sql = "SELECT * FROM order_status WHERE ID = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setLong(1, Long.parseLong(id));
+            pstmt.setString(1, id);
 
             ResultSet result = pstmt.executeQuery();
 
             if (result.next()) {
-                String orderID = result.getString("ID");
+                String osmID = result.getString("ID");
                 String status = result.getString("Status");
                 String location = result.getString("Location");
                 LocalDate lastUpdatedTime = result.getDate("LastUpdatedTime").toLocalDate();
 
-                osm = new OrderStatusManager(orderID, OrderStatusManager.OrderStatus.valueOf(status.toUpperCase()), location, lastUpdatedTime);
+                osm = new OrderStatusManager(osmID, OrderStatusManager.OrderStatus.valueOf(status.toUpperCase()), location, lastUpdatedTime);
             }
         } catch (Exception e) {
             e.printStackTrace();

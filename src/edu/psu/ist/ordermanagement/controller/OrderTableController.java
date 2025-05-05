@@ -1,13 +1,10 @@
 package edu.psu.ist.ordermanagement.controller;
 
 import edu.psu.ist.menumanagement.controller.MenuController;
-import edu.psu.ist.ordermanagement.model.Order;
 import edu.psu.ist.ordermanagement.model.OrderTableModel;
 import edu.psu.ist.ordermanagement.view.OrderTableView;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -22,8 +19,16 @@ public class OrderTableController {
         this.displayData();
         this.addActionListeners();
         this.mouseListener();
-        this.tableModelListener();
+        this.autoSelectFirstRow();
 
+
+    }
+
+    private void autoSelectFirstRow(){
+        if (model.getRowCount() > 0) {
+            view.getOrderTable().setRowSelectionInterval(0, 0); // selects first row
+            showOrderDetails(0);
+        }
     }
 
     private void addActionListeners() {
@@ -34,7 +39,6 @@ public class OrderTableController {
     }
 
     public void displayData() {
-        this.model = new OrderTableModel();
         this.view.getOrderTable().setModel(this.model);
     }
 
@@ -43,25 +47,15 @@ public class OrderTableController {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1) {
                     JTable target = (JTable) e.getSource();
-                    //add func to make it select the indiidual row
+                    showOrderDetails(target.getSelectedRow());
                 }
 
             }
         });
     }
 
-    private void tableModelListener() {
-        this.model.addTableModelListener(new TableModelListener() {
-            public void tableChanged(TableModelEvent e) {
-                if (e.getType() == 0) {
-                    int row = e.getFirstRow();
-                    int column = e.getColumn();
-                    Order updatedValue = (Order) model.getValueAt(row, column);
-//                    ClothingListController.this.clothingArrayList.add(ClothingListController.this.selectedRow, updatedValue);
-//                    ClothingListController.this.clothingArrayList.remove(ClothingListController.this.selectedRow + 1);
-                }
-
-            }
-        });
+    private void showOrderDetails(int selectedRow){
+        view.getOrderDetails().setText("<html>" + model.getOrderDetails(selectedRow) +"</html>");
     }
+
 }

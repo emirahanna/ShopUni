@@ -40,7 +40,8 @@ public class OrderTableModel extends AbstractTableModel {
         return true;
     }
 
-    public ArrayList<Order> getOrderList() {
-        return this.orderList;
+    public String getOrderDetails(int index){
+        System.out.println(orderList.get(index).getOrderItems());
+        return orderList.get(index).getOrderItems();
     }
 }

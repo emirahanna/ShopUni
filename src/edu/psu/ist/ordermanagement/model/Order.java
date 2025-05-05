@@ -44,11 +44,17 @@ public class Order {
         sb.append("Delivery: ").append(shippingDetails.getDeliveryOption()).append(" to ").append(shippingDetails.getAddress()).append("\n");
         sb.append("Estimated Delivery: ").append(shippingDetails.estimateDeliveryDate()).append("\n").append("\n");
         sb.append("Order Summary:").append("\n");
+        sb.append(getOrderItems());
+        sb.append("\n").append("\n").append("-------------------------------------------------------------------------------").append("\n");
+
+        return sb.toString();
+    }
+
+    public String getOrderItems() {
+        StringBuilder sb = new StringBuilder();
         for (Product p : cartSnapshot.getItems().keySet()) {
             sb.append(String.format("%-40s     x%-2d\n", p, cartSnapshot.getItems().get(p)));
         }
-        sb.append("\n").append("\n").append("-------------------------------------------------------------------------------").append("\n");
-
         return sb.toString();
     }
 
