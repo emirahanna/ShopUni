@@ -33,7 +33,7 @@ product image. That is intentional, and will be fixed by the presentation
 | User ID | Name              | % Efforts in Assignment | Brief of Efforts in the Task Contribution                                                                                                                                             |
 |---------|-------------------|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | nvl5303 | Nicole Leon       | 0%                      |                                                                                                                                                                                       |
-| ezy5092 | Emira Hanna Yahya | 85%                     | 1. Created Order JTable view, 2. Recreate orders from order database, 3. Reorganized database to be cleaner, 4. Added button and connected menu to give access to track orders screen |
-| hmf5339 | Haley Fitzgerald  | 15%                     | 1. Added track order button with functionality to access order table on step 3 of payment wizard. 2. added functioning home button on step 3 of payment wizard                        |
-| hlt5125 | Heaven Thomas     | %0                      |
+| ezy5092 | Emira Hanna Yahya | 80%                     | 1. Created Order JTable view, 2. Recreate orders from order database, 3. Reorganized database to be cleaner, 4. Added button and connected menu to give access to track orders screen |
+| hmf5339 | Haley Fitzgerald  | 20%                     | 1. Added track order button with functionality to access order table on step 3 of payment wizard. 2. added functioning home button on step 3 of payment wizard                        |
+| hlt5125 | Heaven Thomas     | 0%                      |
 
