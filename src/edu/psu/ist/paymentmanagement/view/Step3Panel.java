@@ -1,5 +1,8 @@
 package edu.psu.ist.paymentmanagement.view;
 
+import edu.psu.ist.ordermanagement.model.Order;
+import edu.psu.ist.trackingmanagement.controller.TrackingController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,13 +11,15 @@ public class Step3Panel extends WizardStepPanel {
     private JButton backButton;
     private JLabel instructionLabel;
     private JLabel orderLabel;
-    private JButton printReceiptButton;
+    private JButton trackOrderButton;
     private JPanel headerPanel;
     private JPanel orderPanel;
+    private JPanel buttonPanel;
 
     public Step3Panel() {
         setUpHeaderPanel();
-        setUpOrderPanel();    }
+        setUpOrderPanel();
+        setUpTrackingButtonPanel();}
 
     private void setUpHeaderPanel(){
         headerPanel = new JPanel();
@@ -31,6 +36,13 @@ public class Step3Panel extends WizardStepPanel {
         orderLabel.setMaximumSize(new Dimension(300, -1));
         orderPanel.add(orderLabel);
         add(orderPanel, BorderLayout.CENTER);
+    }
+
+    private void setUpTrackingButtonPanel(){
+        buttonPanel = new JPanel();
+        trackOrderButton = new JButton("Track Order");
+        buttonPanel.add(trackOrderButton);
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
 
