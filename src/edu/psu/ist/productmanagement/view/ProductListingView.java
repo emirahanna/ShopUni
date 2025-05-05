@@ -41,6 +41,7 @@ public class ProductListingView extends JFrame {
     private JLabel p5PriceLabel;
     private JPanel cardsPanel;
     private JComboBox categoryComboBox;
+    private JButton menuButton;
 
     public ProductListingView() {
         setUpComboBox();
@@ -91,12 +92,12 @@ public class ProductListingView extends JFrame {
 
     private void setUpComboBox() {
         categoryComboBox.addItem(ProductCategory.TOP);
-        categoryComboBox.addItem("Outerwear");
-        categoryComboBox.addItem("Bottom");
-        categoryComboBox.addItem("Shoes");
-        categoryComboBox.addItem("Accessories");
-        categoryComboBox.addItem("None");
-        categoryComboBox.setSelectedItem("None");
+        categoryComboBox.addItem(ProductCategory.OUTERWEAR);
+        categoryComboBox.addItem(ProductCategory.BOTTOM);
+        categoryComboBox.addItem(ProductCategory.SHOES);
+        categoryComboBox.addItem(ProductCategory.ACCESSORIES);
+        categoryComboBox.addItem(ProductCategory.NONE);
+        categoryComboBox.setSelectedItem(ProductCategory.NONE);
     }
 
 
@@ -128,6 +129,10 @@ public class ProductListingView extends JFrame {
     }
     public JButton getFeaturedProductsButton() {
         return featuredProductsButton;
+    }
+
+    public JButton getMenuButton() {
+        return menuButton;
     }
 
     public JComboBox getCategoryComboBox() {

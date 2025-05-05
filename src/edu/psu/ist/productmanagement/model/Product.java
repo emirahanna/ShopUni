@@ -59,6 +59,10 @@ public class Product {
         return ID;
     }
 
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
     public String getImageID() {
         return imageID;
     }

@@ -38,14 +38,27 @@ public class Order {
 
     public String generateOrderSummary() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Order ID: ").append(orderID).append("\n");
-        sb.append("Order Total: $").append(orderTotal).append("\n");
-        sb.append("Status: ").append(orderStatusManager.getOrderStatus()).append("\n");
-        sb.append("Delivery: ").append(shippingDetails.getDeliveryOption()).append(" to ").append(shippingDetails.getAddress()).append("\n");
-        sb.append("Estimated Delivery: ").append(shippingDetails.estimateDeliveryDate()).append("\n").append("\n");
-        sb.append("Order Summary:").append("\n");
+
+        sb.append("========================================\n");
+        sb.append("                ORDER RECEIPT\n");
+        sb.append("========================================\n\n");
+
+        sb.append(String.format("Order ID:          %s\n", orderID));
+        sb.append(String.format("Order Total:       $%.2f\n", orderTotal));
+        sb.append(String.format("Status:            %s\n", orderStatusManager.getOrderStatus()));
+        sb.append(String.format("Delivery Option:   %s\n", shippingDetails.getDeliveryOption()));
+        sb.append(String.format("Shipping Address:  %s\n", shippingDetails.getAddress()));
+        sb.append(String.format("Est. Delivery:     %s\n", shippingDetails.estimateDeliveryDate()));
+
+        sb.append("\n----------------------------------------\n");
+        sb.append("                ORDER ITEMS\n");
+        sb.append("----------------------------------------\n");
+
         sb.append(getOrderItems());
-        sb.append("\n").append("\n").append("-------------------------------------------------------------------------------").append("\n");
+
+        sb.append("\n========================================\n");
+        sb.append("     Thank you for shopping with us!\n");
+        sb.append("========================================\n");
 
         return sb.toString();
     }

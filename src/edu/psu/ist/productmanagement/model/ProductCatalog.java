@@ -10,10 +10,12 @@ import java.util.Date;
 
 public class ProductCatalog {
     private ArrayList<Product> products;
+    private ArrayList<Product> filtered;
     private final int productPerPage = 5;
 
     public ProductCatalog() {
         this.products = new ArrayList<>();
+        this.filtered = new ArrayList<>();
         loadProducts();
 
     }
@@ -66,4 +68,27 @@ public class ProductCatalog {
         int featuredProductCount = Math.min(3, products.size());
         return new ArrayList<>(products.subList(0,featuredProductCount));
     }
+
+    public ArrayList<Product> getProductsByCategory(ProductCategory category) {
+        filtered = new ArrayList<>();
+        for (Product p : products) {
+            if (p.getProductCategory().equals(category)) {
+                filtered.add(p);
+            }
+        }
+        return filtered;
+    }
+
+    public ArrayList<Product> getProductsByCategoryOnPage(int page) {
+        int start = (page - 1) * productPerPage;
+        int end = Math.min(start + productPerPage, filtered.size());
+
+        if (start >= filtered.size()) return new ArrayList<>();
+        return new ArrayList<>(filtered.subList(start, end));
+    }
+    public int getTotalPagesForCategory() {
+        return (int) Math.ceil(filtered.size() / (double) productPerPage);
+    }
+
+
 }

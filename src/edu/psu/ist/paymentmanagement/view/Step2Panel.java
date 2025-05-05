@@ -22,6 +22,7 @@ public class Step2Panel extends WizardStepPanel {
         setUpHeaderPanel();
         setUpDeliveryOptionPanel();
         setUpInfoFieldPanel();
+        deliveryRadioButton.setSelected(true);
     }
 
     private void setUpBasePanel(){

@@ -2,6 +2,7 @@ package edu.psu.ist.productmanagement.controller;
 
 import java.util.ArrayList;
 
+import edu.psu.ist.menumanagement.controller.MenuController;
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.model.ProductCatalog;
 import edu.psu.ist.productmanagement.model.ProductCategory;
@@ -11,27 +12,30 @@ public class ProductListingController {
     final ProductCatalog catalog;
     final ProductListingView view;
     private int currentPage;
-    final boolean isCatalogOpen;
+    private ProductCategory currCategory;
 
     public ProductListingController() {
         this.catalog = new ProductCatalog();
         this.view = new ProductListingView();
         this.currentPage = 1;
-        isCatalogOpen = true;
+        currCategory = ProductCategory.NONE;
 
         setupListeners();
+        setUpComboBox();
         showCatalog();
-
     }
 
     public void showCatalog() {
-//        ProductCategory pc = view.getCategoryComboBox().getSelectedItem();
-//        switch(){
-//
-//        }
+        ArrayList<Product> products = null;
+        int totalPages = 0;
+        if (currCategory.equals(ProductCategory.NONE)) {
+            products = catalog.getProductsOnPage(currentPage);
+            totalPages = catalog.getTotalPages();
+        } else {
+            products = catalog.getProductsByCategory(currCategory);
+            totalPages = catalog.getTotalPagesForCategory();
+        }
 
-        ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
-        int totalPages = catalog.getTotalPages();
         view.initializeProducts(products, currentPage, totalPages);
         view.getPageIndicator().setText(("Page " + currentPage + " of " + totalPages));
     }
@@ -62,12 +66,22 @@ public class ProductListingController {
             new FeaturedProductsController();
             view.setVisible(false);
         });
-
+        view.getMenuButton().addActionListener(e -> {
+            new MenuController();
+            view.setVisible(false);
+        });
+        view.getCategoryComboBox().addActionListener(e -> setUpComboBox());
         view.getP1ViewProductButton().addActionListener(e -> openProductPage(0));
         view.getP2ViewProductButton().addActionListener(e -> openProductPage(1));
         view.getP3ViewProductButton().addActionListener(e -> openProductPage(2));
         view.getP4ViewProductButton().addActionListener(e -> openProductPage(3));
         view.getP5ViewProductButton().addActionListener(e -> openProductPage(4));
+    }
+
+    private void setUpComboBox() {
+        currCategory = ProductCategory.valueOf(view.getCategoryComboBox().getSelectedItem().toString().toUpperCase());
+        currentPage = 1; // Reset to first page when category changes yay
+        showCatalog();
     }
 
     private void openProductPage(int index) {

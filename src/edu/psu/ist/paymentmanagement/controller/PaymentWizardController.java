@@ -85,6 +85,11 @@ public class PaymentWizardController {
                 if (expDate == null) return;
                 if (cardNum == null) return;
 
+                if (!isValidExpirationDate(expDate)) {
+                    JOptionPane.showMessageDialog(panel, "The expiration date cannot be in the past.");
+                    return;
+                }
+
                 createPayment(new Payment.Card(
                         cardNum,
                         expDate,
@@ -155,6 +160,7 @@ public class PaymentWizardController {
             view.repaintPreviousStep();
         } else {
             new CartController(); // Go back to cart
+            view.setVisible(false);
         }
     }
 
@@ -205,5 +211,17 @@ public class PaymentWizardController {
             JOptionPane.showMessageDialog(parent, fieldName + " must be a valid card number.");
             return null;
         }
+    }
+
+    private boolean isValidExpirationDate(int expDate) {
+        int expMonth = expDate / 100;
+        int expYear = expDate % 100;
+
+        java.time.LocalDate now = java.time.LocalDate.now();
+        int currentMonth = now.getMonthValue();
+        int currentYear = now.getYear() % 100;
+
+        // Returns true if expiration date is either this month or in the future
+        return (expYear > currentYear) || (expYear == currentYear && expMonth >= currentMonth);
     }
 }

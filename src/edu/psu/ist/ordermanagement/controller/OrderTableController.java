@@ -55,7 +55,7 @@ public class OrderTableController {
     }
 
     private void showOrderDetails(int selectedRow){
-        view.getOrderDetails().setText("<html>" + model.getOrderDetails(selectedRow) +"</html>");
+        view.getOrderDetails().setText( "<html>" + model.getOrderDetails(selectedRow).replaceAll("\n", "<br>") + "</html>");
     }
 
 }

@@ -18,19 +18,19 @@ public class Step3Panel extends WizardStepPanel {
     private JButton homeButton;
 
     public Step3Panel() {
+        this.setLayout(new BorderLayout());
         setUpHeaderPanel();
         setUpOrderPanel();
         setUpTrackingButtonPanel();}
 
     private void setUpHeaderPanel(){
         headerPanel = new JPanel();
-        backButton = new JButton("Back");
         instructionLabel = new JLabel("Step 3: Print Receipt");
         homeButton = new JButton("Home");
-        headerPanel.add(backButton);
-        headerPanel.add(instructionLabel);
         headerPanel.add(homeButton);
+        headerPanel.add(instructionLabel);
         add(headerPanel, BorderLayout.NORTH);
+        headerPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
     private void setUpOrderPanel(){

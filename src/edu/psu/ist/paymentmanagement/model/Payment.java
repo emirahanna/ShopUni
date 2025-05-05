@@ -52,7 +52,16 @@ public class Payment {
     }
 
     public String generatesReceipt() {
-        return "Receipt:\nPayment ID: " + paymentID + "\nAmount Paid: $" + amountPaid + "\nDate: " + transactionDate + "\nPayment Method: " + paymentOption;
+        StringBuilder sb = new StringBuilder();
+        sb.append("========================================\n");
+        sb.append("              PAYMENT RECEIPT\n");
+        sb.append("========================================\n\n");
+        sb.append(String.format("Payment ID:       %s\n", paymentID));
+        sb.append(String.format("Amount Paid:      $%.2f\n", amountPaid));
+        sb.append(String.format("Date:             %s\n", transactionDate));
+        sb.append(String.format("Payment Method:   %s\n", paymentOption));
+        sb.append("\n========================================\n");
+        return sb.toString();
     }
 
     public PaymentOption getPaymentOption() {
