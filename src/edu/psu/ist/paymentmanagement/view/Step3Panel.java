@@ -15,6 +15,7 @@ public class Step3Panel extends WizardStepPanel {
     private JPanel headerPanel;
     private JPanel orderPanel;
     private JPanel buttonPanel;
+    private JButton homeButton;
 
     public Step3Panel() {
         setUpHeaderPanel();
@@ -25,8 +26,10 @@ public class Step3Panel extends WizardStepPanel {
         headerPanel = new JPanel();
         backButton = new JButton("Back");
         instructionLabel = new JLabel("Step 3: Print Receipt");
+        homeButton = new JButton("Home");
         headerPanel.add(backButton);
         headerPanel.add(instructionLabel);
+        headerPanel.add(homeButton);
         add(headerPanel, BorderLayout.NORTH);
     }
 
@@ -55,6 +58,14 @@ public class Step3Panel extends WizardStepPanel {
     @Override
     public JButton getBackButton() {
         return backButton;
+    }
+
+    public JButton getHomeButton() {
+        return homeButton;
+    }
+
+    public JButton getTrackOrderButton() {
+        return trackOrderButton;
     }
 
     public JLabel getOrderLabel() {

@@ -4,6 +4,8 @@ import edu.psu.ist.cartmanagement.controller.CartController;
 import edu.psu.ist.cartmanagement.model.CartDAO;
 import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.cartmanagement.model.CartSnapshot;
+import edu.psu.ist.menumanagement.controller.MenuController;
+import edu.psu.ist.ordermanagement.controller.OrderTableController;
 import edu.psu.ist.ordermanagement.model.Order;
 import edu.psu.ist.ordermanagement.model.OrderDAO;
 import edu.psu.ist.ordermanagement.model.Shipping;
@@ -34,6 +36,8 @@ public class PaymentWizardController {
         attachNextButtonListeners();
         attachBackButtonListeners();
         attachRadioButtonListeners();
+        attachHomeButtonListener();
+        attachTrackOrderButtonListener();
     }
 
 
@@ -51,6 +55,24 @@ public class PaymentWizardController {
 
         step1.getNextButton().addActionListener(e -> handleStep1Next(step1));
         step2.getNextButton().addActionListener(e -> handleStep2Next(step2));
+    }
+
+    private void attachHomeButtonListener(){
+        Step3Panel step3Panel = (Step3Panel) view.getStepPanels().get(2);
+
+        step3Panel.getHomeButton().addActionListener(e -> {
+            view.dispose();
+            new MenuController();
+        });
+    }
+
+    private void attachTrackOrderButtonListener(){
+        Step3Panel step3Panel = (Step3Panel) view.getStepPanels().get(2);
+
+        step3Panel.getTrackOrderButton().addActionListener(e -> {
+            view.dispose();
+            new OrderTableController();
+        });
     }
 
     //this made the attachListener methods too long, so it now gets its own method
