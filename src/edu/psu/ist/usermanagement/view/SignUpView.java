@@ -5,11 +5,11 @@ import javax.swing.*;
 public class SignUpView extends JFrame{
     private JTextField usernameField;
     private JLabel shopUniLabel;
-    private JTextField passwordField;
     private JPanel basePanel;
     private JComboBox roleComboBox;
     private JLabel logInPrompt;
     private JButton signUpButton;
+    private JPasswordField passwordField;
 
     public SignUpView(){
         setView();

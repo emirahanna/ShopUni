@@ -6,13 +6,15 @@ import edu.psu.ist.usermanagement.model.UserAccount;
 import javax.swing.*;
 
 public class User implements CartObserver {
-    final UserAccount account;
-    final CartManager cart;
+    private UserAccount account;
+    private CartManager cart;
+    private boolean alertShown;
 
     public User(UserAccount account, CartManager cart) {
         this.account = account;
         this.cart = cart;
         cart.addObserver(this);
+        alertShown = false;
     }
 
     @Override
@@ -20,9 +22,10 @@ public class User implements CartObserver {
         boolean hasItems = !cart.getItems().isEmpty();
         account.setHasCartItems(hasItems);
 
-        if (hasItems) {
+        if (hasItems && !alertShown) {
             SwingUtilities.invokeLater(() -> {
                 JOptionPane.showMessageDialog(null, "Welcome back! You still have " + cart.getItems().size() + " item(s) in your cart.", "Cart Reminder", JOptionPane.INFORMATION_MESSAGE);
+                alertShown = true;
             });
         }
     }

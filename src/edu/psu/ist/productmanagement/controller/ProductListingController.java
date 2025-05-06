@@ -85,7 +85,7 @@ public class ProductListingController {
     }
 
     private void openProductPage(int index) {
-        ArrayList<Product> products = catalog.getProductsOnPage(currentPage);
+        ArrayList<Product> products = (currCategory == ProductCategory.NONE) ? catalog.getProductsOnPage(currentPage): catalog.getProductsByCategoryOnPage(currentPage);
         if (index < products.size()) {
             Product selectedProduct = products.get(index);
             view.setVisible(false);
