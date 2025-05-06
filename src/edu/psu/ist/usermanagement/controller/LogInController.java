@@ -18,10 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class LogInController {
-    private static final Log log = LogFactory.getLog(LogInController.class);
     private LogInView logInView;
-    private UserAccount authenticatedUser; // Stores the logged-in user
-
 
     public LogInController() {
         this.logInView = new LogInView();
@@ -74,7 +71,6 @@ public class LogInController {
         try {
             UserRole role = user.verifyUser();
             if (role == UserRole.BUYER) {
-                authenticatedUser = user;
                 CartController.loadCartAtLogin(UserSession.getInstance().getUserID());
                 new MenuController();
                 logInView.setVisible(false);
@@ -88,9 +84,5 @@ public class LogInController {
             JOptionPane.showMessageDialog(logInView, "Login failed. Incorrect username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
         }
 
-    }
-
-    public LogInView getLogInView() {
-        return logInView;
     }
 }

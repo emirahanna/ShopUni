@@ -29,7 +29,7 @@ public class PaymentIDGenerator {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace(); // or log this properly in a real app
+            e.printStackTrace();
         }
         return maxId;
     }

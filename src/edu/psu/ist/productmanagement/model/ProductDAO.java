@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ProductDAO {
 
@@ -24,7 +24,7 @@ public class ProductDAO {
                 String description = result.getString("description");
                 String imageID = result.getString("imageID");
                 String sellerID = result.getString("sellerID");
-                Date date = result.getDate("dateListed");
+                LocalDate date = result.getDate("dateListed").toLocalDate();
                 String productCategory = result.getString("productCategory");
                 double price = result.getDouble("price");
 

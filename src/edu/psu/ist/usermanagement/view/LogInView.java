@@ -30,11 +30,6 @@ public class LogInView extends JFrame{
         logInPanel.requestFocusInWindow();
     }
 
-
-
-    public JPanel getLogInPanel() {
-        return logInPanel;
-    }
     public JTextField getUsernameField() {
         return usernameField;
     }
@@ -44,7 +39,6 @@ public class LogInView extends JFrame{
     public JTextField getPasswordField() {
         return passwordField;
     }
-
     public JLabel getSignUpPrompt() {
         return signUpPrompt;
     }

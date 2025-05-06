@@ -68,13 +68,8 @@ public class UserAccount {
         return role;
     }
 
-
     public void setHasCartItems(boolean hasCartItems) {
         this.hasCartItems = hasCartItems;
-    }
-
-    public void toggleHasSavedPayment() {
-        hasSavedPayment = !hasSavedPayment;
     }
 
     public boolean isHasSavedPayment() {

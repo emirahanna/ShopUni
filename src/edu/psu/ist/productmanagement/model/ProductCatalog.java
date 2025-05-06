@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -36,7 +37,7 @@ public class ProductCatalog {
                 String imageID = result.getString("imageID");
                 String sellerID = result.getString("sellerID");
                 String productCategory = result.getString("productCategory");
-                Date date = result.getDate("dateListed");
+                LocalDate date = result.getDate("dateListed").toLocalDate();
                 double price = (result.getDouble("price"));
 
                 products.add(new Product(title, description, id, imageID, sellerID, date, productCategory, price));

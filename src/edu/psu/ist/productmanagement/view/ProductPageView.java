@@ -3,7 +3,7 @@ package edu.psu.ist.productmanagement.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class ProductPageView extends JFrame{
+public class ProductPageView extends JFrame {
     private JPanel basePanel;
     private JButton backButton;
     private JPanel productDetails;
@@ -16,19 +16,20 @@ public class ProductPageView extends JFrame{
     private JLabel productImage;
 
 
-    public ProductPageView()  {
+    public ProductPageView() {
         setView();
     }
 
-    public void setProductImage(ImageIcon icon){
+    public void setProductImage(ImageIcon icon) {
         setScaledImage(icon);
         productImage.revalidate();
         productImage.repaint();
     }
 
-    public void setEmptyImage(){
+    public void setEmptyImage() {
         productImage.setText("No product image available.");
     }
+
     private void setView() {
         //names the text at the top of the window
         this.setTitle("ShopUni");
@@ -63,7 +64,6 @@ public class ProductPageView extends JFrame{
     }
 
 
-
     public JPanel getBasePanel() {
         return basePanel;
     }
@@ -95,10 +95,5 @@ public class ProductPageView extends JFrame{
     public JLabel getProductPageBreadCrumb() {
         return productPageBreadCrumb;
     }
-
-    public JLabel getProductImage() {
-        return productImage;
-    }
-
 
 }

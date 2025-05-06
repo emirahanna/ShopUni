@@ -1,8 +1,5 @@
 package edu.psu.ist.paymentmanagement.view;
 
-import edu.psu.ist.ordermanagement.model.Order;
-import edu.psu.ist.trackingmanagement.controller.TrackingController;
-
 import javax.swing.*;
 import java.awt.*;
 

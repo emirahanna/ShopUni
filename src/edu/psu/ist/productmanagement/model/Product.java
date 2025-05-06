@@ -1,7 +1,6 @@
 package edu.psu.ist.productmanagement.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * Encapsulates the features of a product, which can be created and sold
@@ -12,12 +11,12 @@ public class Product {
     private final String ID;
     private final String imageID;
     private final String sellerID;
-    private final Date dateListed;
+    private final LocalDate dateListed;
     private final ProductCategory productCategory;
     private final double price;
 
 
-    public Product(String title, String description, String productID, String imageID, String sellerID, Date dateListed, String productCategory, double price) {
+    public Product(String title, String description, String productID, String imageID, String sellerID, LocalDate dateListed, String productCategory, double price) {
         this.title = title;
         this.description = description;
         this.ID = productID;
