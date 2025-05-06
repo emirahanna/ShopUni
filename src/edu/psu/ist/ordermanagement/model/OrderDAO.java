@@ -28,7 +28,6 @@ public class OrderDAO {
 
             //status id
             insertOrderStatus(order.getOrderStatusManager());
-            System.out.println(order.getOrderStatusManager().getID());
             pstmt.setString(6, order.getOrderStatusManager().getID());
 
             pstmt.executeUpdate();
@@ -97,7 +96,6 @@ public class OrderDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(orderItems.size());
         return CartManager.getInstance().createSnapshot(orderItems);
     }
 

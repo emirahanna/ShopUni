@@ -21,14 +21,16 @@ import java.time.LocalDate;
 public class PaymentWizardController {
     private int currentStep;
     private PaymentWizardFrame view;
+    private PaymentFacade paymentFacade;
     private CartSnapshot cart;
     private Payment payment;
     private Order order;
 
     public PaymentWizardController(CartSnapshot cart) {
-        currentStep = 0;
+        this.currentStep = 0;
         this.cart = cart;
-        view = new PaymentWizardFrame();
+        this.view = new PaymentWizardFrame();
+        this.paymentFacade = new PaymentFacade();
         attachActionListeners();
     }
 
@@ -57,7 +59,7 @@ public class PaymentWizardController {
         step2.getNextButton().addActionListener(e -> handleStep2Next(step2));
     }
 
-    private void attachHomeButtonListener(){
+    private void attachHomeButtonListener() {
         Step3Panel step3Panel = (Step3Panel) view.getStepPanels().get(2);
 
         step3Panel.getHomeButton().addActionListener(e -> {
@@ -66,7 +68,7 @@ public class PaymentWizardController {
         });
     }
 
-    private void attachTrackOrderButtonListener(){
+    private void attachTrackOrderButtonListener() {
         Step3Panel step3Panel = (Step3Panel) view.getStepPanels().get(2);
 
         step3Panel.getTrackOrderButton().addActionListener(e -> {
@@ -75,33 +77,27 @@ public class PaymentWizardController {
         });
     }
 
-    //this made the attachListener methods too long, so it now gets its own method
     private void handleStep1Next(Step1Panel panel) {
         if (panel.getCreditCardRadioButton().isSelected() || panel.getDebitCardRadioButton().isSelected()) {
-            if (validateFields(panel, panel.getCardNumberTextField(), panel.getExpirationDateTextField(), panel.getNameTextField())) {
-                Integer expDate = parseInteger(panel, panel.getExpirationDateTextField().getText(), "Expiration Date");
-                Long cardNum = parseLong(panel, panel.getCardNumberTextField().getText().trim(), "Card Number");
+            if (InputValidator.areFieldsFilled(panel, panel.getCardNumberTextField(), panel.getExpirationDateTextField(), panel.getNameTextField())) {
+                Integer expDate = InputValidator.parseInteger(panel, panel.getExpirationDateTextField().getText(), "Expiration Date");
+                Long cardNum = InputValidator.parseLong(panel, panel.getCardNumberTextField().getText(), "Card Number");
 
-                if (expDate == null) return;
-                if (cardNum == null) return;
+                if (expDate == null || cardNum == null) return;
 
-                if (!isValidExpirationDate(expDate)) {
+                if (!paymentFacade.isValidExpirationDate(expDate)) {
                     JOptionPane.showMessageDialog(panel, "The expiration date cannot be in the past.");
                     return;
                 }
 
-                createPayment(new Payment.Card(
-                        cardNum,
-                        expDate,
-                        panel.getNameTextField().getText().trim()
-                ));
+                Payment.Card card = new Payment.Card(cardNum, expDate, panel.getNameTextField().getText().trim());
+                payment = paymentFacade.processPayment(card, cart.getTotal());
                 nextStep();
             }
         } else if (panel.getGiftCardRadioButton().isSelected()) {
-            if (validateFields(panel, panel.getGiftCardNumberTextField())) {
-                createPayment(new Payment.GiftCard(
-                        panel.getGiftCardNumberTextField().getText().trim()
-                ));
+            if (InputValidator.areFieldsFilled(panel, panel.getGiftCardNumberTextField())) {
+                Payment.GiftCard giftCard = new Payment.GiftCard(panel.getGiftCardNumberTextField().getText().trim());
+                payment = paymentFacade.processPayment(giftCard, cart.getTotal());
                 nextStep();
             }
         } else {
@@ -110,27 +106,20 @@ public class PaymentWizardController {
     }
 
     private void handleStep2Next(Step2Panel panel) {
-        if (validateFields(panel, panel.getNameTextField(), panel.getAddressTextField())) {
-            //ternary operators.. so slick.. so divine
-            Shipping.DeliveryOption option = panel.getPickupRadioButton().isSelected()
-                    ? Shipping.DeliveryOption.PICKUP
-                    : Shipping.DeliveryOption.DELIVERY;
+        if (InputValidator.areFieldsFilled(panel, panel.getNameTextField(), panel.getAddressTextField())) {
+            Shipping.DeliveryOption option = panel.getPickupRadioButton().isSelected() ? Shipping.DeliveryOption.PICKUP : Shipping.DeliveryOption.DELIVERY;
 
-            createOrder(
-                    panel.getNameTextField().getText().trim(),
-                    panel.getAddressTextField().getText().trim(),
-                    option
-            );
+            order = paymentFacade.placeOrder(payment, panel.getNameTextField().getText().trim(), panel.getAddressTextField().getText().trim(), cart, option);
             nextStep();
             handleStep3Panel();
         }
     }
 
-    private void handleStep3Panel(){
+    private void handleStep3Panel() {
         Step3Panel step3Panel = (Step3Panel) view.getStepPanels().get(2);
         step3Panel.getOrderLabel().setText(generateOrderLabel());
-        CartDAO.deleteCartItemsForUser(UserSession.getInstance().getUserID()); //clear cart items in database
-        CartManager.getInstance().emptyCart(); //  clear in-memory cart
+        CartDAO.deleteCartItemsForUser(UserSession.getInstance().getUserID());
+        CartManager.getInstance().emptyCart();
     }
 
     private void attachRadioButtonListeners() {
@@ -163,65 +152,8 @@ public class PaymentWizardController {
             view.setVisible(false);
         }
     }
-
-    private String generateOrderLabel(){
+    private String generateOrderLabel() {
         String summary = order.generateOrderSummary() + "\n" + payment.generatesReceipt();
         return "<html>" + summary.replaceAll("\n", "<br>") + "</html>";
-    }
-
-    private void createPayment(Payment.PaymentOption paymentOption) {
-        payment = new Payment(PaymentIDGenerator.createID(), paymentOption, cart.getTotal(),  LocalDate.now());
-        PaymentDAO.insertPayment(payment);
-    }
-
-    private void createOrder(String name, String address, Shipping.DeliveryOption deliveryOption) {
-        order = new Order(payment.getPaymentID(),
-                LocalDate.now(),
-                cart,
-                address,
-                deliveryOption);
-        OrderDAO.insertOrder(order);
-
-    }
-
-    //  Helpers Please work....please....I need this to work! I will give my first 2 born, 2 childrens, please!
-    private boolean validateFields(JComponent parent, JTextField... fields) { //helps to validate n number of fields, yay
-        for (JTextField field : fields) {
-            if (field.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(parent, "Please fill in all required fields.");
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private Integer parseInteger(JComponent parent, String input, String fieldName) {
-        try {
-            return Integer.parseInt(input.trim());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(parent, fieldName + " must be a valid number.");
-            return null;
-        }
-    }
-
-    private Long parseLong(JComponent parent, String input, String fieldName) {
-        try {
-            return Long.parseLong(input.trim());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(parent, fieldName + " must be a valid card number.");
-            return null;
-        }
-    }
-
-    private boolean isValidExpirationDate(int expDate) {
-        int expMonth = expDate / 100;
-        int expYear = expDate % 100;
-
-        java.time.LocalDate now = java.time.LocalDate.now();
-        int currentMonth = now.getMonthValue();
-        int currentYear = now.getYear() % 100;
-
-        // Returns true if expiration date is either this month or in the future
-        return (expYear > currentYear) || (expYear == currentYear && expMonth >= currentMonth);
     }
 }

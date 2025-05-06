@@ -4,7 +4,6 @@ import edu.psu.ist.cartmanagement.model.CartSnapshot;
 import edu.psu.ist.productmanagement.model.Product;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Order {
     private String orderID;

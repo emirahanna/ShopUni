@@ -2,7 +2,7 @@ package edu.psu.ist.cartmanagement.model;
 
 /**
  * Helper class to ensure that the cart is persistent between sessions.
- * so tired
+ *
  */
 public class CartItemRecord {
     private String productID;

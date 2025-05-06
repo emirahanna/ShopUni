@@ -1,8 +1,6 @@
 package edu.psu.ist.ordermanagement.view;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
-import java.awt.*;
 
 public class OrderTableView extends JFrame {
     private JPanel basePanel;
@@ -29,18 +27,12 @@ public class OrderTableView extends JFrame {
     public JPanel getBasePanel() {
         return basePanel;
     }
-
     public JTable getOrderTable() {
         return orderTable;
     }
     public JLabel getOrderDetails() {
         return orderDetails;
     }
-
-    public JScrollPane getScrollPane() {
-        return scrollPane;
-    }
-
     public JButton getBackButton() {
         return backButton;
     }

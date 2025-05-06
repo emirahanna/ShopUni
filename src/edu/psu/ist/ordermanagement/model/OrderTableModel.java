@@ -41,7 +41,6 @@ public class OrderTableModel extends AbstractTableModel {
     }
 
     public String getOrderDetails(int index){
-        System.out.println(orderList.get(index).getOrderItems());
         return orderList.get(index).getOrderItems();
     }
 }

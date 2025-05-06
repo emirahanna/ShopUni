@@ -23,15 +23,6 @@ public class OrderStatusManager {
         this.lastUpdatedTime = lastUpdatedTime;
     }
 
-    //can't cancel if the order has already been shipped
-    public boolean cancelOrder() {
-        if (orderStatus == OrderStatus.PENDING) {
-            orderStatus = OrderStatus.CANCELED;
-            return true;
-        }
-        return false;
-    }
-
     public OrderStatus getOrderStatus() {
         return orderStatus;
     }
