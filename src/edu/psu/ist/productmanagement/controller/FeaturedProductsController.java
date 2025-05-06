@@ -19,6 +19,7 @@ public class FeaturedProductsController {
         featuredProductsView.initializeFeaturedProducts(featuredProducts);
     }
 
+
     public void attachActionListeners() {
         featuredProductsView.getBackButton().addActionListener(e -> {
             new ProductListingController();
