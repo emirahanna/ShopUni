@@ -80,19 +80,25 @@ public class PaymentWizardController {
     private void handleStep1Next(Step1Panel panel) {
         if (panel.getCreditCardRadioButton().isSelected() || panel.getDebitCardRadioButton().isSelected()) {
             if (InputValidator.areFieldsFilled(panel, panel.getCardNumberTextField(), panel.getExpirationDateTextField(), panel.getNameTextField())) {
-                Integer expDate = InputValidator.parseInteger(panel, panel.getExpirationDateTextField().getText(), "Expiration Date");
-                Long cardNum = InputValidator.parseLong(panel, panel.getCardNumberTextField().getText(), "Card Number");
-
-                if (expDate == null || cardNum == null) return;
-
-                if (!paymentFacade.isValidExpirationDate(expDate)) {
-                    JOptionPane.showMessageDialog(panel, "The expiration date cannot be in the past.");
+                if(panel.getExpirationDateTextField().getText().trim().length() != 4){
+                    JOptionPane.showMessageDialog(panel, "Expiration date must be in mmyy format");
                     return;
                 }
+                else {
+                    Integer expDate = InputValidator.parseInteger(panel, panel.getExpirationDateTextField().getText(), "Expiration Date");
+                    Long cardNum = InputValidator.parseLong(panel, panel.getCardNumberTextField().getText(), "Card Number");
 
-                Payment.Card card = new Payment.Card(cardNum, expDate, panel.getNameTextField().getText().trim());
-                payment = paymentFacade.processPayment(card, cart.getTotal());
-                nextStep();
+                    if (expDate == null || cardNum == null) return;
+
+                    if (!paymentFacade.isValidExpirationDate(expDate)) {
+                        JOptionPane.showMessageDialog(panel, "Please give a valid expiration date.");
+                        return;
+                    }
+
+                    Payment.Card card = new Payment.Card(cardNum, expDate, panel.getNameTextField().getText().trim());
+                    payment = paymentFacade.processPayment(card, cart.getTotal());
+                    nextStep();
+                }
             }
         } else if (panel.getGiftCardRadioButton().isSelected()) {
             if (InputValidator.areFieldsFilled(panel, panel.getGiftCardNumberTextField())) {

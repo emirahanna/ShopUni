@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class InputValidator {
      //the dumbest of all names....
-     public static boolean areFieldsFilled(JComponent parent, JTextField... fields) {
+     public static boolean areFieldsFilled(JComponent parent, JTextField... fields) { //shoutout to dan for teaching this
          for (JTextField field : fields) {
              if (field.getText().trim().isEmpty()) {
                  JOptionPane.showMessageDialog(parent, "Please fill in all required fields.");

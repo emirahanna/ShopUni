@@ -32,7 +32,8 @@ public class ProductListingController {
             products = catalog.getProductsOnPage(currentPage);
             totalPages = catalog.getTotalPages();
         } else {
-            products = catalog.getProductsByCategory(currCategory);
+            catalog.getProductsByCategory(currCategory);
+            products = catalog.getProductsByCategoryOnPage(currentPage);
             totalPages = catalog.getTotalPagesForCategory();
         }
 

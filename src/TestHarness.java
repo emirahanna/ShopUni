@@ -7,7 +7,6 @@ import java.sql.*;
 public class TestHarness {
     public static void main(String[] args) {
         testFullFlow();
-        //attemptPaymentBeforeLogin();
     }
 
     public static void attemptPaymentBeforeLogin(){

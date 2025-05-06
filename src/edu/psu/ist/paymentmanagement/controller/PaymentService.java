@@ -21,6 +21,6 @@ public class PaymentService {
         int currentMonth = now.getMonthValue();
         int currentYear = now.getYear() % 100;
 
-        return (expYear > currentYear || (expYear == currentYear && expMonth >= currentMonth)) && currentMonth <=12;
+        return (expYear > currentYear || (expYear == currentYear && expMonth >= currentMonth)) && expMonth <=12 ;
     }
 }
