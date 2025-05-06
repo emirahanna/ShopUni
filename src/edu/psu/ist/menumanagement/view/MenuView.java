@@ -9,6 +9,7 @@ public class MenuView extends JFrame{
     private JPanel basePanel;
     private JLabel promptLabel;
     private JButton trackOrdersButton;
+    private JButton logOutButton;
 
     public MenuView() {
         setView();
@@ -43,5 +44,9 @@ public class MenuView extends JFrame{
 
     public JLabel getPromptLabel() {
         return promptLabel;
+    }
+
+    public JButton getLogOutButton() {
+        return logOutButton;
     }
 }

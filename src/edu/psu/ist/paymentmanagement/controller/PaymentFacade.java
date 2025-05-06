@@ -19,8 +19,8 @@ public class PaymentFacade {
         return paymentService.createPayment(option, amount);
     }
 
-    public Order placeOrder(Payment payment, String name, String address, CartSnapshot cart, Shipping.DeliveryOption option) {
-        return orderService.createOrder(name, address, cart, payment.getPaymentID(), option);
+    public Order placeOrder(Payment payment, String address, CartSnapshot cart, Shipping.DeliveryOption option) {
+        return orderService.createOrder(address, cart, payment.getPaymentID(), option);
     }
 
     public boolean isValidExpirationDate(int expDate) {

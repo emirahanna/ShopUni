@@ -8,6 +8,7 @@ import edu.psu.ist.ordermanagement.controller.OrderTableController;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
 import edu.psu.ist.productmanagement.controller.ProductPageController;
 import edu.psu.ist.productmanagement.model.Product;
+import edu.psu.ist.usermanagement.controller.LogInController;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -49,6 +50,11 @@ public class MenuController {
             trackOrder();
             view.setVisible(false);
         });
+        view.getLogOutButton().addActionListener(e -> {
+            logOut();
+            view.setVisible(false);
+        });
+
 
         view.getPromptLabel().addMouseListener(new MouseAdapter() {
             @Override
@@ -93,6 +99,9 @@ public class MenuController {
         new OrderTableController();
     }
 
+    private void logOut(){
+        new LogInController();
+    }
 
 
 }

@@ -1,13 +1,16 @@
 package edu.psu.ist.ordermanagement.model;
 
 import edu.psu.ist.cartmanagement.model.CartSnapshot;
+import edu.psu.ist.cartmanagement.util.User;
 import edu.psu.ist.productmanagement.model.Product;
+import edu.psu.ist.usermanagement.model.UserSession;
 
 import java.time.LocalDate;
 
 public class Order {
     private String orderID;
     private String paymentID;
+    private String userID;
     private double orderTotal;
     private LocalDate orderDate;
     private CartSnapshot cartSnapshot;
@@ -22,6 +25,7 @@ public class Order {
         this.orderDate = orderDate;
         this.orderStatusManager = new OrderStatusManager();
         this.shippingDetails = new Shipping(ShippingIDGenerator.createID(), orderID, address, deliveryOption, orderDate);
+        this.userID = UserSession.getInstance().getUserID();
     }
 
     public Order(String id, String paymentID, LocalDate orderDate, CartSnapshot cartSnapshot, Shipping shipping, OrderStatusManager orderStatusManager) {
@@ -32,6 +36,7 @@ public class Order {
         this.orderDate = orderDate;
         this.orderStatusManager = orderStatusManager;
         this.shippingDetails = shipping;
+        this.userID = UserSession.getInstance().getUserID();
     }
 
 

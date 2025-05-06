@@ -4,6 +4,7 @@ import edu.psu.ist.cartmanagement.model.CartManager;
 import edu.psu.ist.cartmanagement.model.CartSnapshot;
 import edu.psu.ist.productmanagement.model.Product;
 import edu.psu.ist.productmanagement.model.ProductDAO;
+import edu.psu.ist.usermanagement.model.UserSession;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -15,7 +16,7 @@ public class OrderDAO {
     //inserting them into the db
     public static void insertOrder(Order order) {
         try (Connection connection = DriverManager.getConnection("jdbc:ucanaccess://src/ProductList.accdb")) {
-            String sql = "INSERT INTO orders (ID, paymentID, OrderTotal, OrderDate, ShippingID, StatusID ) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO orders (ID, paymentID, OrderTotal, OrderDate, ShippingID, StatusID, UserID) VALUES (?, ?, ?, ?, ?, ?,?)";
             PreparedStatement pstmt = connection.prepareStatement(sql); //better performance than Statement, but mainly to pass parameters at runtime owo
             pstmt.setString(1, order.getOrderID());
             pstmt.setString(2, order.getPaymentID());
@@ -29,6 +30,7 @@ public class OrderDAO {
             //status id
             insertOrderStatus(order.getOrderStatusManager());
             pstmt.setString(6, order.getOrderStatusManager().getID());
+            pstmt.setString(7, UserSession.getInstance().getUserID());
 
             pstmt.executeUpdate();
 
@@ -58,10 +60,11 @@ public class OrderDAO {
     public static ArrayList<Order> returnAsArrayList() {
         ArrayList<Order> orderArrayList = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection("jdbc:ucanaccess://src/ProductList.accdb")) {
-            String sql = "SELECT * FROM orders";
+            String sql = "SELECT * FROM orders WHERE UserID = ?";
 
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, UserSession.getInstance().getUserID());
+            ResultSet result = statement.executeQuery();
 
             while (result.next()) {
                 String id = result.getString("ID");

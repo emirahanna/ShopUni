@@ -115,7 +115,7 @@ public class PaymentWizardController {
         if (InputValidator.areFieldsFilled(panel, panel.getNameTextField(), panel.getAddressTextField())) {
             Shipping.DeliveryOption option = panel.getPickupRadioButton().isSelected() ? Shipping.DeliveryOption.PICKUP : Shipping.DeliveryOption.DELIVERY;
 
-            order = paymentFacade.placeOrder(payment, panel.getNameTextField().getText().trim(), panel.getAddressTextField().getText().trim(), cart, option);
+            order = paymentFacade.placeOrder(payment, panel.getNameTextField().getText().trim(), cart, option);
             nextStep();
             handleStep3Panel();
         }
