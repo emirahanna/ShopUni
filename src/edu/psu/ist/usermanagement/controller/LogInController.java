@@ -2,13 +2,13 @@ package edu.psu.ist.usermanagement.controller;
 
 import edu.psu.ist.cartmanagement.controller.CartController;
 import edu.psu.ist.cartmanagement.model.CartManager;
+import edu.psu.ist.cartmanagement.util.User;
 import edu.psu.ist.menumanagement.controller.MenuController;
 import edu.psu.ist.usermanagement.model.UserAccount;
 import edu.psu.ist.usermanagement.model.UserRole;
 import edu.psu.ist.usermanagement.model.UserSession;
 import edu.psu.ist.usermanagement.view.LogInView;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import edu.psu.ist.cartmanagement.util.CartObserver.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,6 +72,7 @@ public class LogInController {
             UserRole role = user.verifyUser();
             if (role == UserRole.BUYER) {
                 CartController.loadCartAtLogin(UserSession.getInstance().getUserID());
+                new User(user, CartManager.getInstance());
                 new MenuController();
                 logInView.setVisible(false);
             }

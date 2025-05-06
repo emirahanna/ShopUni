@@ -55,7 +55,6 @@ public class CartManager implements CartSubject, CartSnapshot {
         cartContents.put(p, cartContents.getOrDefault(p, 0) + 1);
         calculateTotalPrice(p.getPrice());
         notifyObservers();
-
     }
 
 
@@ -80,6 +79,7 @@ public class CartManager implements CartSubject, CartSnapshot {
     public void emptyCart() {
         cartContents.clear();
         totalPrice = 0;
+        notifyObservers();
     }
 
     //attempt to export a new snapshot for DAO purposes

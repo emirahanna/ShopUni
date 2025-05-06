@@ -1,6 +1,8 @@
 package edu.psu.ist.menumanagement.controller;
 
 import edu.psu.ist.cartmanagement.controller.CartController;
+import edu.psu.ist.cartmanagement.model.CartManager;
+import edu.psu.ist.cartmanagement.util.User;
 import edu.psu.ist.menumanagement.view.MenuView;
 import edu.psu.ist.ordermanagement.controller.OrderTableController;
 import edu.psu.ist.productmanagement.controller.ProductListingController;
@@ -10,7 +12,7 @@ import edu.psu.ist.productmanagement.model.Product;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class MenuController {
     private MenuView view;
@@ -18,6 +20,13 @@ public class MenuController {
     public MenuController() {
         view = new MenuView();
         attachListeners();
+        notifyCartContent();
+    }
+
+    private void notifyCartContent(){
+        if (!CartManager.getInstance().getItems().isEmpty()) {
+            CartManager.getInstance().notifyObservers();
+        }
     }
 
     private void attachListeners() {
@@ -71,7 +80,7 @@ public class MenuController {
     private void openAddToCart() {
         // Open the product page to start adding things to cart
         // this is sample data
-        new ProductPageController(new Product("TOP", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. \n This is sample data and I don't know what else to write", "20342391331", "imageID", "sellerID", new Date(), "Top", 40.0));
+        new ProductPageController(new Product("TOP", "Designed in a responsible MicroModal mix, this draped short-sleeve top combines comfort with elegance. \nFeaturing a flattering gathered design across the front and a unique asymmetric neckline, style it with your favourite pair of jeans for an effortlessly refined look. \n This is sample data and I don't know what else to write", "20342391331", "imageID", "sellerID", LocalDate.now(), "Top", 40.0));
     }
 
     private void openPurchaseProduct() {

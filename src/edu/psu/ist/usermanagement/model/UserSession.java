@@ -21,10 +21,6 @@ public class UserSession {
         return userID;
     }
 
-    public void clearSession() {
-        userID = null;
-    }
-
     public boolean isLoggedIn() {
         return userID != null;
     }
